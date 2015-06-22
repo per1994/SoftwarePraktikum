@@ -42,6 +42,7 @@ public class Moderator {
 	public void rolleFestlegen(Gruppe gruppe, Benutzer benutzer){
 		Moderator newModerator = new Moderator();
 		newModerator.setBenutzer(benutzer);
+		newModerator.addGruppeToGruppenListe(gruppe);
 		gruppe.getModeratorenListe().add(newModerator);
 	}
 
