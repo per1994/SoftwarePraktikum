@@ -1,7 +1,6 @@
 package org.plp.gruppenfunktionen;
 
 import org.plp.benutzer.*;
-import org.plp.gamification.*;
 import java.util.ArrayList;
 
 public class Gruppe {
@@ -38,9 +37,8 @@ public class Gruppe {
 		return anzahlMitglieder;
 	}
 	
-	public void setAnzahlMitglieder(int anzahlMitglieder) {
-		this.anzahlMitglieder = anzahlMitglieder;
-		Moderator auch in MitgliederListe? sonst Länge + Länge
+	public void setAnzahlMitglieder(ArrayList<Benutzer> mitgliederListe) {
+		this.anzahlMitglieder = mitgliederListe.size();
 	}
 	
 	public Fachrichtung getFachrichtung() {
@@ -98,7 +96,5 @@ public class Gruppe {
 	public void setLernziel(Lernziel lernziel) {
 		this.lernziel = lernziel;
 	}
-	
-	
 	
 }
