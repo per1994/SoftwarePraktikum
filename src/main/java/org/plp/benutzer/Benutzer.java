@@ -34,7 +34,7 @@ public class Benutzer {
 			freundesliste.remove(benutzer);
 			
 		}else{
-			throw new Exception("Du bist aktuell nicht mit"+" "+benutzer.getProfil().getName()+"befreundet");
+			//throw new Exception("Du bist aktuell nicht mit"+" "+benutzer.getProfil().getName()+"befreundet");
 		}
 	}
 	
