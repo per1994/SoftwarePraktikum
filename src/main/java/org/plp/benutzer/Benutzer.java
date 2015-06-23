@@ -22,6 +22,7 @@ public class Benutzer {
 	public void freundHinzufügen (Benutzer benutzer) throws Exception{
 		if (!freundesliste.contains(benutzer)){
 			freundesliste.add(benutzer);
+			benutzer.getFreundesliste().add(this);
 			
 		}else{
 			throw new Exception("Du hast diesen Benutzer bereits zu deiner Freundesliste hinzugefügt");
