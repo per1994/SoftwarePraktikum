@@ -51,7 +51,7 @@ public class Moderator {
 		gruppe.getLernziele().add(ziel);
 	}
 	
-	public void rolleFestlegen(Gruppe gruppe, Benutzer benutzer){
+	public void rolleFestlegen(Gruppe gruppe, Benutzer benutzer) throws Exception{
 		Moderator newModerator = new Moderator();
 		newModerator.setBenutzer(benutzer);
 		newModerator.addGruppeToGruppenListe(gruppe);
