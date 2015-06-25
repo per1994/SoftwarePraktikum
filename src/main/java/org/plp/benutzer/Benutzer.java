@@ -33,21 +33,12 @@ public class Benutzer {
 	public void freundEntfernen (Benutzer benutzer) throws Exception{
 		if (freundesliste.contains(benutzer)){
 			freundesliste.remove(benutzer);
-			benutzer.getFreundesliste().remove(this);
 			
 		}else{
 			//throw new Exception("Du bist aktuell nicht mit"+" "+benutzer.getProfil().getName()+"befreundet");
 		}
 	}
 	
-	public void erstellenEintrag(){
-		Eintrag eintrag= new Eintrag();
-	}
-	
-	public void schreibenKommentar(Eintrag eintrag, String kommentar){
-		eintrag.getKommentare().add(kommentar);
-		
-	}
 
 	public Profil getProfil() {
 		return profil;
