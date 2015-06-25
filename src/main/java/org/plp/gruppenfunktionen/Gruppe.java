@@ -21,16 +21,40 @@ public class Gruppe {
 		return mitgliederListe;
 	}
 	
-	public void addMitgliedToMitgliederListe(Benutzer benutzer) {
-		mitgliederListe.add(benutzer);
+	public void addMitgliedToMitgliederListe(Benutzer benutzer)throws Exception {
+		if(mitgliederListe.contains(benutzer)){
+			throw new Exception("Benutzer ist bereits Mitglied!");
+		}else {
+			mitgliederListe.add(benutzer);	
+		}
+	}
+	
+	public void removeMitgliedFromMitgliederListe (Benutzer benutzer)throws Exception {
+		if(!mitgliederListe.contains(benutzer)){
+			throw new Exception("Benutzer ist nicht Mitglied!");
+		}else{
+			mitgliederListe.remove(benutzer);	
+		}
 	}
 	
 	public ArrayList<Moderator> getModeratorenListe() {
 		return moderatorenListe;
 	}
 	
-	public void addModeratorToModeratorenListe(Moderator moderator) {
-		moderatorenListe.add(moderator);
+	public void addModeratorToModeratorenListe(Moderator moderator)throws Exception {
+		if(moderatorenListe.contains(moderator)){
+			throw new Exception("Moderator ist bereits in der Gruppe!");
+		}else{
+			moderatorenListe.add(moderator);	
+		}
+	}
+	
+	public void removeModeratorFromModeratorenListe (Moderator moderator)throws Exception {
+		if(!moderatorenListe.contains(moderator)){
+			throw new Exception("Moderator ist nicht in der Gruppe!");
+		}else{
+			moderatorenListe.remove(moderator);	
+		}
 	}
 	
 	public int getAnzahlMitglieder() {
@@ -85,8 +109,20 @@ public class Gruppe {
 		return lernziele;
 	}
 	
-	public void addLernzielToLernziele(Lernziel lernziel) {
-		lernziele.add(lernziel);
+	public void addLernzielToLernziele(Lernziel lernziel)throws Exception {
+		if(lernziele.contains(lernziel)){
+			throw new Exception("Lernziel ist bereits enthalten!");
+		}else{
+			lernziele.add(lernziel);	
+		}
+	}
+	
+	public void removeLernzielFromLernziele(Lernziel lernziel)throws Exception {
+		if(!lernziele.contains(lernziel)){
+			throw new Exception("Lernziel ist nicht vorhanden!");
+		}else{
+			lernziele.remove(lernziel);	
+		}
 	}
 	
 	public Lernziel getLernziel() {

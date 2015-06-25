@@ -22,8 +22,20 @@ public class Moderator {
 		return gruppenListe;
 	}
 	
-	public void addGruppeToGruppenListe(Gruppe gruppe) {
-		gruppenListe.add(gruppe);
+	public void addGruppeToGruppenListe(Gruppe gruppe)throws Exception {
+		if(gruppenListe.contains(gruppe)){
+			throw new Exception("Gruppe ist bereits in der Liste!");
+		}else{
+			gruppenListe.add(gruppe);	
+		}
+	}
+	
+	public void removeGruppeFromGruppenListe(Gruppe gruppe)throws Exception {
+		if(!gruppenListe.contains(gruppe)){
+			throw new Exception("Gruppe ist nicht in der Liste!");
+		}else{
+			gruppenListe.remove(gruppe);	
+		}
 	}
 	
 	public void deleteGruppe(Gruppe gruppe){
