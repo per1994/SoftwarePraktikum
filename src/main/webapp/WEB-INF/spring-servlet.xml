@@ -22,6 +22,15 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<!--templates to be automatically updated when modified. -->
 		<property name="cacheable" value="true" />
 	</bean>
+		<bean id="templateResolverCss"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/resource/" />
+		<property name="suffix" value=".css" />
+		<property name="templateMode" value="HTML5" />
+		<!--Template cache is true by default. Set to false if you want -->
+		<!--templates to be automatically updated when modified. -->
+		<property name="cacheable" value="true" />
+	</bean>
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
 	</bean>

@@ -3,8 +3,32 @@
 <head>
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap-3.1.1.min.css"
+        data-th-href="@{css/bootstrap-3.1.1.min.css}" />
+<!-- Optional theme -->
 </head>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
+	<div style="width: 1900px; height: 75px; background-color: blue">
+		<h1 style="color: white; text-align: center; font-family: Arial"
+			th:text="'PLP'"></h1>
+		<p style="color: white; text-align: center; font-family: Arial"
+			th:text="'Play, Learn, Pass'" />
+	</div>
+	<p th:text="'Hello, ' + ${name} + '!'" />
+
+<form method="get">
+
+   <label>Benutzer Name:</label>
+	<input type="text" name="benutzerName"/>
+	<label>Passwort:</label>
+	<input type="text" name="passwort"/>
+
+  <button name="action" type="submit" value="login">Login</button>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
