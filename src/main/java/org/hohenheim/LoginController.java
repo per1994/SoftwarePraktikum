@@ -14,9 +14,8 @@ public class LoginController {
 		}
 		
 		User user = new User();
-		user.Password = password;
-		user.Name = userName;
-		
+		user.setPassword(password); 
+		user.setName(userName);
 		user.HinzufügenZuModel(model);
 		
 		return "home";

@@ -19,7 +19,7 @@ public class GreetingController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String greeting(
-			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
+		//	@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			@RequestParam(value = "benutzerName", required = false, defaultValue = "") String benutzerName,
 			@RequestParam(value = "passwort", required = false, defaultValue = "") String passwort,
 			@RequestParam(value = "action", required = false, defaultValue = "index") String page,
