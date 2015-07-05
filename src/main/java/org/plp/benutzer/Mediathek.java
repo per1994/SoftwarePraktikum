@@ -1,16 +1,17 @@
 package org.plp.benutzer;
 
-import java.util.Set;
+import java.util.ArrayList;
 
-public class Mediathek<T> {
+public class Mediathek {
+	
+	private ArrayList<Datei> set;
 
-	private Set<T> date;
-
-	public Set<T> getDate() {
-		return date;
+	public ArrayList<Datei> getSet() {
+		return set;
 	}
 
-	public void setDate(Set<T> date) {
-		this.date = date;
+	public void setSet(ArrayList<Datei> set) {
+		this.set = set;
 	}
+
 }

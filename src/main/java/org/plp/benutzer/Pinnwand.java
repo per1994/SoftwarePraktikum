@@ -2,24 +2,31 @@ package org.plp.benutzer;
 
 import java.util.ArrayList;
 
-public class Pinnwand<T> {
+public class Pinnwand {
 
-	private int neueEintraege;
-	private ArrayList<T> eintraege;
-
-	public int getNeueEintraege() {
-		return neueEintraege;
+	private int neueEinträge;
+	private ArrayList<Eintrag>einträge;
+	
+	
+	public void benachrichtigenEmpfänger(Benutzer empfänger){
+		
+		
 	}
-
-	public void setNeueEintraege(int neueEintraege) {
-		this.neueEintraege = neueEintraege;
+	
+	
+	
+	
+	public int getNeueEinträge() {
+		return neueEinträge;
 	}
-
-	public ArrayList<T> getEintraege() {
-		return eintraege;
+	public void setNeueEinträge(int neueEinträge) {
+		this.neueEinträge = neueEinträge;
 	}
-
-	public void setEintraege(ArrayList<T> eintraege) {
-		this.eintraege = eintraege;
+	public ArrayList<Eintrag> getEinträge() {
+		return einträge;
 	}
+	public void setEinträge(ArrayList<Eintrag> einträge) {
+		this.einträge = einträge;
+	}
+	
 }

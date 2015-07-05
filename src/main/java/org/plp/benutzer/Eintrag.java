@@ -2,24 +2,30 @@ package org.plp.benutzer;
 
 import java.util.ArrayList;
 
-public class Eintrag<T> {
-
-	private String eintragsText;
-	private ArrayList<T> kommentare;
-
-	public String getEintragsText() {
-		return eintragsText;
+public class Eintrag {
+	
+	private String eintragstext;
+	private ArrayList<String> kommentare;
+	
+	
+	public void erscheintAufPinnwand(Pinnwand pinnwand){
+		pinnwand.getEinträge().add(this);
+		pinnwand.setNeueEinträge(pinnwand.getNeueEinträge()+1);
 	}
-
-	public void setEintragsText(String eintragsText) {
-		this.eintragsText = eintragsText;
+	
+	
+	
+	public String getEintragstext() {
+		return eintragstext;
 	}
-
-	public ArrayList<T> getKommentare() {
+	public void setEintragstext(String eintragstext) {
+		this.eintragstext = eintragstext;
+	}
+	public ArrayList<String> getKommentare() {
 		return kommentare;
 	}
-
-	public void setKommentare(ArrayList<T> kommentare) {
+	public void setKommentare(ArrayList<String> kommentare) {
 		this.kommentare = kommentare;
 	}
+
 }
