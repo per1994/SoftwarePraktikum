@@ -15,16 +15,20 @@
 		<p style="color: white; text-align: center; font-family: Arial"
 			th:text="'Play, Learn, Pass'" />
 	</div>
-	<p th:text="'Hello ' + '!'" />
+	
+	<p th:text=" ${message.inhalt} + '!'" />
 
-	<form method="get">
+	
+	
+	
+	<form action="#" th:action="@{/home}" th:object="${benutzer}" method="post">
+	
+	
+	<p>Benutzername: <input type="text" th:field="*{benutzerName}" /></p>
+        <p>Passwort: <input type="password" th:field="*{passwort}" /></p>
+        <p><input type="submit" value="Einloggen" /> </p>
 
-		<label>Benutzer Name:</label> <input type="text" name="benutzerName" />
-		<label>Passwort:</label> <input type="password" name="passwort" />
-
-		<!-- <button name="action" type="submit" value="login">Login</button> -->
-		<button name="action" type="submit" value="login"
-			class="btn btn-lg btn-primary">Login</button>
+		
 	</form>
 
 

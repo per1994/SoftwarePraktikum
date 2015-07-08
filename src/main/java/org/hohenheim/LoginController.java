@@ -13,11 +13,11 @@ public class LoginController {
 			return "error";
 		}
 		
-		User user = new User();
+		/*User user = new User();
 		user.setPassword(password); 
 		user.setName(userName);
 		user.HinzufügenZuModel(model);
-		
+		*/
 		return "home";
 	}
 
