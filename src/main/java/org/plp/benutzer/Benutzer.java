@@ -7,14 +7,16 @@ import org.plp.gruppenfunktionen.Fachrichtung;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.plp.gruppenfunktionen.Lernziel;
 import org.plp.gruppenfunktionen.Moderator;
+import org.springframework.ui.Model;
 
 public class Benutzer {
 	
 	private Profil profil= new Profil();
-	private String password;
+	private String benutzerName;
+	private String passwort;
 	private String email;
 	private ArrayList freundesliste = new ArrayList();
-	private Moderator moderator= new Moderator();
+	//private Moderator moderator= new Moderator();
 	private ArrayList gruppenListe= new ArrayList();
 	private int anzahlCombats;
 	private int anzahlNiederlagen;
@@ -97,6 +99,11 @@ public class Benutzer {
 		
 	}
 	
+	public void HinzufügenZuModel(Model model){
+		model.addAttribute("userName", this.getProfil().getName());
+		model.addAttribute("userPassword", passwort);
+	}
+	
 	
 	
 	
@@ -130,13 +137,13 @@ public class Benutzer {
 		this.freundesliste = freundesliste;
 	}
 
-	public Moderator getModerator() {
+	/*public Moderator getModerator() {
 		return moderator;
 	}
 
 	public void setModerator(Moderator moderator) {
 		this.moderator = moderator;
-	}
+	}*/
 
 	public ArrayList getGruppenListe() {
 		return gruppenListe;
@@ -184,6 +191,32 @@ public class Benutzer {
 
 	public void setAnzahlQuest(int anzahlQuest) {
 		this.anzahlQuest = anzahlQuest;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getBenutzerName() {
+		return benutzerName;
+	}
+
+	public void setBenutzerName(String benutzerName) {
+		this.benutzerName = benutzerName;
+	}
+
+	public String getPasswort() {
+		return passwort;
+	}
+
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
 	}
 
 	

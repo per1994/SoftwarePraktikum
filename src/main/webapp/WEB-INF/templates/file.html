@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Getting Started: Serving Web Content</title>
+<title>PLP: PlayLearnPass</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -11,8 +11,29 @@
 		<p style="color: white; text-align: center; font-family: Arial"
 			th:text="'Play, Learn, Pass'" />
 	</div>
-	<p th:text="'Willkommen auf deiner Startseite ' + ${benutzer.benutzerName} + '!'" />
-	<a href="file" class="button">Dateiupload</a>
+	<h2>Dateiupload </h2>
+
+	
+
+		
+	
+	<form method="POST" commandName="file" enctype="multipart/form-data">
+
+		Upload your file please:
+		<input type="file" name="file" />
+		<input type="submit" value="upload" />
+		<form:errors path="file" cssStyle="color: #ff0000;" />
+		</form>
+		
+		<b>fileuploadtest.pdf</b>&nbsp;
+		<a href="filedownload" class="button">Download</a>
+		
+
+
+		
+	
+
+
 
 </body>
 </html>
