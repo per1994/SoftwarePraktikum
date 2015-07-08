@@ -1,11 +1,33 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="resource/bootstrap/css/bootstrap.css" rel="stylesheet"
+	type="text/css"></link>
+<title>PLP:PlayLearnPass</title>
+
+
 </head>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
-<p th:text="'suekrue stinkt'" />
+	<div style="width: 1900px; height: 75px; background-color: blue">
+		<h1 style="color: white; text-align: center; font-family: Arial"
+			th:text="'PLP'"></h1>
+		<p style="color: white; text-align: center; font-family: Arial"
+			th:text="'Play, Learn, Pass'" />
+	</div>
+	<p th:text="'Hello ' + '!'" />
+
+	<form method="get">
+
+		<label>Benutzer Name:</label> <input type="text" name="benutzerName" />
+		<label>Passwort:</label> <input type="password" name="passwort" />
+
+		<!-- <button name="action" type="submit" value="login">Login</button> -->
+		<button name="action" type="submit" value="login"
+			class="btn btn-lg btn-primary">Login</button>
+	</form>
+
+
+
 </body>
 </html>

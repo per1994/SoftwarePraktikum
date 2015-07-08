@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div style="width: 1900px; height: 75px; background-color: blue">
+		<h1 style="color: white; text-align: center; font-family: Arial"
+			th:text="'PLP'"></h1>
+		<p style="color: white; text-align: center; font-family: Arial"
+			th:text="'Play, Learn, Pass'" />
+	</div>
+	<p th:text="'Willkommen auf deiner Startseite ' + ${userName} + '!'" />
+
+</body>
+</html>
