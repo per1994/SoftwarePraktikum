@@ -2,9 +2,13 @@ package org.plp.benutzer;
 
 public class Achievement {
 	
-	int benötigteCombatsiege;
-	int benötigteCombats;
-	int benötigteQuests;
+	private int benötigteCombatsiege;
+	private int benötigteCombats;
+	private int benötigteQuests;
+	
+	
+	
+	
 	public int getBenötigteCombatsiege() {
 		return benötigteCombatsiege;
 	}

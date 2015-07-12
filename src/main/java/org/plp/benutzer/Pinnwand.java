@@ -7,6 +7,10 @@ public class Pinnwand {
 	private int neueEinträge;
 	private ArrayList<Eintrag>einträge;
 	
+	public Pinnwand (){
+		einträge= new ArrayList();
+	}
+	
 	
 	public void benachrichtigenEmpfänger(Benutzer empfänger){
 		

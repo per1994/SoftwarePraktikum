@@ -1,6 +1,9 @@
 package org.plp.benutzer;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.plp.gamification.Quest;
 import org.plp.gruppenfunktionen.Fachrichtung;
@@ -11,13 +14,15 @@ import org.springframework.ui.Model;
 
 public class Benutzer {
 
-	private Profil profil = new Profil();
+	
 	private String benutzerName;
+	private String vorname;
+	private String nachname;
 	private String passwort;
 	private String email;
-	private ArrayList freundesliste = new ArrayList();
-	// private Moderator moderator= new Moderator();
-	private ArrayList gruppenListe = new ArrayList();
+	private Set freundesliste;
+	//private Moderator moderator= new Moderator();
+	private Set gruppenListe; 
 	private int anzahlCombats;
 	private int anzahlNiederlagen;
 	private int anzahlSiege;
@@ -25,6 +30,22 @@ public class Benutzer {
 	private int anzahlQuest;
 	private int id;
 	private int punktzahl;
+	private Pinnwand pinnwand;
+	private Date gebDatum;
+	private int alter;
+	private char geschlecht;
+	private Fachrichtung fachrichtung;
+	private Set<Badge> badges;
+	private Avatar avatar;
+	private Set<Achievement> achievements;
+	
+	public Benutzer(){
+		freundesliste= new HashSet();
+		gruppenListe= new HashSet();
+		badges= new HashSet();
+		achievements= new HashSet();
+		
+	}
 
 	public void freundHinzufügen(Benutzer benutzer) throws Exception {
 		if (!freundesliste.contains(benutzer)) {
@@ -45,13 +66,17 @@ public class Benutzer {
 
 		} else {
 			throw new Exception("Du bist aktuell nicht mit" + " "
-					+ benutzer.getProfil().getName() + "befreundet");
+					+ benutzer.getVorname() + "befreundet");
 		}
 	}
 
-	public void erstellenEintrag(String eintragstext) {
+	public void erstellenEintrag(Pinnwand pinnwand,String eintragstext, Benutzer empfänger) {
 		Eintrag eintrag = new Eintrag();
 		eintrag.setEintragstext(eintragstext);
+		pinnwand.getEinträge().add(eintrag);
+		pinnwand.setNeueEinträge(pinnwand.getNeueEinträge()+1);
+		pinnwand.benachrichtigenEmpfänger(empfänger);
+		
 
 	}
 
@@ -95,21 +120,16 @@ public class Benutzer {
 
 	public void erstellenQuest() {
 		Quest quest = new Quest();
+		
 
 	}
 
 	public void HinzufügenZuModel(Model model) {
-		model.addAttribute("userName", this.getProfil().getName());
+		model.addAttribute("userName", this.getVorname());
 		model.addAttribute("userPassword", passwort);
 	}
 
-	public Profil getProfil() {
-		return profil;
-	}
-
-	public void setProfil(Profil profil) {
-		this.profil = profil;
-	}
+	
 
 	public String getEmail() {
 		return email;
@@ -119,11 +139,11 @@ public class Benutzer {
 		this.email = email;
 	}
 
-	public ArrayList getFreundesliste() {
+	public Set getFreundesliste() {
 		return freundesliste;
 	}
 
-	public void setFreundesliste(ArrayList freundesliste) {
+	public void setFreundesliste(HashSet freundesliste) {
 		this.freundesliste = freundesliste;
 	}
 
@@ -134,11 +154,11 @@ public class Benutzer {
 	 * moderator; }
 	 */
 
-	public ArrayList getGruppenListe() {
+	public Set getGruppenListe() {
 		return gruppenListe;
 	}
 
-	public void setGruppenListe(ArrayList gruppenListe) {
+	public void setGruppenListe(HashSet gruppenListe) {
 		this.gruppenListe = gruppenListe;
 	}
 
@@ -211,6 +231,98 @@ public class Benutzer {
 	}
 
 	public void SetPunktzahl(int punktzahl) {
+		this.punktzahl = punktzahl;
+	}
+
+	public String getVorname() {
+		return vorname;
+	}
+
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+	public String getNachname() {
+		return nachname;
+	}
+
+	public void setNachname(String nachname) {
+		this.nachname = nachname;
+	}
+
+	public Pinnwand getPinnwand() {
+		return pinnwand;
+	}
+
+	public void setPinnwand(Pinnwand pinnwand) {
+		this.pinnwand = pinnwand;
+	}
+
+	public Date getGebDatum() {
+		return gebDatum;
+	}
+
+	public void setGebDatum(Date gebDatum) {
+		this.gebDatum = gebDatum;
+	}
+
+	public int getAlter() {
+		return alter;
+	}
+
+	public void setAlter(int alter) {
+		this.alter = alter;
+	}
+
+	public char getGeschlecht() {
+		return geschlecht;
+	}
+
+	public void setGeschlecht(char geschlecht) {
+		this.geschlecht = geschlecht;
+	}
+
+	public Fachrichtung getFachrichtung() {
+		return fachrichtung;
+	}
+
+	public void setFachrichtung(Fachrichtung fachrichtung) {
+		this.fachrichtung = fachrichtung;
+	}
+
+	public Set<Badge> getBadges() {
+		return badges;
+	}
+
+	public void setBadges(Set<Badge> badges) {
+		this.badges = badges;
+	}
+
+	public Avatar getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
+	}
+
+	public Set<Achievement> getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(Set<Achievement> achievements) {
+		this.achievements = achievements;
+	}
+
+	public void setFreundesliste(Set freundesliste) {
+		this.freundesliste = freundesliste;
+	}
+
+	public void setGruppenListe(Set gruppenListe) {
+		this.gruppenListe = gruppenListe;
+	}
+
+	public void setPunktzahl(int punktzahl) {
 		this.punktzahl = punktzahl;
 	}
 
