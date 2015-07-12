@@ -10,108 +10,98 @@ import org.plp.gruppenfunktionen.Moderator;
 import org.springframework.ui.Model;
 
 public class Benutzer {
-	
-	private Profil profil= new Profil();
+
+	private Profil profil = new Profil();
 	private String benutzerName;
 	private String passwort;
 	private String email;
 	private ArrayList freundesliste = new ArrayList();
-	//private Moderator moderator= new Moderator();
-	private ArrayList gruppenListe= new ArrayList();
+	// private Moderator moderator= new Moderator();
+	private ArrayList gruppenListe = new ArrayList();
 	private int anzahlCombats;
 	private int anzahlNiederlagen;
 	private int anzahlSiege;
 	private int anzahlUnentschieden;
 	private int anzahlQuest;
 	private int id;
-	
-	public void freundHinzufügen (Benutzer benutzer) throws Exception{
-		if (!freundesliste.contains(benutzer)){
+	private int punktzahl;
+
+	public void freundHinzufügen(Benutzer benutzer) throws Exception {
+		if (!freundesliste.contains(benutzer)) {
 			freundesliste.add(benutzer);
 			benutzer.getFreundesliste().add(this);
-			
-		}else{
-			throw new Exception("Du hast diesen Benutzer bereits zu deiner Freundesliste hinzugefügt");
+
+		} else {
+			throw new Exception(
+					"Du hast diesen Benutzer bereits zu deiner Freundesliste hinzugefügt");
 		}
-		
+
 	}
-	
-	public void freundEntfernen (Benutzer benutzer) throws Exception{
-		if (freundesliste.contains(benutzer)){
+
+	public void freundEntfernen(Benutzer benutzer) throws Exception {
+		if (freundesliste.contains(benutzer)) {
 			freundesliste.remove(benutzer);
 			benutzer.getFreundesliste().remove(this);
-			
-		}else{
-			throw new Exception("Du bist aktuell nicht mit"+" "+benutzer.getProfil().getName()+"befreundet");
+
+		} else {
+			throw new Exception("Du bist aktuell nicht mit" + " "
+					+ benutzer.getProfil().getName() + "befreundet");
 		}
 	}
-	
-	public void erstellenEintrag(String eintragstext){
-		Eintrag eintrag= new Eintrag();
+
+	public void erstellenEintrag(String eintragstext) {
+		Eintrag eintrag = new Eintrag();
 		eintrag.setEintragstext(eintragstext);
-		
-		
+
 	}
-	
-	public void schreibenKommentar(Eintrag eintrag, String kommentar){
+
+	public void schreibenKommentar(Eintrag eintrag, String kommentar) {
 		eintrag.getKommentare().add(kommentar);
-		
+
 	}
-	
-	public void erstellenGruppe(Fachrichtung fachrichtung, String name, Lernziel lernziel, String passwort) throws Exception{
-		
-		Gruppe lerngruppe= new Gruppe();
-		
-		
-			lerngruppe.addMitgliedToMitgliederListe(this);
-			lerngruppe.setFachrichtung(fachrichtung);
-			lerngruppe.setName(name);
-			lerngruppe.setLernziel(lernziel);
-			lerngruppe.setPasswort(passwort);
-			
-			this.getGruppenListe().add(lerngruppe);
-			
-			
-			
-		
+
+	public void erstellenGruppe(Fachrichtung fachrichtung, String name,
+			Lernziel lernziel, String passwort) throws Exception {
+
+		Gruppe lerngruppe = new Gruppe();
+
+		lerngruppe.addMitgliedToMitgliederListe(this);
+		lerngruppe.setFachrichtung(fachrichtung);
+		lerngruppe.setName(name);
+		lerngruppe.setLernziel(lernziel);
+		lerngruppe.setPasswort(passwort);
+
+		this.getGruppenListe().add(lerngruppe);
+
 	}
-	
-	public void einladenBenutzer(Benutzer sender, Benutzer empfänger){
-		
+
+	public void einladenBenutzer(Benutzer sender, Benutzer empfänger) {
+
 	}
-	
-	public void annehmenEinladung(){
-		
+
+	public void annehmenEinladung() {
+
 	}
-	
-	public void ablehnenEinladung(){
-		
+
+	public void ablehnenEinladung() {
+
 	}
-	
-	public void beitretenGruppe(Gruppe gruppe) throws Exception{
+
+	public void beitretenGruppe(Gruppe gruppe) throws Exception {
 		gruppe.addMitgliedToMitgliederListe(this);
 		this.getGruppenListe().add(gruppe);
-		
+
 	}
-	
-	public void erstellenQuest(){
+
+	public void erstellenQuest() {
 		Quest quest = new Quest();
-		
+
 	}
-	
-	public void HinzufügenZuModel(Model model){
+
+	public void HinzufügenZuModel(Model model) {
 		model.addAttribute("userName", this.getProfil().getName());
 		model.addAttribute("userPassword", passwort);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public Profil getProfil() {
 		return profil;
@@ -137,13 +127,12 @@ public class Benutzer {
 		this.freundesliste = freundesliste;
 	}
 
-	/*public Moderator getModerator() {
-		return moderator;
-	}
-
-	public void setModerator(Moderator moderator) {
-		this.moderator = moderator;
-	}*/
+	/*
+	 * public Moderator getModerator() { return moderator; }
+	 * 
+	 * public void setModerator(Moderator moderator) { this.moderator =
+	 * moderator; }
+	 */
 
 	public ArrayList getGruppenListe() {
 		return gruppenListe;
@@ -193,7 +182,6 @@ public class Benutzer {
 		this.anzahlQuest = anzahlQuest;
 	}
 
-
 	public int getId() {
 		return id;
 	}
@@ -201,7 +189,6 @@ public class Benutzer {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getBenutzerName() {
 		return benutzerName;
@@ -219,6 +206,12 @@ public class Benutzer {
 		this.passwort = passwort;
 	}
 
-	
+	public int getPunktzahl() {
+		return punktzahl;
+	}
+
+	public void SetPunktzahl(int punktzahl) {
+		this.punktzahl = punktzahl;
+	}
 
 }
