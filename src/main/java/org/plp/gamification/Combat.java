@@ -39,24 +39,68 @@ public class Combat {
 		}
 	}
 
-	public void setPunkteGewinner(int punktzahlGewinner) {
-		punkteGewinner = punktzahlGewinner;
+	public HashSet<Benutzer> getTeilnehmer() {
+		return teilnehmer;
 	}
 
-	public void setPunkteVerlierer(int punktzahlVerlierer) {
-		punkteVerlierer = punktzahlVerlierer;
+	public void setTeilnehmer(HashSet<Benutzer> teilnehmer) {
+		this.teilnehmer = teilnehmer;
 	}
 
-	public void setPunktUnentschieden(int punktzahl) {
-		punkteUnentschieden = punktzahl;
+	public Aufgabe getAufgabe() {
+		return aufgabe;
+	}
+
+	public void setAufgabe(Aufgabe aufgabe) {
+		this.aufgabe = aufgabe;
+	}
+
+	public Benutzer getGewinner() {
+		return gewinner;
 	}
 
 	public void setGewinner(Benutzer gewinner) {
 		this.gewinner = gewinner;
 	}
 
+	public Benutzer getVerlierer() {
+		return verlierer;
+	}
+
 	public void setVerlierer(Benutzer verlierer) {
 		this.verlierer = verlierer;
+	}
+
+	public int getPunkteGewinner() {
+		return punkteGewinner;
+	}
+
+	public void setPunkteGewinner(int punkteGewinner) {
+		this.punkteGewinner = punkteGewinner;
+	}
+
+	public int getPunkteVerlierer() {
+		return punkteVerlierer;
+	}
+
+	public void setPunkteVerlierer(int punkteVerlierer) {
+		this.punkteVerlierer = punkteVerlierer;
+	}
+
+	public int getPunkteUnentschieden() {
+		return punkteUnentschieden;
+	}
+
+	public void setPunkteUnentschieden(int punkteUnentschieden) {
+		this.punkteUnentschieden = punkteUnentschieden;
+	}
+
+	public boolean isUnentschieden() {
+		return unentschieden;
+	}
+
+	public void setUnentschieden(boolean unentschieden) {
+		this.unentschieden = unentschieden;
 	}
 
 }
