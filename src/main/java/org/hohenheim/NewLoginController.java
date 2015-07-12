@@ -28,7 +28,7 @@ public class NewLoginController {
 			message.setInhat("Falscher Login");
 			model.addAttribute("message", message);
 			
-			return "index";
+			return "LogIn";
 		}
 
 		

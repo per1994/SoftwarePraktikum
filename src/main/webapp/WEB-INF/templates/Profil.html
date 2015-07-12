@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Profil</title>
+<title>PLP-LogIn/Register</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -39,39 +39,22 @@
 
 </head>
 <body>
-	<div class="up-bar">
-		<h2 class="text-left name-color">
-			<strong>PLP</strong>
-		</h2>
-	</div>
-	<div class="col-sm-6 col-sm-offset-3 form-box">
-		<div class="container-fluid  profile-bar">
-			<div class="row-fluid">
-				<div class="span2">
-					<img
-						src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-						class="img-avatar" />
-				</div>
-				<table>
-					<tr>
-						<h3 th:text="${benutzer.benutzerName}"></h3>
-						<h4 class="font-weight1">Studiengang:</h4>
-						<h4>Wirtschaftsinformatik</h4>
-						<a href="file" class="button">Dateiupload</a>
-					</tr>
-					<tr>
-						<a href="Gruppenliste"><h4 class="font-weight1">Gruppen</h4></a>
-						<a href="Freundesliste"><h4 class="font-weight1">Freundesliste</h4></a>
-					</tr>
-					<tr>
-						<h4 class="font-weight1">Badges:</h4>
-						<h4 class="font-weight1">Achievments:</h4>
-						<h4 class="font-weight1">Punkte:</h4>
-					</tr>
-				</table>
+	<div class="container-fluid well span6">
+		<div class="row-fluid">
+			<div class="span2">
+				<img
+					src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+					class="img-circle" />
+			</div>
+
+			<div class="span8">
+				<h3 th:text="${benutzer.benutzerName}"></h3>
+				<h6>Wirtschaftsinformatik</h6>
+				<a href="file" class="button">Dateiupload</a>
 			</div>
 		</div>
 	</div>
+
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>

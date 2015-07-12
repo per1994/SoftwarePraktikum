@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-
 public class FileController {
 
 	@Autowired
@@ -36,83 +35,85 @@ public class FileController {
 
 	}
 
-	
-	 @RequestMapping(value="/file",method = RequestMethod.GET)
-	 	    public String getForm(Model model) {
-	 	        FileTest fileModel = new FileTest();
-	 	        model.addAttribute("file", fileModel);
-	 	        return "file";
+	@RequestMapping(value = "/file", method = RequestMethod.GET)
+	public String getForm(Model model) {
+		FileTest fileModel = new FileTest();
+		model.addAttribute("file", fileModel);
+		return "file";
 
-	 	    }
-	 
-	 @RequestMapping(value="/file",method = RequestMethod.POST)
-	 	    public String fileUploaded(Model model, @Validated FileTest file,
-	 	            BindingResult result) {
-	 	 
-	 	        String returnVal = "succesFile";
-	 	        if (result.hasErrors()) {
-	 	            returnVal = "file";
-	 	        } else {           
-	 	            MultipartFile multipartFile = file.getFile();
-	 	            
-	 	            String orgName =multipartFile.getOriginalFilename();
-	 	            String filePath="C:/Program Files/apache-tomcat-8.0.23-windows-x64/apache-tomcat-8.0.23/webapps/uploads/"+orgName;
-	 	            File dest=new File(filePath);
-	 	            
-	 	            try {
-						multipartFile.transferTo(dest);
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	 	        }
+	}
 
-	 	        return returnVal;
-	 	    }
-	 
+	@RequestMapping(value = "/file", method = RequestMethod.POST)
+	public String fileUploaded(Model model, @Validated FileTest file,
+			BindingResult result) {
 
-		@RequestMapping(value = "/filedownload", method = RequestMethod.GET)
-		public @ResponseBody void downloadFiles(HttpServletRequest request, HttpServletResponse response) {
-	 
-			ServletContext context = request.getServletContext();
-			
-			File downloadFile = new File("C:/Program Files/apache-tomcat-8.0.23-windows-x64/apache-tomcat-8.0.23/webapps/uploads/fileuploadtest.pdf");
-			FileInputStream inputStream = null;
-			OutputStream outStream = null;
-			
+		String returnVal = "succesFile";
+		if (result.hasErrors()) {
+			returnVal = "file";
+		} else {
+			MultipartFile multipartFile = file.getFile();
+
+			String orgName = multipartFile.getOriginalFilename();
+			String filePath = "C:/Program Files/apache-tomcat-8.0.23-windows-x64/apache-tomcat-8.0.23/webapps/uploads/"
+					+ orgName;
+			File dest = new File(filePath);
+
 			try {
-				inputStream = new FileInputStream(downloadFile);
-	 
-				response.setContentLength((int) downloadFile.length());
-				response.setContentType(context.getMimeType("C:/JavaHonk/CustomJar.jar"));			
-	 
-				// response header
-				String headerKey = "Content-Disposition";
-				String headerValue = String.format("attachment; filename=\"%s\"",downloadFile.getName());
-				response.setHeader(headerKey, headerValue);
-	 
-				// Write response
-				outStream = response.getOutputStream();
-				IOUtils.copy(inputStream, outStream);
-	 
-			} catch (Exception e) {
+				multipartFile.transferTo(dest);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} finally {
-				try {
-					if (null != inputStream)
-						inputStream.close();
-					if (null != inputStream)
-						outStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-	 
 		}
 
-}
+		return returnVal;
+	}
 
+	@RequestMapping(value = "/filedownload", method = RequestMethod.GET)
+	public @ResponseBody void downloadFiles(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ServletContext context = request.getServletContext();
+
+		File downloadFile = new File(
+				"C:/Program Files/apache-tomcat-8.0.23-windows-x64/apache-tomcat-8.0.23/webapps/uploads/fileuploadtest.pdf");
+		FileInputStream inputStream = null;
+		OutputStream outStream = null;
+
+		try {
+			inputStream = new FileInputStream(downloadFile);
+
+			response.setContentLength((int) downloadFile.length());
+			response.setContentType(context
+					.getMimeType("C:/JavaHonk/CustomJar.jar"));
+
+			// response header
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					downloadFile.getName());
+			response.setHeader(headerKey, headerValue);
+
+			// Write response
+			outStream = response.getOutputStream();
+			IOUtils.copy(inputStream, outStream);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != inputStream)
+					inputStream.close();
+				if (null != inputStream)
+					outStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+}

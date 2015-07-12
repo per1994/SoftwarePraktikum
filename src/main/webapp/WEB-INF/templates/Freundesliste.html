@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Profil</title>
+<title>Freundesliste</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -17,6 +17,7 @@
 	href="resource/assets/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="resource/assets/css/form-elements.css" />
 <link rel="stylesheet" href="resource/assets/css/style.css" />
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,40 +44,68 @@
 		<h2 class="text-left name-color">
 			<strong>PLP</strong>
 		</h2>
-	</div>
-	<div class="col-sm-6 col-sm-offset-3 form-box">
-		<div class="container-fluid  profile-bar">
-			<div class="row-fluid">
-				<div class="span2">
-					<img
-						src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-						class="img-avatar" />
+		<div class="table-position1 ">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-lg-offset-4">
+						<input type="search" id="search" value="" class="form-control"
+							placeholder="Suchen" />
+					</div>
 				</div>
-				<table>
-					<tr>
-						<h3 th:text="${benutzer.benutzerName}"></h3>
-						<h4 class="font-weight1">Studiengang:</h4>
-						<h4>Wirtschaftsinformatik</h4>
-						<a href="file" class="button">Dateiupload</a>
-					</tr>
-					<tr>
-						<a href="Gruppenliste"><h4 class="font-weight1">Gruppen</h4></a>
-						<a href="Freundesliste"><h4 class="font-weight1">Freundesliste</h4></a>
-					</tr>
-					<tr>
-						<h4 class="font-weight1">Badges:</h4>
-						<h4 class="font-weight1">Achievments:</h4>
-						<h4 class="font-weight1">Punkte:</h4>
-					</tr>
-				</table>
+				<div class="row table-itself">
+					<div class="col-lg-12">
+						<table class="table" id="table">
+							<thead>
+								<tr>
+									<th class="thead-color font-weight1">Vorname</th>
+									<th class="thead-color font-weight1">Nachname</th>
+									<th class="thead-color font-weight1">Benutzername</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Benjamin</td>
+									<td>Schmid</td>
+									<td>BenjoMahenjo</td>
+								</tr>
+								<tr>
+									<td>Patrick</td>
+									<td>Schmelzle</td>
+									<td>per1994</td>
+								</tr>
+								<tr>
+									<td>Pascal</td>
+									<td>Maichl</td>
+									<td>TennisGigant</td>
+								</tr>
+								<tr>
+									<td>Leo</td>
+									<td>Grad</td>
+									<td>KingLeo</td>
+								</tr>
+								<tr>
+									<td>S&uuml;kr&uuml;</td>
+									<td>Sever</td>
+									<td>AliasGod</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+
+
+
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resource/assets/js/jquery.backstretch.min.js"></script>
 	<script src="resource/assets/js/scripts.js"></script>
+	<script src="resource/dist/freundesliste.js"></script>
+	<script src="resource/dist/jquery.js"></script>
+	<script src="resource/dist/jquery.searchable.js"></script>
 
 	<!--[if lt IE 10]>
             <script src="resource/assets/js/placeholder.js"></script>
