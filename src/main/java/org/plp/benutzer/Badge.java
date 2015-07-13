@@ -1,10 +1,38 @@
 package org.plp.benutzer;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "BADGE")
 public class Badge {
 	
-	String name;
-	int id;
-	int benötigtePunkte;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
+	private int id;
+	
+	
+	@Column(name = "benötigtePunkte")
+	private int benötigtePunkte;
+	
+	
+	public Badge(){}
+	
+	
+	
+	
+	
+	
+	
 	public String getName() {
 		return name;
 	}

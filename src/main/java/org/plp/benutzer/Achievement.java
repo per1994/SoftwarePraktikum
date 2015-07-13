@@ -1,11 +1,32 @@
 package org.plp.benutzer;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ACHIEVEMENT")
 public class Achievement {
 	
+	
+	@Column(name = "benötigteCombatsiege")
 	private int benötigteCombatsiege;
+	
+	@Column(name = "benötigteCombats")
 	private int benötigteCombats;
+	
+	@Column(name = "benötigteQuests")
 	private int benötigteQuests;
 	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
+	private int id;
+	
+	
+	public Achievement(){}
 	
 	
 	

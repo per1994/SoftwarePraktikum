@@ -64,7 +64,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/DatenbankName" />
+		<property name="url" value="jdbc:mysql://localhost:3306/plp" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
