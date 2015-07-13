@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.plp.gamification.Quest;
+import org.plp.grundfunktionen.Nachricht;
 import org.plp.gruppenfunktionen.Fachrichtung;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.plp.gruppenfunktionen.Lernziel;
@@ -14,15 +15,14 @@ import org.springframework.ui.Model;
 
 public class Benutzer {
 
-	
 	private String benutzerName;
 	private String vorname;
 	private String nachname;
 	private String passwort;
 	private String email;
-	private Set freundesliste;
-	//private Moderator moderator= new Moderator();
-	private Set gruppenListe; 
+	private Set<Benutzer> freundesliste;
+	//private Moderator moderator = new Moderator();
+	private Set<Gruppe> gruppenListe;
 	private int anzahlCombats;
 	private int anzahlNiederlagen;
 	private int anzahlSiege;
@@ -38,54 +38,78 @@ public class Benutzer {
 	private Set<Badge> badges;
 	private Avatar avatar;
 	private Set<Achievement> achievements;
-	
-	public Benutzer(){
-		freundesliste= new HashSet();
-		gruppenListe= new HashSet();
-		badges= new HashSet();
-		achievements= new HashSet();
-		
+	private Set<Nachricht> nachrichten;
+
+	public Benutzer() {
+		freundesliste = new HashSet<Benutzer>();
+		gruppenListe = new HashSet<Gruppe>();
+		badges = new HashSet<Badge>();
+		achievements = new HashSet<Achievement>();
+		nachrichten = new HashSet<Nachricht>();
+
 	}
 
-	public void freundHinzufügen(Benutzer benutzer) throws Exception {
-		if (!freundesliste.contains(benutzer)) {
-			freundesliste.add(benutzer);
-			benutzer.getFreundesliste().add(this);
-
+	public void freundschaftsAnfrageVersenden(Benutzer empfänger)
+			throws Exception {
+		if (!freundesliste.contains(empfänger)) {
+			Nachricht nachricht = new Nachricht(this, empfänger,
+					Nachricht.FREUNDSCHAFTSANRAGE, this);
+			empfänger.nachrichten.add(nachricht);
 		} else {
-			throw new Exception(
-					"Du hast diesen Benutzer bereits zu deiner Freundesliste hinzugefügt");
+			throw new Exception("Du bist bereits mit diesem Nutzer befreundet");
 		}
-
 	}
 
-	public void freundEntfernen(Benutzer benutzer) throws Exception {
-		if (freundesliste.contains(benutzer)) {
-			freundesliste.remove(benutzer);
-			benutzer.getFreundesliste().remove(this);
+	public void freundschaftsAnfrageAnnehmen(Nachricht freundschaftsAnfrage) {
+		this.freundesliste.add((Benutzer) freundschaftsAnfrage.getAnhang());
+		((Benutzer) freundschaftsAnfrage.getAnhang()).freundesliste.add(this);
+		this.nachrichten.remove(freundschaftsAnfrage);
+		Nachricht nachricht = new Nachricht(this,
+				freundschaftsAnfrage.getAnhang(),
+				Nachricht.FREUNDSCHAFTSANFRAGEANGENOMMEN, this);
+		((Benutzer) freundschaftsAnfrage.getAnhang()).nachrichten
+				.add(nachricht);
+	}
+
+	// public void freundHinzufügen(Benutzer benutzer) throws Exception {
+	// if (!freundesliste.contains(benutzer)) {
+	// freundesliste.add(benutzer);
+	// benutzer.getFreundesliste().add(this);
+	//
+	// } else {
+	// throw new Exception(
+	// "Du hast diesen Benutzer bereits zu deiner Freundesliste hinzugefügt");
+	// }
+	//
+	// }
+
+	public void freundEntfernen(Benutzer freund) throws Exception {
+		if (freundesliste.contains(freund)) {
+			freundesliste.remove(freund);
+			freund.getFreundesliste().remove(this);
 
 		} else {
 			throw new Exception("Du bist aktuell nicht mit" + " "
-					+ benutzer.getVorname() + "befreundet");
+					+ freund.getVorname() + "befreundet");
 		}
 	}
 
-	public void erstellenEintrag(Pinnwand pinnwand,String eintragstext, Benutzer empfänger) {
+	public void eintragErstellen(Pinnwand pinnwand, String eintragstext,
+			Benutzer empfänger) {
 		Eintrag eintrag = new Eintrag();
 		eintrag.setEintragstext(eintragstext);
 		pinnwand.getEinträge().add(eintrag);
-		pinnwand.setNeueEinträge(pinnwand.getNeueEinträge()+1);
-		pinnwand.benachrichtigenEmpfänger(empfänger);
-		
-
+		Nachricht nachricht = new Nachricht(pinnwand, empfänger,
+				Nachricht.PINNWANDEINTRAGERHALTEN, this);
+		empfänger.nachrichten.add(nachricht);
 	}
 
-	public void schreibenKommentar(Eintrag eintrag, String kommentar) {
+	public void kommentarSchreiben(Eintrag eintrag, String kommentar) {
 		eintrag.getKommentare().add(kommentar);
 
 	}
 
-	public void erstellenGruppe(Fachrichtung fachrichtung, String name,
+	public void gruppeErstellen(Fachrichtung fachrichtung, String name,
 			Lernziel lernziel, String passwort) throws Exception {
 
 		Gruppe lerngruppe = new Gruppe();
@@ -100,7 +124,9 @@ public class Benutzer {
 
 	}
 
-	public void einladenBenutzer(Benutzer sender, Benutzer empfänger) {
+	public void einladenBenutzer(Benutzer empfänger) {
+		Nachricht nachricht = new Nachricht(this, empfänger,
+				Nachricht.FREUNDSCHAFTSANRAGE, this);
 
 	}
 
@@ -120,7 +146,6 @@ public class Benutzer {
 
 	public void erstellenQuest() {
 		Quest quest = new Quest();
-		
 
 	}
 
@@ -128,8 +153,6 @@ public class Benutzer {
 		model.addAttribute("userName", this.getVorname());
 		model.addAttribute("userPassword", passwort);
 	}
-
-	
 
 	public String getEmail() {
 		return email;
@@ -143,10 +166,6 @@ public class Benutzer {
 		return freundesliste;
 	}
 
-	public void setFreundesliste(HashSet freundesliste) {
-		this.freundesliste = freundesliste;
-	}
-
 	/*
 	 * public Moderator getModerator() { return moderator; }
 	 * 
@@ -156,10 +175,6 @@ public class Benutzer {
 
 	public Set getGruppenListe() {
 		return gruppenListe;
-	}
-
-	public void setGruppenListe(HashSet gruppenListe) {
-		this.gruppenListe = gruppenListe;
 	}
 
 	public int getAnzahlCombats() {
@@ -314,16 +329,32 @@ public class Benutzer {
 		this.achievements = achievements;
 	}
 
-	public void setFreundesliste(Set freundesliste) {
+	public void setPunktzahl(int punktzahl) {
+		this.punktzahl = punktzahl;
+	}
+
+//	public Moderator getModerator() {
+//		return moderator;
+//	}
+//
+//	public void setModerator(Moderator moderator) {
+//		this.moderator = moderator;
+//	}
+
+	public Set<Nachricht> getNachrichten() {
+		return nachrichten;
+	}
+
+	public void setNachrichten(Set<Nachricht> nachrichten) {
+		this.nachrichten = nachrichten;
+	}
+
+	public void setFreundesliste(Set<Benutzer> freundesliste) {
 		this.freundesliste = freundesliste;
 	}
 
-	public void setGruppenListe(Set gruppenListe) {
+	public void setGruppenListe(Set<Gruppe> gruppenListe) {
 		this.gruppenListe = gruppenListe;
-	}
-
-	public void setPunktzahl(int punktzahl) {
-		this.punktzahl = punktzahl;
 	}
 
 }

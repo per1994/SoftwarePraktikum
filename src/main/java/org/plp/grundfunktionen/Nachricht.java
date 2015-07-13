@@ -8,8 +8,8 @@ import org.plp.gruppenfunktionen.Gruppe;
 
 public class Nachricht {
 
-	private Benutzer sender;
-	private Benutzer empfänger;
+	private Object sender;
+	private Object empfänger;
 	private boolean statisch;
 	private int typ;
 	private Date datum;
@@ -21,8 +21,13 @@ public class Nachricht {
 	public static final int GRUPPENEINLADUNG = 1;
 	public static final int COMBATANFRAGE = 2;
 	public static final int TEAMCOMBATANFRAGE = 3;
-
-	public Nachricht(Benutzer sender, Benutzer empfänger, int typ, Object anhang) {
+	public static final int FREUNDSCHAFTSANFRAGEANGENOMMEN = 4;
+	public static final int GRUPPENEINLADUNGANGENOMMEN = 5;
+	public static final int COMBATANFRAGEANGENOMMEN = 6;
+	public static final int TEAMCOMBATANFRAGEANGENOMMEN = 7;
+	public static final int PINNWANDEINTRAGERHALTEN = 8;
+	
+	public Nachricht(Object sender, Object empfänger, int typ, Object anhang) {
 		switch (typ) {
 		case (0):
 			titel = "Freundschaftsanfrage";
@@ -32,9 +37,7 @@ public class Nachricht {
 			break;
 		case (1):
 			titel = "Gruppeneinladung";
-			inhalt = ((Benutzer) sender).getVorname() + " "
-					+ ((Benutzer) sender).getNachname()
-					+ " hat dich in die Gruppe " + ((Gruppe) anhang).getName()
+			inhalt = "Du wurdest in die Gruppe " + ((Gruppe) sender).getName()
 					+ " eingeladen";
 			break;
 		case (2):
@@ -45,6 +48,42 @@ public class Nachricht {
 					+ ((Combat) anhang).getAufgabe().getThemengebiet()
 					+ " heraufgefordert!";
 			break;
+		case (3):
+			titel = "Team-Combat-Herausforderung";
+			inhalt = "Die Gruppe " + ((Gruppe) sender).getName()
+					+ " hat euch zu einem Team-Combat in der Fachrichtung "
+					+ ((Combat) anhang).getAufgabe().getFachrichtung()
+					+ " herausgefordert";
+			break;
+		case (4):
+			titel = "Freundschaftsanfrage angenommen";
+			inhalt = ((Benutzer) sender).getVorname() + " "
+					+ ((Benutzer) sender).getNachname()
+					+ " hat deine Freundschaftsanfrage akzeptiert!";
+			break;
+		case (5):
+			titel = "Neues Gruppenmitglied";
+			inhalt = ((Benutzer) sender).getVorname() + " "
+					+ ((Benutzer) sender).getNachname() + " ist deiner Gruppe "
+					+ ((Gruppe) empfänger).getName() + " beigetreten!";
+			break;
+		case (6):
+			titel = "Combat-Herausforderung angenommen";
+			inhalt = ((Benutzer) sender).getVorname() + " "
+					+ ((Benutzer) sender).getNachname()
+					+ " hat deine Herausforderung zum Combat angenommen!";
+			break;
+		case (7):
+			titel = "Team-Combat-Herausforderung angenommen";
+			inhalt = ((Gruppe) sender).getName()
+					+ " hat deine Herausforderung zum Team-Combat angenommen!";
+			break;
+		case (8):
+			titel = "Pinnwandeintrag erhalten";
+			inhalt = ((Benutzer) anhang).getVorname() + " "
+					+ ((Benutzer) anhang).getNachname()
+					+ " hat einen Eintrag auf deiner Pinnwand hinterlassen";
+			break;
 		}
 		this.sender = sender;
 		this.empfänger = empfänger;
@@ -53,7 +92,7 @@ public class Nachricht {
 		datum = new Date();
 	}
 
-	public Benutzer getSender() {
+	public Object getSender() {
 		return sender;
 	}
 
@@ -61,7 +100,7 @@ public class Nachricht {
 		this.sender = sender;
 	}
 
-	public Benutzer getEmpfänger() {
+	public Object getEmpfänger() {
 		return empfänger;
 	}
 
