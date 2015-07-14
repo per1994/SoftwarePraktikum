@@ -42,11 +42,13 @@ public class Benutzer {
 	
 	@Column(name = "passwort")
 	private String passwort;
-	private String email;
 	
 	@Column(name = "email")
+	private String email;
+	
+	
 	private Set<Benutzer> freundesliste;
-	//private Moderator moderator = new Moderator();
+	private Moderator moderator;
 	private Set<Gruppe> gruppenListe;
 	
 	@Column(name = "anzahlCombats")
@@ -152,7 +154,7 @@ public class Benutzer {
 		empfänger.nachrichten.add(nachricht);
 	}
 
-	public void kommentarSchreiben(Eintrag eintrag, String kommentar) {
+	public void kommentarSchreiben(Eintrag eintrag, Kommentar kommentar) {
 		eintrag.getKommentare().add(kommentar);
 
 	}

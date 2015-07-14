@@ -1,6 +1,7 @@
 package org.plp.benutzer;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,8 +22,10 @@ public class Eintrag {
 	@GeneratedValue
 	private int id;
 	
+	private Benutzer author;
 	
-	private ArrayList<String> kommentare;
+	
+	private Set<Kommentar> kommentare;
 
 	public String getEintragstext() {
 		return eintragstext;
@@ -32,11 +35,11 @@ public class Eintrag {
 		this.eintragstext = eintragstext;
 	}
 
-	public ArrayList<String> getKommentare() {
+	public Set<Kommentar> getKommentare() {
 		return kommentare;
 	}
 
-	public void setKommentare(ArrayList<String> kommentare) {
+	public void setKommentare(Set<Kommentar> kommentare) {
 		this.kommentare = kommentare;
 	}
 
