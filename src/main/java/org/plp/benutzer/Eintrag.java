@@ -1,6 +1,7 @@
 package org.plp.benutzer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,23 +10,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "EINTRAG")
 public class Eintrag {
 
-	@Column(name = "eintragstext")
-	private String eintragstext;
-	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue
 	private int id;
-	
+
+	@Column(name = "eintragstext")
+	private String eintragstext;
+
 	private Benutzer author;
-	
-	
+
 	private Set<Kommentar> kommentare;
+
+	public Eintrag() {
+		kommentare = new HashSet<Kommentar>();
+	}
 
 	public String getEintragstext() {
 		return eintragstext;

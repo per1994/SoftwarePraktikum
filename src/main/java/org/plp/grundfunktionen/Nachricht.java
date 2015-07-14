@@ -2,19 +2,44 @@ package org.plp.grundfunktionen;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.plp.benutzer.Benutzer;
 import org.plp.gamification.Combat;
 import org.plp.gruppenfunktionen.Gruppe;
 
+@Entity
+@Table(name = "NACHRICHT")
 public class Nachricht {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
+	private int id;
+
 	private Object sender;
+	
 	private Object empfänger;
+
+	@Column(name = "statisch")
 	private boolean statisch;
+
+	@Column(name = "typ")
 	private int typ;
+	
+	@Column(name = "datum")
 	private Date datum;
+	
+	@Column(name = "titel")
 	private String titel;
+	
+	@Column(name = "inhalt")
 	private String inhalt;
+	
 	private Object anhang;
 
 	public static final int FREUNDSCHAFTSANRAGE = 0;
@@ -26,7 +51,7 @@ public class Nachricht {
 	public static final int COMBATANFRAGEANGENOMMEN = 6;
 	public static final int TEAMCOMBATANFRAGEANGENOMMEN = 7;
 	public static final int PINNWANDEINTRAGERHALTEN = 8;
-	
+
 	public Nachricht(Object sender, Object empfänger, int typ, Object anhang) {
 		switch (typ) {
 		case (0):

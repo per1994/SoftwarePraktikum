@@ -1,11 +1,29 @@
 package org.plp.gamification;
 
 import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TEILAUFGABE")
 public class Teilaufgabe {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
+	private int id;
+
+	@Column(name = "frage")
 	private String frage;
-	private HashSet<String> antwortMöglichkeiten = new HashSet<String>();
+
+	private Set<String> antwortMöglichkeiten;
+
+	@Column(name = "punktzahl")
 	private int punktzahl;
 
 	public String getFrage() {
@@ -16,7 +34,7 @@ public class Teilaufgabe {
 		this.frage = frage;
 	}
 
-	public HashSet<String> getAntwortMöglichkeiten() {
+	public Set<String> getAntwortMöglichkeiten() {
 		return antwortMöglichkeiten;
 	}
 

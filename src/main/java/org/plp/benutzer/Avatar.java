@@ -6,23 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
-
 @Entity
 @Table(name = "AVATAR")
 public class Avatar {
-	
-	
-	@Column(name = "anzahlAchievement")
-	private int anzahlAchievement;
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue
 	private int id;
-	
-	public Avatar(){}
+
+	@Column(name = "anzahlAchievement")
+	private int anzahlAchievement;
+
+	public Avatar() {
+	}
 
 	public int getAnzahlAchievement() {
 		return anzahlAchievement;

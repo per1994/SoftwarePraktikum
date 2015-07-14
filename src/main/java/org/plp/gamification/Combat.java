@@ -2,17 +2,40 @@ package org.plp.gamification;
 
 import java.util.HashSet;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.plp.benutzer.Benutzer;
 
+@Entity
+@Table(name = "COMBAT")
 public class Combat {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
+	private int id;
+
 	private HashSet<Benutzer> teilnehmer = new HashSet<Benutzer>();
+
 	private Aufgabe aufgabe;
+
 	private Benutzer gewinner;
+
 	private Benutzer verlierer;
+
+	@Column(name = "punkteGewinner")
 	private int punkteGewinner;
+
+	@Column(name = "punkteVerlierer")
 	private int punkteVerlierer;
+
+	@Column(name = "punkteUnentschieden")
 	private int punkteUnentschieden;
+
 	private boolean unentschieden;
 
 	// Hier kommt der Konstruktor hin

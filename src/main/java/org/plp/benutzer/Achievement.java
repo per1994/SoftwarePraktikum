@@ -9,48 +9,47 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ACHIEVEMENT")
 public class Achievement {
-	
-	
-	@Column(name = "benötigteCombatsiege")
-	private int benötigteCombatsiege;
-	
-	@Column(name = "benötigteCombats")
-	private int benötigteCombats;
-	
-	@Column(name = "benötigteQuests")
-	private int benötigteQuests;
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue
 	private int id;
-	
-	
-	public Achievement(){}
-	
-	
-	
+
+	@Column(name = "benötigteCombatsiege")
+	private int benötigteCombatsiege;
+
+	@Column(name = "benötigteCombats")
+	private int benötigteCombats;
+
+	@Column(name = "benötigteQuests")
+	private int benötigteQuests;
+
+	// Konstruktor für Hibernate
+	public Achievement() {
+	}
+
 	public int getBenötigteCombatsiege() {
 		return benötigteCombatsiege;
 	}
+
 	public void setBenötigteCombatsiege(int benötigteCombatsiege) {
 		this.benötigteCombatsiege = benötigteCombatsiege;
 	}
+
 	public int getBenötigteCombats() {
 		return benötigteCombats;
 	}
+
 	public void setBenötigteCombats(int benötigteCombats) {
 		this.benötigteCombats = benötigteCombats;
 	}
+
 	public int getBenötigteQuests() {
 		return benötigteQuests;
 	}
+
 	public void setBenötigteQuests(int benötigteQuests) {
 		this.benötigteQuests = benötigteQuests;
 	}
-	
-	
-	
-	
 
 }

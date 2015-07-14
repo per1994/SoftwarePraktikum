@@ -11,72 +11,64 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
-
-
-
 import org.plp.gamification.Quest;
 import org.plp.grundfunktionen.Nachricht;
 import org.plp.gruppenfunktionen.Fachrichtung;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.plp.gruppenfunktionen.Lernziel;
-import org.plp.gruppenfunktionen.Moderator;
 import org.springframework.ui.Model;
-
-
-
 
 @Entity
 @Table(name = "BENUTZER")
 public class Benutzer {
 
-	@Column(name = "benutzerName")
-	private String benutzerName;
-	
-	@Column(name = "vorname")
-	private String vorname;
-	
-	@Column(name = "nachname")
-	private String nachname;
-	
-	@Column(name = "passwort")
-	private String passwort;
-	
-	@Column(name = "email")
-	private String email;
-	
-	
-	private Set<Benutzer> freundesliste;
-	private Moderator moderator;
-	private Set<Gruppe> gruppenListe;
-	
-	@Column(name = "anzahlCombats")
-	private int anzahlCombats;
-	
-	@Column(name = "anzahlNiederlagen")
-	private int anzahlNiederlagen;
-	
-	@Column(name = "anzahlSiege")
-	private int anzahlSiege;
-	
-	@Column(name = "anzahlUnentschieden")
-	private int anzahlUnentschieden;
-	
-	@Column(name = "anzahlQuest")
-	private int anzahlQuest;
-	
 	@Id
-	@Column(name = "erstelltAm")
+	@Column(name = "id")
 	@GeneratedValue
 	private int id;
-	
+
+	@Column(name = "benutzerName")
+	private String benutzerName;
+
+	@Column(name = "vorname")
+	private String vorname;
+
+	@Column(name = "nachname")
+	private String nachname;
+
+	@Column(name = "passwort")
+	private String passwort;
+
+	@Column(name = "email")
+	private String email;
+
+	private Set<Benutzer> freundesliste;
+
+	private Set<Gruppe> gruppenListe;
+
+	private Set<Gruppe> moderierteGruppenListe;
+
+	@Column(name = "anzahlCombats")
+	private int anzahlCombats;
+
+	@Column(name = "anzahlNiederlagen")
+	private int anzahlNiederlagen;
+
+	@Column(name = "anzahlSiege")
+	private int anzahlSiege;
+
+	@Column(name = "anzahlUnentschieden")
+	private int anzahlUnentschieden;
+
+	@Column(name = "anzahlQuest")
+	private int anzahlQuest;
+
 	@Column(name = "punktzahl")
 	private int punktzahl;
-	
+
 	@Column(name = "erstelltAm")
 	private Pinnwand pinnwand;
-	
+
 	@Column(name = "gebDatum")
 	private Date gebDatum;
 
@@ -88,8 +80,6 @@ public class Benutzer {
 	private Set<Achievement> achievements;
 	private Set<Nachricht> nachrichten;
 
-	
-	
 	public Benutzer() {
 		freundesliste = new HashSet<Benutzer>();
 		gruppenListe = new HashSet<Gruppe>();
@@ -331,13 +321,11 @@ public class Benutzer {
 		this.gebDatum = gebDatum;
 	}
 
-	/*public int getAlter() {
-		return alter;
-	}
-
-	public void setAlter(int alter) {
-		this.alter = alter;
-	}*/
+	/*
+	 * public int getAlter() { return alter; }
+	 * 
+	 * public void setAlter(int alter) { this.alter = alter; }
+	 */
 
 	public char getGeschlecht() {
 		return geschlecht;
@@ -383,13 +371,13 @@ public class Benutzer {
 		this.punktzahl = punktzahl;
 	}
 
-//	public Moderator getModerator() {
-//		return moderator;
-//	}
-//
-//	public void setModerator(Moderator moderator) {
-//		this.moderator = moderator;
-//	}
+	// public Moderator getModerator() {
+	// return moderator;
+	// }
+	//
+	// public void setModerator(Moderator moderator) {
+	// this.moderator = moderator;
+	// }
 
 	public Set<Nachricht> getNachrichten() {
 		return nachrichten;

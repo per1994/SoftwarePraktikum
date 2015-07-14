@@ -6,27 +6,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "DATEI")
 public class Datei {
-	
-	
-	@Column(name = "pfad")
-	private String pfad;
-	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "typ")
-	private String typ;
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue
 	private int id;
-	
+
+	@Column(name = "pfad")
+	private String pfad;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "typ")
+	private String typ;
+
+	public Datei() {
+
+	}
 
 	public String getPfad() {
 		return pfad;

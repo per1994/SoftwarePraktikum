@@ -1,20 +1,42 @@
 package org.plp.gamification;
 
 import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.plp.benutzer.Benutzer;
 import org.plp.gruppenfunktionen.Fachrichtung;
 
+@Entity
+@Table(name = "AUFGABE")
 public class Aufgabe {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
+	private int id;
+
 	private Benutzer aufgabenAutor;
-	private HashSet<Teilaufgabe> teilAufgaben = new HashSet<Teilaufgabe>();
+
+	private Set<Teilaufgabe> teilAufgaben;
+
+	@Column(name = "punktzahl")
 	private int punktzahl;
+
 	private Fachrichtung fachrichtung;
+
+	@Column(name = "themengebiet")
 	private String themengebiet;
 
-	
-	
+	public Aufgabe() {
+		teilAufgaben = new HashSet<Teilaufgabe>();
+	}
+
 	public Benutzer getAufgabenAutor() {
 		return aufgabenAutor;
 	}
@@ -23,7 +45,7 @@ public class Aufgabe {
 		this.aufgabenAutor = aufgabenAutor;
 	}
 
-	public HashSet<Teilaufgabe> getTeilAufgaben() {
+	public Set<Teilaufgabe> getTeilAufgaben() {
 		return teilAufgaben;
 	}
 
@@ -54,7 +76,5 @@ public class Aufgabe {
 	public void setThemengebiet(String themengebiet) {
 		this.themengebiet = themengebiet;
 	}
-	
-	
 
 }
