@@ -152,6 +152,10 @@ public class Benutzer {
 
 	}
 
+	public Benutzer(String benutzerName) {
+		this.benutzerName=benutzerName;
+	}
+
 	public void freundschaftsAnfrageVersenden(Benutzer empfänger)
 			throws Exception {
 		if (!freundesListe.contains(empfänger)) {
