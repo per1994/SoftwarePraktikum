@@ -22,7 +22,7 @@ public class Nachricht {
 	private int nachricht_id;
 
 	private Object sender;
-	
+
 	private Object empfänger;
 
 	@Column(name = "statisch")
@@ -30,16 +30,16 @@ public class Nachricht {
 
 	@Column(name = "typ")
 	private int typ;
-	
+
 	@Column(name = "datum")
 	private Date datum;
-	
+
 	@Column(name = "titel")
 	private String titel;
-	
+
 	@Column(name = "inhalt")
 	private String inhalt;
-	
+
 	private Object anhang;
 
 	public static final int FREUNDSCHAFTSANRAGE = 0;
@@ -62,8 +62,8 @@ public class Nachricht {
 			break;
 		case (1):
 			titel = "Gruppeneinladung";
-			inhalt = "Du wurdest in die Gruppe " + ((Gruppe) sender).getName()
-					+ " eingeladen";
+			inhalt = "Du wurdest in die Gruppe "
+					+ ((Gruppe) sender).getGruppenName() + " eingeladen";
 			break;
 		case (2):
 			titel = "Combat-Herausforderung";
@@ -75,7 +75,7 @@ public class Nachricht {
 			break;
 		case (3):
 			titel = "Team-Combat-Herausforderung";
-			inhalt = "Die Gruppe " + ((Gruppe) sender).getName()
+			inhalt = "Die Gruppe " + ((Gruppe) sender).getGruppenName()
 					+ " hat euch zu einem Team-Combat in der Fachrichtung "
 					+ ((Combat) anhang).getAufgabe().getFachrichtung()
 					+ " herausgefordert";
@@ -90,7 +90,7 @@ public class Nachricht {
 			titel = "Neues Gruppenmitglied";
 			inhalt = ((Benutzer) sender).getVorname() + " "
 					+ ((Benutzer) sender).getNachname() + " ist deiner Gruppe "
-					+ ((Gruppe) empfänger).getName() + " beigetreten!";
+					+ ((Gruppe) empfänger).getGruppenName() + " beigetreten!";
 			break;
 		case (6):
 			titel = "Combat-Herausforderung angenommen";
@@ -100,7 +100,7 @@ public class Nachricht {
 			break;
 		case (7):
 			titel = "Team-Combat-Herausforderung angenommen";
-			inhalt = ((Gruppe) sender).getName()
+			inhalt = ((Gruppe) sender).getGruppenName()
 					+ " hat deine Herausforderung zum Team-Combat angenommen!";
 			break;
 		case (8):

@@ -57,9 +57,9 @@ public class Benutzer {
 
 	@Column(name = "anzahlCombats")
 	private int anzahlCombats;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "questTeilnehmer")
-	private Set<Quest>quests;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "questTeilnehmer")
+	private Set<Quest> quests;
 
 	@Column(name = "anzahlNiederlagen")
 	private int anzahlNiederlagen;
@@ -75,14 +75,14 @@ public class Benutzer {
 
 	@Column(name = "punktzahl")
 	private int punktzahl;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "aufgabenAutor")
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabenAutor")
 	private Set<Aufgabe> erstellteAufgaben;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "autor")
-	private Set<Eintrag>einträge;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "autor")
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "autor")
+	private Set<Eintrag> einträge;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "autor")
 	private Set<Kommentar> kommentare;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -96,12 +96,11 @@ public class Benutzer {
 	private char geschlecht;
 	private Fachrichtung fachrichtung;
 	private Set<Badge> badges;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="avatar_id")
+	@JoinColumn(name = "avatar_id")
 	private Avatar avatar;
-	
-	
+
 	private Set<Achievement> achievements;
 	private Set<Nachricht> nachrichten;
 
@@ -177,16 +176,6 @@ public class Benutzer {
 	public void gruppeErstellen(Fachrichtung fachrichtung, String name,
 			Lernziel lernziel, String passwort) throws Exception {
 
-		Gruppe lerngruppe = new Gruppe();
-
-		lerngruppe.addMitgliedToMitgliederListe(this);
-		lerngruppe.setFachrichtung(fachrichtung);
-		lerngruppe.setName(name);
-		lerngruppe.setLernziel(lernziel);
-		lerngruppe.setPasswort(passwort);
-
-		this.getGruppenListe().add(lerngruppe);
-
 	}
 
 	public void einladenBenutzer(Benutzer empfänger) {
@@ -204,8 +193,6 @@ public class Benutzer {
 	}
 
 	public void beitretenGruppe(Gruppe gruppe) throws Exception {
-		gruppe.addMitgliedToMitgliederListe(this);
-		this.getGruppenListe().add(gruppe);
 
 	}
 
