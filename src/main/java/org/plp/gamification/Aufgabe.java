@@ -3,10 +3,14 @@ package org.plp.gamification;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.plp.benutzer.Benutzer;
@@ -21,6 +25,8 @@ public class Aufgabe {
 	@GeneratedValue
 	private int aufgabe_id;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "benutzer_id")
 	private Benutzer aufgabenAutor;
 
 	private Set<Teilaufgabe> teilAufgaben;
@@ -28,10 +34,16 @@ public class Aufgabe {
 	@Column(name = "punktzahl")
 	private int punktzahl;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fachrichtung_id")
 	private Fachrichtung fachrichtung;
 
 	@Column(name = "themengebiet")
 	private String themengebiet;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "aufgabensammlung_id")
+	private Aufgabensammlung aufgabenSammlung;
 
 	public Aufgabe() {
 		teilAufgaben = new HashSet<Teilaufgabe>();

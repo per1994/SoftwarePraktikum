@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,11 +28,16 @@ public class Eintrag {
 	@Column(name = "eintragstext")
 	private String eintragstext;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "benutzer_id")
-	private Benutzer author;
+	private Benutzer autor;
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "eintrag")
 	private Set<Kommentar> kommentare;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pinnwand_id")
+	private Pinnwand pinnwand;
 
 	public Eintrag() {
 		kommentare = new HashSet<Kommentar>();
@@ -50,6 +57,30 @@ public class Eintrag {
 
 	public void setKommentare(Set<Kommentar> kommentare) {
 		this.kommentare = kommentare;
+	}
+
+	public int getEintrag_id() {
+		return eintrag_id;
+	}
+
+	public void setEintrag_id(int eintrag_id) {
+		this.eintrag_id = eintrag_id;
+	}
+
+	public Benutzer getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Benutzer autor) {
+		this.autor = autor;
+	}
+
+	public Pinnwand getPinnwand() {
+		return pinnwand;
+	}
+
+	public void setPinnwand(Pinnwand pinnwand) {
+		this.pinnwand = pinnwand;
 	}
 
 }

@@ -2,10 +2,14 @@ package org.plp.gamification;
 
 import java.util.HashSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.plp.benutzer.Benutzer;
@@ -20,9 +24,11 @@ public class Quest {
 	private int quest_id;
 
 	private HashSet<Aufgabe> aufgaben = new HashSet<Aufgabe>();
-	
-	private Benutzer questAutor;
-	
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "benutzer_id")
+	private Benutzer questTeilnehmer;
+
 	@Column(name = "bearbeitungsZeit")
 	private int bearbeitungsZeit;
 
@@ -35,11 +41,11 @@ public class Quest {
 	}
 
 	public Benutzer getQuestAutor() {
-		return questAutor;
+		return questTeilnehmer;
 	}
 
-	public void setQuestAutor(Benutzer questAutor) {
-		this.questAutor = questAutor;
+	public void setQuestAutor(Benutzer questTeilnehmer) {
+		this.questTeilnehmer = questTeilnehmer;
 	}
 
 	public int getBearbeitungsZeit() {
