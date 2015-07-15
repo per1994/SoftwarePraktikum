@@ -2,6 +2,11 @@ package org.plp.gruppenfunktionen;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Lernziel {
 
 	private String inhalt;
@@ -9,6 +14,11 @@ public class Lernziel {
 	private Date zielDatum;
 	private boolean erreicht;
 	private int bearbeitungsZeit;
+	
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="gruppe_id")
+	private Gruppe gruppe;
 	
 	public String getInhalt() {
 		return inhalt;

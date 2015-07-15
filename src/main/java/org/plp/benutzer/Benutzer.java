@@ -12,13 +12,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.plp.gamification.Aufgabe;
+import org.plp.gamification.Combat;
 import org.plp.gamification.Quest;
+import org.plp.gamification.Team;
 import org.plp.grundfunktionen.Nachricht;
 import org.plp.gruppenfunktionen.Fachrichtung;
 import org.plp.gruppenfunktionen.Gruppe;
@@ -51,8 +54,10 @@ public class Benutzer {
 
 	private Set<Benutzer> freundesliste;
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "mitgliederListe")
 	private Set<Gruppe> gruppenListe;
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "moderatorenListe")
 	private Set<Gruppe> moderierteGruppenListe;
 
 	@Column(name = "anzahlCombats")
@@ -95,12 +100,21 @@ public class Benutzer {
 	@Column(name = "geschlecht")
 	private char geschlecht;
 	private Fachrichtung fachrichtung;
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Badge> badges;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "avatar_id")
 	private Avatar avatar;
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teamMitgleider")
+	private Set<Team> teams;
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilnehmer")
+	private Set<Combat> combats;
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;
 	private Set<Nachricht> nachrichten;
 

@@ -1,6 +1,7 @@
 package org.plp.gamification;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +25,8 @@ public class Quest {
 	@GeneratedValue
 	private int quest_id;
 
-	private HashSet<Aufgabe> aufgaben = new HashSet<Aufgabe>();
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "quests")
+	private Set<Aufgabe> aufgaben;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "benutzer_id")
@@ -32,11 +35,11 @@ public class Quest {
 	@Column(name = "bearbeitungsZeit")
 	private int bearbeitungsZeit;
 
-	public HashSet<Aufgabe> getAufgaben() {
+	public Set<Aufgabe> getAufgaben() {
 		return aufgaben;
 	}
 
-	public void setAufgaben(HashSet<Aufgabe> aufgaben) {
+	public void setAufgaben(Set<Aufgabe> aufgaben) {
 		this.aufgaben = aufgaben;
 	}
 

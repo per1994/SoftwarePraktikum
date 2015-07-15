@@ -11,7 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.plp.gruppenfunktionen.Gruppe;
 
 @Entity
 @Table(name = "Mediathek")
@@ -21,6 +24,10 @@ public class Mediathek {
 	@Column(name = "mediathek_id")
 	@GeneratedValue
 	private int mediathek_id;
+	
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy="mediathek")
+	private Gruppe gruppe;
 
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "mediathek")

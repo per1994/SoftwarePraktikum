@@ -27,6 +27,9 @@ public class Fachrichtung {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
 	private Set<Aufgabe> aufgaben;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
+	private Set<Gruppe>gruppen;
 
 	public String getName() {
 		return name;

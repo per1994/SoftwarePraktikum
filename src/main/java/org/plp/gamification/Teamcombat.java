@@ -1,11 +1,16 @@
 package org.plp.gamification;
 
 import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,9 +22,11 @@ public class Teamcombat {
 	@GeneratedValue
 	private int teamcombat_id;
 
-	private HashSet<Team> teilnehmer = new HashSet<Team>();
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "teamCombat")
+	private Set<Team> teilnehmer;
 
-	private Quest aufgabe;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teamCombats")
+	private Set<Aufgabe> aufgabeliste;
 
 	@Column(name = "punkteGewinner")
 	private int punkteGewinner;
