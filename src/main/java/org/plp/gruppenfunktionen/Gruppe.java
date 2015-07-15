@@ -6,9 +6,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 public class Gruppe {
 
@@ -17,24 +25,35 @@ public class Gruppe {
 	@GeneratedValue
 	private int gruppe_id;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "GRUPPE_MITGLIED", joinColumns = @JoinColumn(name = "gruppe_id"), inverseJoinColumns = @JoinColumn(name = "benutzer_id"))
 	private Set<Benutzer> mitgliederListe;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "GRUPPE_MODERATOR", joinColumns = @JoinColumn(name = "gruppe_id"), inverseJoinColumns = @JoinColumn(name = "benutzer_id"))
 	private Set<Benutzer> moderatorenListe;
 
 	private int anzahlMitglieder;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fachrichtung_id")
 	private Fachrichtung fachrichtung;
 
 	private double lernfortschritt;
 
 	private String gruppenName;
 
-	private Set<String> lernziele;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "gruppe")
+	private Set<Lernziel> lernziele;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "mediathek_id")
+	private Mediathek mediathek;
 
 	public Gruppe() {
 		mitgliederListe = new HashSet<Benutzer>();
 		moderatorenListe = new HashSet<Benutzer>();
-		lernziele = new HashSet<String>();
+		lernziele = new HashSet<Lernziel>();
 	}
 
 	public int getGruppe_id() {
@@ -93,12 +112,20 @@ public class Gruppe {
 		this.gruppenName = gruppenName;
 	}
 
-	public Set<String> getLernziele() {
+	public Set<Lernziel> getLernziele() {
 		return lernziele;
 	}
 
-	public void setLernziele(Set<String> lernziele) {
+	public void setLernziele(Set<Lernziel> lernziele) {
 		this.lernziele = lernziele;
+	}
+
+	public Mediathek getMediathek() {
+		return mediathek;
+	}
+
+	public void setMediathek(Mediathek mediathek) {
+		this.mediathek = mediathek;
 	}
 
 }

@@ -1,11 +1,18 @@
 package org.plp.gamification;
 
 import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.plp.benutzer.Benutzer;
@@ -19,8 +26,14 @@ public class Combat {
 	@GeneratedValue
 	private int combat_id;
 
-	private HashSet<Benutzer> teilnehmer = new HashSet<Benutzer>();
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "COMBAT_TEILNEHMER", joinColumns = 
+	@JoinColumn(name = "combat_id"), inverseJoinColumns = 
+	@JoinColumn(name = "benutzer_id"))
+	private Set<Benutzer> teilnehmer;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "aufgabe_id")
 	private Aufgabe aufgabe;
 
 	private Benutzer gewinner;
@@ -62,7 +75,7 @@ public class Combat {
 		}
 	}
 
-	public HashSet<Benutzer> getTeilnehmer() {
+	public Set<Benutzer> getTeilnehmer() {
 		return teilnehmer;
 	}
 

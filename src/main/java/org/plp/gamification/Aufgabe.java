@@ -10,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.plp.benutzer.Benutzer;
@@ -29,6 +32,7 @@ public class Aufgabe {
 	@JoinColumn(name = "benutzer_id")
 	private Benutzer aufgabenAutor;
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabe")
 	private Set<Teilaufgabe> teilAufgaben;
 
 	@Column(name = "punktzahl")
@@ -45,6 +49,21 @@ public class Aufgabe {
 	@JoinColumn(name = "aufgabensammlung_id")
 	private Aufgabensammlung aufgabenSammlung;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "AUFGABE_TEAMCOMBAT", joinColumns = 
+	@JoinColumn(name = "aufgabe_id"), inverseJoinColumns = 
+	@JoinColumn(name = "teamcombat_id"))
+	private Set<Teamcombat> teamCombats;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabe")
+	private Set<Combat> combats;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "AUFGABE_QUEST", joinColumns = 
+	@JoinColumn(name = "aufgabe_id"), inverseJoinColumns = 
+	@JoinColumn(name = "quest_id"))
+	private Set<Quest> quests;
+	
 	public Aufgabe() {
 		teilAufgaben = new HashSet<Teilaufgabe>();
 	}
