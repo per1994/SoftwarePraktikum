@@ -5,10 +5,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.plp.gamification.Quest;
@@ -23,9 +28,9 @@ import org.springframework.ui.Model;
 public class Benutzer {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "benutzer_id")
 	@GeneratedValue
-	private int id;
+	private int benutzer_id;
 
 	@Column(name = "benutzerName")
 	private String benutzerName;
@@ -66,7 +71,8 @@ public class Benutzer {
 	@Column(name = "punktzahl")
 	private int punktzahl;
 
-	@Column(name = "erstelltAm")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pinnwand_id")
 	private Pinnwand pinnwand;
 
 	@Column(name = "gebDatum")
@@ -76,7 +82,12 @@ public class Benutzer {
 	private char geschlecht;
 	private Fachrichtung fachrichtung;
 	private Set<Badge> badges;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="avatar_id")
 	private Avatar avatar;
+	
+	
 	private Set<Achievement> achievements;
 	private Set<Nachricht> nachrichten;
 
@@ -258,11 +269,11 @@ public class Benutzer {
 	}
 
 	public int getId() {
-		return id;
+		return benutzer_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int benutzer_id) {
+		this.benutzer_id = benutzer_id;
 	}
 
 	public String getBenutzerName() {

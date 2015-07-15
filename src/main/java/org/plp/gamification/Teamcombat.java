@@ -13,9 +13,9 @@ import javax.persistence.Table;
 public class Teamcombat {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "teamcombat_id")
 	@GeneratedValue
-	private int id;
+	private int teamcombat_id;
 
 	private HashSet<Team> teilnehmer = new HashSet<Team>();
 

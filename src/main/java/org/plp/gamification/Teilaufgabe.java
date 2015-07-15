@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class Teilaufgabe {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "teilaufgabe_id")
 	@GeneratedValue
-	private int id;
+	private int teilaufgabe_id;
 
 	@Column(name = "frage")
 	private String frage;

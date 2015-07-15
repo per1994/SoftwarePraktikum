@@ -11,9 +11,9 @@ import javax.persistence.Table;
 public class Badge {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "badge_id")
 	@GeneratedValue
-	private int id;
+	private int badge_id;
 
 	@Column(name = "name")
 	private String name;
@@ -33,11 +33,11 @@ public class Badge {
 	}
 
 	public int getId() {
-		return id;
+		return badge_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int badge_id) {
+		this.badge_id = badge_id;
 	}
 
 	public int getBenötigtePunkte() {

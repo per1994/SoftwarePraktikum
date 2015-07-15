@@ -15,9 +15,9 @@ import org.plp.benutzer.Benutzer;
 public class Quest {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "quest_id")
 	@GeneratedValue
-	private int id;
+	private int quest_id;
 
 	private HashSet<Aufgabe> aufgaben = new HashSet<Aufgabe>();
 	

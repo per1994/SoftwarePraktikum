@@ -11,9 +11,9 @@ import javax.persistence.Table;
 public class Fachrichtung {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "fachrichtung_id")
 	@GeneratedValue
-	private int id;
+	private int fachrichtung_id;
 
 	@Column(name = "name")
 	private String name;

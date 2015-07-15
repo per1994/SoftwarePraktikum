@@ -11,9 +11,9 @@ import javax.persistence.Table;
 public class Achievement {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "achievement_id")
 	@GeneratedValue
-	private int id;
+	private int achievement_id;
 
 	@Column(name = "benötigteCombatsiege")
 	private int benötigteCombatsiege;

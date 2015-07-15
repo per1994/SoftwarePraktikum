@@ -15,9 +15,9 @@ import org.plp.benutzer.Benutzer;
 public class Team {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "team_id")
 	@GeneratedValue
-	private int id;
+	private int team_id;
 
 	private HashSet<Benutzer> teamMitglieder = new HashSet<Benutzer>();
 }

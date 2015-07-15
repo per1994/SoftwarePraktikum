@@ -17,9 +17,9 @@ import org.plp.gruppenfunktionen.Gruppe;
 public class Nachricht {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "nachricht_id")
 	@GeneratedValue
-	private int id;
+	private int nachricht_id;
 
 	private Object sender;
 	

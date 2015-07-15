@@ -11,9 +11,9 @@ import javax.persistence.Table;
 public class Datei {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "datei_id")
 	@GeneratedValue
-	private int id;
+	private int datei_id;
 
 	@Column(name = "pfad")
 	private String pfad;

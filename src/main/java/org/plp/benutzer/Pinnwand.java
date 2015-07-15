@@ -15,9 +15,9 @@ import javax.persistence.Table;
 public class Pinnwand {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "pinnwand_id")
 	@GeneratedValue
-	private int id;
+	private int pinnwand_id;
 
 	private Set<Eintrag> einträge;
 

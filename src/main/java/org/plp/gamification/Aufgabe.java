@@ -17,9 +17,9 @@ import org.plp.gruppenfunktionen.Fachrichtung;
 public class Aufgabe {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "aufgabe_id")
 	@GeneratedValue
-	private int id;
+	private int aufgabe_id;
 
 	private Benutzer aufgabenAutor;
 

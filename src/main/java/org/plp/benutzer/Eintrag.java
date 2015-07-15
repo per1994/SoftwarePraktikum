@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,13 +19,15 @@ import javax.persistence.Table;
 public class Eintrag {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "eintrag_id")
 	@GeneratedValue
-	private int id;
+	private int eintrag_id;
 
 	@Column(name = "eintragstext")
 	private String eintragstext;
 
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "benutzer_id")
 	private Benutzer author;
 
 	private Set<Kommentar> kommentare;

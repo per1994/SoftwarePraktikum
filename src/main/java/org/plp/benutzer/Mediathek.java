@@ -15,9 +15,9 @@ import javax.persistence.Table;
 public class Mediathek {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "mediathek_id")
 	@GeneratedValue
-	private int id;
+	private int mediathek_id;
 
 	private Set<Datei> set;
 
