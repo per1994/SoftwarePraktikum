@@ -60,4 +60,12 @@ public class Lernziel {
 		this.bearbeitungsZeit = bearbeitungsZeit;
 	}
 
+	public Gruppe getGruppe() {
+		return gruppe;
+	}
+
+	public void setGruppe(Gruppe gruppe) {
+		this.gruppe = gruppe;
+	}
+
 }

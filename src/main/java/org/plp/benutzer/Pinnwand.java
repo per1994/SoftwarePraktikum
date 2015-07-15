@@ -42,4 +42,20 @@ public class Pinnwand {
 		this.einträge = einträge;
 	}
 
+	public int getPinnwand_id() {
+		return pinnwand_id;
+	}
+
+	public void setPinnwand_id(int pinnwand_id) {
+		this.pinnwand_id = pinnwand_id;
+	}
+
+	public Benutzer getBesitzer() {
+		return besitzer;
+	}
+
+	public void setBesitzer(Benutzer besitzer) {
+		this.besitzer = besitzer;
+	}
+
 }

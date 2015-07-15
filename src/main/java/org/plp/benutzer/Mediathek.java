@@ -62,4 +62,20 @@ public class Mediathek {
 		this.set = set;
 	}
 
+	public int getMediathek_id() {
+		return mediathek_id;
+	}
+
+	public void setMediathek_id(int mediathek_id) {
+		this.mediathek_id = mediathek_id;
+	}
+
+	public Gruppe getGruppe() {
+		return gruppe;
+	}
+
+	public void setGruppe(Gruppe gruppe) {
+		this.gruppe = gruppe;
+	}
+
 }

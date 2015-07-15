@@ -66,6 +66,9 @@ public class Aufgabe {
 	
 	public Aufgabe() {
 		teilAufgaben = new HashSet<Teilaufgabe>();
+		combats= new HashSet<Combat>();
+		teamCombats= new HashSet<Teamcombat>();
+		quests= new HashSet<Quest>();
 	}
 
 	public Benutzer getAufgabenAutor() {
@@ -106,6 +109,50 @@ public class Aufgabe {
 
 	public void setThemengebiet(String themengebiet) {
 		this.themengebiet = themengebiet;
+	}
+
+	public int getAufgabe_id() {
+		return aufgabe_id;
+	}
+
+	public void setAufgabe_id(int aufgabe_id) {
+		this.aufgabe_id = aufgabe_id;
+	}
+
+	public Aufgabensammlung getAufgabenSammlung() {
+		return aufgabenSammlung;
+	}
+
+	public void setAufgabenSammlung(Aufgabensammlung aufgabenSammlung) {
+		this.aufgabenSammlung = aufgabenSammlung;
+	}
+
+	public Set<Teamcombat> getTeamCombats() {
+		return teamCombats;
+	}
+
+	public void setTeamCombats(Set<Teamcombat> teamCombats) {
+		this.teamCombats = teamCombats;
+	}
+
+	public Set<Combat> getCombats() {
+		return combats;
+	}
+
+	public void setCombats(Set<Combat> combats) {
+		this.combats = combats;
+	}
+
+	public Set<Quest> getQuests() {
+		return quests;
+	}
+
+	public void setQuests(Set<Quest> quests) {
+		this.quests = quests;
+	}
+
+	public void setTeilAufgaben(Set<Teilaufgabe> teilAufgaben) {
+		this.teilAufgaben = teilAufgaben;
 	}
 
 }

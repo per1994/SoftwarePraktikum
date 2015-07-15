@@ -1,5 +1,6 @@
 package org.plp.benutzer;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,7 @@ public class Avatar {
 	private Set<Benutzer>benutzer;
 
 	public Avatar() {
+		benutzer= new HashSet<Benutzer>();
 	}
 
 	public int getAnzahlAchievement() {
@@ -36,6 +38,22 @@ public class Avatar {
 
 	public void setAnzahlAchievement(int anzahlAchievement) {
 		this.anzahlAchievement = anzahlAchievement;
+	}
+
+	public int getAvatar_id() {
+		return avatar_id;
+	}
+
+	public void setAvatar_id(int avatar_id) {
+		this.avatar_id = avatar_id;
+	}
+
+	public Set<Benutzer> getBenutzer() {
+		return benutzer;
+	}
+
+	public void setBenutzer(Set<Benutzer> benutzer) {
+		this.benutzer = benutzer;
 	}
 
 }

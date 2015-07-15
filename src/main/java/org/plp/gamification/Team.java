@@ -33,4 +33,32 @@ public class Team {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "teamcombat_id")
 	private Teamcombat teamCombat;
+	
+	public Team(){
+		teamMitglieder= new HashSet<Benutzer>();
+	}
+
+	public int getTeam_id() {
+		return team_id;
+	}
+
+	public void setTeam_id(int team_id) {
+		this.team_id = team_id;
+	}
+
+	public Set<Benutzer> getTeamMitglieder() {
+		return teamMitglieder;
+	}
+
+	public void setTeamMitglieder(Set<Benutzer> teamMitglieder) {
+		this.teamMitglieder = teamMitglieder;
+	}
+
+	public Teamcombat getTeamCombat() {
+		return teamCombat;
+	}
+
+	public void setTeamCombat(Teamcombat teamCombat) {
+		this.teamCombat = teamCombat;
+	}
 }

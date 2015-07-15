@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -52,7 +53,6 @@ public class Benutzer {
 	@Column(name = "email")
 	private String email;
 
-	private Set<Benutzer> freundesliste;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "mitgliederListe")
 	private Set<Gruppe> gruppenListe;
@@ -99,7 +99,9 @@ public class Benutzer {
 
 	@Column(name = "geschlecht")
 	private char geschlecht;
-	private Fachrichtung fachrichtung;
+	
+	@Column(name = "studiengang")
+	private String studiengang;
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Badge> badges;
@@ -116,20 +118,43 @@ public class Benutzer {
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;
+	
+	
 	private Set<Nachricht> nachrichten;
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "BENUTZER_FREUNDE", joinColumns = 
+	@JoinColumn(name = "benutzer_id"), inverseJoinColumns = 
+	@JoinColumn(name = "freunde_id"))
+	private Set<Benutzer> freundesListe;
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "freundesListe")
+	private Set<Benutzer> freunde;
+
 
 	public Benutzer() {
-		freundesliste = new HashSet<Benutzer>();
+		freundesListe = new HashSet<Benutzer>();
 		gruppenListe = new HashSet<Gruppe>();
+		moderierteGruppenListe= new HashSet<Gruppe>();
 		badges = new HashSet<Badge>();
 		achievements = new HashSet<Achievement>();
 		nachrichten = new HashSet<Nachricht>();
+		quests= new HashSet<Quest>();
+		erstellteAufgaben= new HashSet<Aufgabe>();
+		einträge= new HashSet<Eintrag>();
+		kommentare= new HashSet<Kommentar>();
+		badges= new HashSet<Badge>();
+		teams= new HashSet<Team>();
+		combats= new HashSet<Combat>();
+		achievements= new HashSet<Achievement>();
+		nachrichten= new HashSet<Nachricht>();
 
 	}
 
 	public void freundschaftsAnfrageVersenden(Benutzer empfänger)
 			throws Exception {
-		if (!freundesliste.contains(empfänger)) {
+		if (!freundesListe.contains(empfänger)) {
 			Nachricht nachricht = new Nachricht(this, empfänger,
 					Nachricht.FREUNDSCHAFTSANRAGE, this);
 			empfänger.nachrichten.add(nachricht);
@@ -139,8 +164,8 @@ public class Benutzer {
 	}
 
 	public void freundschaftsAnfrageAnnehmen(Nachricht freundschaftsAnfrage) {
-		this.freundesliste.add((Benutzer) freundschaftsAnfrage.getAnhang());
-		((Benutzer) freundschaftsAnfrage.getAnhang()).freundesliste.add(this);
+		this.freundesListe.add((Benutzer) freundschaftsAnfrage.getAnhang());
+		((Benutzer) freundschaftsAnfrage.getAnhang()).freundesListe.add(this);
 		this.nachrichten.remove(freundschaftsAnfrage);
 		Nachricht nachricht = new Nachricht(this,
 				freundschaftsAnfrage.getAnhang(),
@@ -161,7 +186,7 @@ public class Benutzer {
 	//
 	// }
 
-	public void freundEntfernen(Benutzer freund) throws Exception {
+	/*public void freundEntfernen(Benutzer freund) throws Exception {
 		if (freundesliste.contains(freund)) {
 			freundesliste.remove(freund);
 			freund.getFreundesliste().remove(this);
@@ -171,7 +196,7 @@ public class Benutzer {
 					+ freund.getVorname() + "befreundet");
 		}
 	}
-
+*/
 	public void eintragErstellen(Pinnwand pinnwand, String eintragstext,
 			Benutzer empfänger) {
 		Eintrag eintrag = new Eintrag();
@@ -228,16 +253,6 @@ public class Benutzer {
 		this.email = email;
 	}
 
-	public Set getFreundesliste() {
-		return freundesliste;
-	}
-
-	/*
-	 * public Moderator getModerator() { return moderator; }
-	 * 
-	 * public void setModerator(Moderator moderator) { this.moderator =
-	 * moderator; }
-	 */
 
 	public Set getGruppenListe() {
 		return gruppenListe;
@@ -361,14 +376,6 @@ public class Benutzer {
 		this.geschlecht = geschlecht;
 	}
 
-	public Fachrichtung getFachrichtung() {
-		return fachrichtung;
-	}
-
-	public void setFachrichtung(Fachrichtung fachrichtung) {
-		this.fachrichtung = fachrichtung;
-	}
-
 	public Set<Badge> getBadges() {
 		return badges;
 	}
@@ -397,13 +404,6 @@ public class Benutzer {
 		this.punktzahl = punktzahl;
 	}
 
-	// public Moderator getModerator() {
-	// return moderator;
-	// }
-	//
-	// public void setModerator(Moderator moderator) {
-	// this.moderator = moderator;
-	// }
 
 	public Set<Nachricht> getNachrichten() {
 		return nachrichten;
@@ -413,12 +413,97 @@ public class Benutzer {
 		this.nachrichten = nachrichten;
 	}
 
-	public void setFreundesliste(Set<Benutzer> freundesliste) {
-		this.freundesliste = freundesliste;
-	}
 
 	public void setGruppenListe(Set<Gruppe> gruppenListe) {
 		this.gruppenListe = gruppenListe;
+	}
+
+	public int getBenutzer_id() {
+		return benutzer_id;
+	}
+
+	public void setBenutzer_id(int benutzer_id) {
+		this.benutzer_id = benutzer_id;
+	}
+
+	public Set<Gruppe> getModerierteGruppenListe() {
+		return moderierteGruppenListe;
+	}
+
+	public void setModerierteGruppenListe(Set<Gruppe> moderierteGruppenListe) {
+		this.moderierteGruppenListe = moderierteGruppenListe;
+	}
+
+	public Set<Quest> getQuests() {
+		return quests;
+	}
+
+	public void setQuests(Set<Quest> quests) {
+		this.quests = quests;
+	}
+
+	public Set<Aufgabe> getErstellteAufgaben() {
+		return erstellteAufgaben;
+	}
+
+	public void setErstellteAufgaben(Set<Aufgabe> erstellteAufgaben) {
+		this.erstellteAufgaben = erstellteAufgaben;
+	}
+
+	public Set<Eintrag> getEinträge() {
+		return einträge;
+	}
+
+	public void setEinträge(Set<Eintrag> einträge) {
+		this.einträge = einträge;
+	}
+
+	public Set<Kommentar> getKommentare() {
+		return kommentare;
+	}
+
+	public void setKommentare(Set<Kommentar> kommentare) {
+		this.kommentare = kommentare;
+	}
+
+	public Set<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
+	}
+
+	public Set<Combat> getCombats() {
+		return combats;
+	}
+
+	public void setCombats(Set<Combat> combats) {
+		this.combats = combats;
+	}
+
+	public Set<Benutzer> getFreundesListe() {
+		return freundesListe;
+	}
+
+	public void setFreundesListe(Set<Benutzer> freundesListe) {
+		this.freundesListe = freundesListe;
+	}
+
+	public Set<Benutzer> getFreunde() {
+		return freunde;
+	}
+
+	public void setFreunde(Set<Benutzer> freunde) {
+		this.freunde = freunde;
+	}
+
+	public String getStudiengang() {
+		return studiengang;
+	}
+
+	public void setStudiengang(String studiengang) {
+		this.studiengang = studiengang;
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.plp.benutzer;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,7 @@ public class Badge {
 	private Set<Benutzer> besitzer;
 	
 	public Badge() {
+		besitzer=new HashSet<Benutzer>();
 	}
 
 	public String getName() {
@@ -59,6 +61,22 @@ public class Badge {
 
 	public void setBenötigtePunkte(int benötigtePunkte) {
 		this.benötigtePunkte = benötigtePunkte;
+	}
+
+	public int getBadge_id() {
+		return badge_id;
+	}
+
+	public void setBadge_id(int badge_id) {
+		this.badge_id = badge_id;
+	}
+
+	public Set<Benutzer> getBesitzer() {
+		return besitzer;
+	}
+
+	public void setBesitzer(Set<Benutzer> besitzer) {
+		this.besitzer = besitzer;
 	}
 
 }

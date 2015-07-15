@@ -59,4 +59,12 @@ public class Kommentar {
 		this.autor = autor;
 	}
 
+	public Eintrag getEintrag() {
+		return eintrag;
+	}
+
+	public void setEintrag(Eintrag eintrag) {
+		this.eintrag = eintrag;
+	}
+
 }

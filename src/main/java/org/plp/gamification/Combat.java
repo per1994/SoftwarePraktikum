@@ -57,6 +57,10 @@ public class Combat {
 		teilnehmer.add(teilnehmer2);
 	}
 
+	public Combat(){
+		teilnehmer= new HashSet<Benutzer>();
+	}
+	
 	public void updateBenutzerZahlen() {
 		if (!unentschieden) {
 			gewinner.SetPunktzahl(gewinner.getPunktzahl() + punkteGewinner);
@@ -137,6 +141,18 @@ public class Combat {
 
 	public void setUnentschieden(boolean unentschieden) {
 		this.unentschieden = unentschieden;
+	}
+
+	public int getCombat_id() {
+		return combat_id;
+	}
+
+	public void setCombat_id(int combat_id) {
+		this.combat_id = combat_id;
+	}
+
+	public void setTeilnehmer(Set<Benutzer> teilnehmer) {
+		this.teilnehmer = teilnehmer;
 	}
 
 }

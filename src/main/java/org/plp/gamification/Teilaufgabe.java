@@ -35,6 +35,11 @@ public class Teilaufgabe {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="aufgabe_id")
 	private Aufgabe aufgabe;
+	
+	
+	public Teilaufgabe(){
+		antwortMöglichkeiten= new HashSet<Antwortmöglichkeit>();
+	}
 
 	public String getFrage() {
 		return frage;
@@ -58,6 +63,22 @@ public class Teilaufgabe {
 
 	public void setPunktzahl(int punktzahl) {
 		this.punktzahl = punktzahl;
+	}
+
+	public int getTeilaufgabe_id() {
+		return teilaufgabe_id;
+	}
+
+	public void setTeilaufgabe_id(int teilaufgabe_id) {
+		this.teilaufgabe_id = teilaufgabe_id;
+	}
+
+	public Aufgabe getAufgabe() {
+		return aufgabe;
+	}
+
+	public void setAufgabe(Aufgabe aufgabe) {
+		this.aufgabe = aufgabe;
 	}
 
 }

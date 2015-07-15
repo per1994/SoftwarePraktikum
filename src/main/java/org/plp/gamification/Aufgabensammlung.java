@@ -1,5 +1,6 @@
 package org.plp.gamification;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,5 +23,26 @@ public class Aufgabensammlung {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "aufgabenSammlung")
 	private Set<Aufgabe>aufgaben;
+	
+	
+	public Aufgabensammlung(){
+		aufgaben=new HashSet<Aufgabe>();
+	}
+
+	public int getAufgabensammlung_id() {
+		return aufgabensammlung_id;
+	}
+
+	public void setAufgabensammlung_id(int aufgabensammlung_id) {
+		this.aufgabensammlung_id = aufgabensammlung_id;
+	}
+
+	public Set<Aufgabe> getAufgaben() {
+		return aufgaben;
+	}
+
+	public void setAufgaben(Set<Aufgabe> aufgaben) {
+		this.aufgaben = aufgaben;
+	}
 
 }

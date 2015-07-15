@@ -1,5 +1,6 @@
 package org.plp.benutzer;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -37,8 +38,9 @@ public class Achievement {
 	@JoinColumn(name = "benutzer_id"))
 	private Set<Benutzer> besitzer;
 
-	// Konstruktor für Hibernate
+	// Hibernate braucht leeren Konstruktor
 	public Achievement() {
+		 besitzer=new HashSet<Benutzer>();
 	}
 
 	public int getBenötigteCombatsiege() {
@@ -63,6 +65,22 @@ public class Achievement {
 
 	public void setBenötigteQuests(int benötigteQuests) {
 		this.benötigteQuests = benötigteQuests;
+	}
+
+	public int getAchievement_id() {
+		return achievement_id;
+	}
+
+	public void setAchievement_id(int achievement_id) {
+		this.achievement_id = achievement_id;
+	}
+
+	public Set<Benutzer> getBesitzer() {
+		return besitzer;
+	}
+
+	public void setBesitzer(Set<Benutzer> besitzer) {
+		this.besitzer = besitzer;
 	}
 
 }
