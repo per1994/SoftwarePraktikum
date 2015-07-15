@@ -13,9 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.plp.gamification.Aufgabe;
 import org.plp.gamification.Quest;
 import org.plp.grundfunktionen.Nachricht;
 import org.plp.gruppenfunktionen.Fachrichtung;
@@ -55,6 +57,9 @@ public class Benutzer {
 
 	@Column(name = "anzahlCombats")
 	private int anzahlCombats;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "questTeilnehmer")
+	private Set<Quest>quests;
 
 	@Column(name = "anzahlNiederlagen")
 	private int anzahlNiederlagen;
@@ -70,6 +75,15 @@ public class Benutzer {
 
 	@Column(name = "punktzahl")
 	private int punktzahl;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "aufgabenAutor")
+	private Set<Aufgabe> erstellteAufgaben;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "autor")
+	private Set<Eintrag>einträge;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "autor")
+	private Set<Kommentar> kommentare;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pinnwand_id")

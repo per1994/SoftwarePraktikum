@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +22,12 @@ public class Pinnwand {
 	@Column(name = "pinnwand_id")
 	@GeneratedValue
 	private int pinnwand_id;
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="pinnwand")
+	private Benutzer besitzer;
 
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "pinnwand")
 	private Set<Eintrag> einträge;
 
 	public Pinnwand() {
