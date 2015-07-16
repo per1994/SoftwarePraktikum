@@ -45,30 +45,24 @@ public class Aufgabe {
 	@Column(name = "themengebiet")
 	private String themengebiet;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "aufgabensammlung_id")
 	private Aufgabensammlung aufgabenSammlung;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "AUFGABE_TEAMCOMBAT", joinColumns = 
-	@JoinColumn(name = "aufgabe_id"), inverseJoinColumns = 
-	@JoinColumn(name = "teamcombat_id"))
+	@JoinTable(name = "AUFGABE_TEAMCOMBAT", joinColumns = @JoinColumn(name = "aufgabe_id"), inverseJoinColumns = @JoinColumn(name = "teamcombat_id"))
 	private Set<Teamcombat> teamCombats;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabe")
 	private Set<Combat> combats;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "AUFGABE_QUEST", joinColumns = 
-	@JoinColumn(name = "aufgabe_id"), inverseJoinColumns = 
-	@JoinColumn(name = "quest_id"))
+	@JoinTable(name = "AUFGABE_QUEST", joinColumns = @JoinColumn(name = "aufgabe_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
 	private Set<Quest> quests;
-	
+
 	public Aufgabe() {
 		teilAufgaben = new HashSet<Teilaufgabe>();
-		combats= new HashSet<Combat>();
-		teamCombats= new HashSet<Teamcombat>();
-		quests= new HashSet<Quest>();
+		combats = new HashSet<Combat>();
+		teamCombats = new HashSet<Teamcombat>();
+		quests = new HashSet<Quest>();
 	}
 
 	public Benutzer getAufgabenAutor() {

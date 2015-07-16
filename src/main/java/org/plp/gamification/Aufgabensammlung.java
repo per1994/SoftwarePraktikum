@@ -11,22 +11,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="AUFGABENSAMMLUNG")
+@Table(name = "AUFGABENSAMMLUNG")
 public class Aufgabensammlung {
-	
-	
+
 	@Id
 	@Column(name = "aufgabensammlung_id")
 	@GeneratedValue
 	private int aufgabensammlung_id;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "aufgabenSammlung")
-	private Set<Aufgabe>aufgaben;
-	
-	
-	public Aufgabensammlung(){
-		aufgaben=new HashSet<Aufgabe>();
+
+	private Set<Aufgabe> aufgaben;
+
+	public Aufgabensammlung() {
+		aufgaben = new HashSet<Aufgabe>();
 	}
 
 	public int getAufgabensammlung_id() {
