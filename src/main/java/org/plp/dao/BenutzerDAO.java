@@ -1,4 +1,4 @@
-package dao;
+package org.plp.dao;
 
 import java.util.List;
 

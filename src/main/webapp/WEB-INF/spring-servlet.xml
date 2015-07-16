@@ -72,7 +72,15 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="org.hohenheim" />
+		<property name="packagesToScan">
+		<array>
+              <value>org.plp.benutzer</value>
+              <value>org.plp.gamification</value>
+              <value>org.plp.grundfunktionen</value>
+              <value>org.plp.gruppenfunktionen</value>
+              <value>org.plp.dao</value>
+         </array> 
+         </property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
