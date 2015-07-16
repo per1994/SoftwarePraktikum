@@ -2,11 +2,18 @@ package org.plp.grundfunktionen;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.benutzer.Benutzer;
 import org.plp.gamification.Combat;
@@ -21,8 +28,10 @@ public class Nachricht {
 	@GeneratedValue
 	private int nachricht_id;
 
+	@Transient
 	private Object sender;
 
+	@Transient
 	private Object empfänger;
 
 	@Column(name = "statisch")
@@ -40,6 +49,7 @@ public class Nachricht {
 	@Column(name = "inhalt")
 	private String inhalt;
 
+	@Transient
 	private Object anhang;
 
 	public static final int FREUNDSCHAFTSANRAGE = 0;
@@ -116,8 +126,9 @@ public class Nachricht {
 		this.anhang = anhang;
 		datum = new Date();
 	}
-	
-	public Nachricht(){}
+
+	public Nachricht() {
+	}
 
 	public Object getSender() {
 		return sender;

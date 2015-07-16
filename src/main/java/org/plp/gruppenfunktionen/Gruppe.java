@@ -1,6 +1,7 @@
 package org.plp.gruppenfunktionen;
 
 import org.plp.benutzer.*;
+import org.plp.grundfunktionen.Nachricht;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -46,8 +47,11 @@ public class Gruppe {
 	private double lernfortschritt;
 
 	private String gruppenName;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Nachricht> nachrichten;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "gruppe")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Lernziel> lernziele;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

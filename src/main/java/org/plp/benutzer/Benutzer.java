@@ -35,7 +35,7 @@ import org.springframework.ui.Model;
 public class Benutzer {
 
 	@Id
-	@Column(name = "benutzer_id")
+	@Column(name = "benutzer_id", nullable = false, unique = true)
 	@GeneratedValue
 	private int benutzer_id;
 
@@ -116,6 +116,12 @@ public class Benutzer {
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilnehmer")
 	private Set<Combat> combats;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "gewinner")
+	private Set<Combat> gewonneneCombats;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "verlierer")
+	private Set<Combat> verloreneCombats;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;

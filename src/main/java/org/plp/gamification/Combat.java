@@ -36,8 +36,12 @@ public class Combat {
 	@JoinColumn(name = "aufgabe_id")
 	private Aufgabe aufgabe;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "benutzer_id")
 	private Benutzer gewinner;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "benutzer_id", insertable = false, updatable = false)
 	private Benutzer verlierer;
 
 	@Column(name = "punkteGewinner")

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class GreetingController {
 	
-	//@Autowired
-	//private BenutzerService benutzerservice;
+	@Autowired
+	private BenutzerService benutzerservice;
 	
 	public GreetingController(){
 		
@@ -27,10 +27,10 @@ public class GreetingController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String greeting(Model model) {
 		
-		/*benutzerservice.addNewBenutzer("BenjoMahenjo");
+		benutzerservice.addNewBenutzer("BenjoMahenjo");
 		benutzerservice.addNewBenutzer("per1994");
 		
-		System.out.println("Anzahl der Einträge"+benutzerservice.listAllBenutzer().size()); */
+		System.out.println("Anzahl der Einträge"+benutzerservice.listAllBenutzer().size()); 
 		
 		Message message= new Message();
 		message.setInhat("Willkommen bei PLP, deiner SocialLearningPlattform");
