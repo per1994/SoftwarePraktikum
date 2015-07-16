@@ -38,4 +38,8 @@ public class BenutzerService {
 		benutzerDAO.update(benutzer_id);
 	}
 
+	@Transactional
+	public Benutzer getBenutzer(int benutzer_id){
+		return benutzerDAO.getBenutzer(benutzer_id);
+	}
 }

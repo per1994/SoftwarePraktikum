@@ -54,4 +54,11 @@ public class BenutzerDAOImpl implements BenutzerDAO {
 		
 	}
 
+	@Override
+	public Benutzer getBenutzer(int benutzer_id) {
+		Benutzer benutzer = (Benutzer) sessionFactory.getCurrentSession().load(
+                Benutzer.class, benutzer_id);
+		return benutzer;
+	}
+
 }

@@ -9,5 +9,6 @@ public interface BenutzerDAO {
 	public List<Benutzer> listBenutzer();
 	public void löschen(int benutzer_id);
 	public boolean update(int benutzer_id);
+	public Benutzer getBenutzer(int benutzer_id);
 
 }

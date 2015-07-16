@@ -15,9 +15,9 @@ import javax.persistence.Table;
 public class Antwortmöglichkeit {
 
 	@Id
-	@Column(name = "antwortmoeglichkeiten_id")
+	@Column(name = "antwortmöglichkeiten_id")
 	@GeneratedValue
-	private int antwortmoeglichkeit_id;
+	private int antwortmöglichkeit_id;
 
 	@Column(name = "antwortenText")
 	private String antwortenText;
@@ -34,11 +34,11 @@ public class Antwortmöglichkeit {
 	}
 
 	public int getAntwortmoeglichkeit_id() {
-		return antwortmoeglichkeit_id;
+		return antwortmöglichkeit_id;
 	}
 
 	public void setAntwortmoeglichkeit_id(int antwortmoeglichkeit_id) {
-		this.antwortmoeglichkeit_id = antwortmoeglichkeit_id;
+		this.antwortmöglichkeit_id = antwortmoeglichkeit_id;
 	}
 
 	public String getAntwortenText() {
