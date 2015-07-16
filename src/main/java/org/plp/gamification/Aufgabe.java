@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.benutzer.Benutzer;
 import org.plp.gruppenfunktionen.Fachrichtung;
@@ -45,6 +46,7 @@ public class Aufgabe {
 	@Column(name = "themengebiet")
 	private String themengebiet;
 
+	@Transient
 	private Aufgabensammlung aufgabenSammlung;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "AUFGABENSAMMLUNG")
@@ -21,6 +22,7 @@ public class Aufgabensammlung {
 	@GeneratedValue
 	private int aufgabensammlung_id;
 
+	@Transient
 	private Set<Aufgabe> aufgaben;
 
 	public Aufgabensammlung() {
