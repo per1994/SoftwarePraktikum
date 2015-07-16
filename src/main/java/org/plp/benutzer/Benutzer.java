@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.gamification.Aufgabe;
 import org.plp.gamification.Combat;
@@ -110,7 +111,7 @@ public class Benutzer {
 	@JoinColumn(name = "avatar_id")
 	private Avatar avatar;
 	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teamMitgleider")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teamMitglieder")
 	private Set<Team> teams;
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilnehmer")
@@ -119,7 +120,7 @@ public class Benutzer {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;
 	
-	
+	@Transient
 	private Set<Nachricht> nachrichten;
 	
 	

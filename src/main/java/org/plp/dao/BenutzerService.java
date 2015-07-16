@@ -17,8 +17,10 @@ public class BenutzerService {
 	
 	@Transactional
 	public void addNewBenutzer(String benutzerName){
+		System.out.println("Ich bin im Service, Methode addNewBenutzer");
 		Benutzer b=new Benutzer(benutzerName);
 		benutzerDAO.add(b);
+		
 	}
 	
 	@Transactional

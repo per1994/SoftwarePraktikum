@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import org.plp.gruppenfunktionen.Gruppe;
 
 @Entity
-@Table(name = "Mediathek")
+@Table(name = "MEDIATHEK")
 public class Mediathek {
 
 	@Id

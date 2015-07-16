@@ -13,7 +13,8 @@ public class TestHibernate {
 		
 		
 		
-		
+		TestHibernate hiber= new TestHibernate();
+		//hiber.test();
 		
 		
 		

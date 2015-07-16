@@ -116,6 +116,8 @@ public class Nachricht {
 		this.anhang = anhang;
 		datum = new Date();
 	}
+	
+	public Nachricht(){}
 
 	public Object getSender() {
 		return sender;
