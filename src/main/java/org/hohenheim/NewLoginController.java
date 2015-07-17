@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/home")
 public class NewLoginController {
 	
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(@ModelAttribute Benutzer benutzer,@ModelAttribute Message message, Model model) {
 	
