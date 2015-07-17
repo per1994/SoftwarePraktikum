@@ -31,7 +31,7 @@ public class GreetingController {
 		
 		
 		Benutzer benutzer= new Benutzer();
-		benutzer.setBenutzer_id(10);
+		benutzer.setBenutzer_id(20);
 		benutzer.setBenutzerName("SükrüStinkt");
 		
 		benutzerservice.update(benutzer);
