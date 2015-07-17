@@ -231,89 +231,6 @@ img {
 	}
 }
 
-/***
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
-
-/* Content */
-.content {
-	padding-top: 30px;
-}
-
-/* Testimonials */
-.testimonials blockquote {
-	background: #f8f8f8 none repeat scroll 0 0;
-	border: medium none;
-	color: #666;
-	display: block;
-	font-size: 14px;
-	line-height: 20px;
-	padding: 15px;
-	position: relative;
-}
-
-.testimonials blockquote::before {
-	width: 0;
-	height: 0;
-	right: 0;
-	bottom: 0;
-	content: " ";
-	display: block;
-	position: absolute;
-	border-bottom: 20px solid #fff;
-	border-right: 0 solid transparent;
-	border-left: 15px solid transparent;
-	border-left-style: inset; /*FF fixes*/
-	border-bottom-style: inset; /*FF fixes*/
-}
-
-.testimonials blockquote::after {
-	width: 0;
-	height: 0;
-	right: 0;
-	bottom: 0;
-	content: " ";
-	display: block;
-	position: absolute;
-	border-style: solid;
-	border-width: 20px 20px 0 0;
-	border-color: transparent transparent transparent;
-}
-
-.testimonials .carousel-info img {
-	border: 1px solid #f5f5f5;
-	border-radius: 150px !important;
-	height: 75px;
-	padding: 3px;
-	width: 75px;
-}
-
-.testimonials .carousel-info {
-	overflow: hidden;
-}
-
-.testimonials .carousel-info img {
-	margin-right: 15px;
-}
-
-.testimonials .carousel-info span {
-	display: block;
-}
-
-.testimonials span.testimonials-name {
-	color: black;
-	font-size: 16px;
-	font-weight: 300;
-	margin: 23px 0 7px;
-}
-
-.testimonials span.testimonials-post {
-	color: #656565;
-	font-size: 12px;
-}
-
 .LogIn-Position {
 	margin: 0px 500px 0px -500px;
 }
@@ -347,10 +264,6 @@ Licensed under MIT
 	height: 50px;
 }
 
-.up-bar-color {
-	background-color: #f5f5f5;
-}
-
 .name-color {
 	margin-left: 30px;
 	color: #58ACFA;
@@ -363,6 +276,7 @@ Licensed under MIT
 .img-avatar {
 	border-radius: 50%;
 	width: 150px;
+	height: 150px;
 }
 
 .profile-left {
@@ -373,6 +287,10 @@ Licensed under MIT
 .profile-right {
 	text-align: right;
 	margin-right: 30px;
+}
+
+.profile-display {
+	display: inline-block;
 }
 
 .upbar-position {
@@ -386,11 +304,7 @@ Licensed under MIT
 
 .table-position1 {
 	width: 100%;
-	margin-top: 70px;
-}
-
-.table-position2 {
-	width: 100%;
+	height: 500px;
 	margin-top: 70px;
 }
 
@@ -411,182 +325,4 @@ Licensed under MIT
 .-new-container {
 	float: right;
 	margin-right: 30px;
-}
-
-.message-size {
-	width: 200px;
-	height: 500px;
-	border: 1px solid #999999;
-	padding: 5px;
-	margin-top: 50px;
-}
-
-#plp-color {
-	color: #58ACFA;
-}
-
-.container-color {
-	background-color: #f5f5f5;
-}
-
-.new-navbar-brand {
-	float: left;
-	height: 50px;
-	padding: 15px 15px;
-	font-size: 22px;
-	line-height: 20px;
-}
-
-#next-bound {
-	display: inline-block;
-}
-
-.new-left {
-	text-align: left;
-}
-
-.new-center {
-	text-align: center;
-}
-
-.new-right {
-	text-align: right;
-}
-
-.table-post {
-	position: relative;
-}
-
-.centerTable {
-	margin: 0px auto;
-}
-
-.jumbotron-flat {
-	background-color: solid #4DB8FFF;
-	height: 100%;
-	border: 1px solid #4DB8FF;
-	background: white;
-	width: 100%;
-	text-align: center;
-	overflow: auto;
-}
-
-.block-profile {
-	display: block;
-}
-
-.setting-position1 {
-	margin: 0px 250px 0px -250px;
-	position: fixed;
-}
-
-.setting-position2 {
-	position: relative;
-	margin: 0px -300px 0px 300px;
-}
-
-.table-width {
-	width: 200px;
-}
-
-.profile-display {
-	display: inline-block;
-}
-
-.profile-width {
-	width: 600px;
-}
-
-.profile-position {
-	margin-left: -65.625em;
-	display: inline-block;
-}
-
-.pinnwand-position {
-	margin-top: 38px;
-}
-
-.comment-size {
-	width: 400px;
-	height: 600px;
-}
-
-.profileset-position {
-	margin-top: -30px;
-}
-
-.setting-position3 {
-	margin: -30px 200px 0px -200px;
-	width: 800px;
-}
-
-.setting-position4 {
-	margin: -30px -700px 0px 500px;
-	width: 800px;
-}
-
-.new {
-	overflow: hidden;
-}
-
-.group-panel-size {
-	position: fixed;
-	margin-top: 85px;
-	margin-left: -355px;
-	width: 1200px;
-	height: 845px;
-	background-color: #f5f5f5;
-	margin-top: 85px;
-}
-
-.setting-panel {
-	position: relative;
-	margin-top: 90px;
-	margin-left: auto;
-	margin-right: auto;
-	left: 0;
-	right: 0;
-}
-
-.table a {
-	display: block;
-	text-decoration: none;
-}
-
-.new-progress {
-	height: 20px;
-	margin-bottom: 20px;
-	overflow: hidden;
-	background-color: #FFFFFF;
-	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-	box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-}
-
-.bar-position {
-	margin-top: 10px;
-	margin-left: 1200px;
-	margin-right: -600px;
-}
-
-.bar-top {
-	margin-top: 20px;
-}
-
-.new-innner-bg {
-	padding: 0px 0 170px 0;
-}
-
-.group-pinn-position {
-	position: relative;
-	margin: 85px -650px 0px 650px;
-}
-
-.hor-body {
-	max-width: 100%;
-	overflow-x: hidden;
-}
-
-.input-size {
-	width: 463px; 
 }

@@ -39,112 +39,39 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-default up-bar-color navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-					aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="new-navbar-brand" id="plp-color" href="home">PLP</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="Pinnwand">Pinnwand</a></li>
-					<li><a href="Freundesliste">Freunde</a></li>
-					<li><a href="Gruppenliste">Gruppen</a></li>
-					<li><a href="Profileinstellungen">Profileinstellungen</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Inbox <span class="badge">42</span></a></li>
-					<li><a href="#">Abmelden</a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-
-	<div class="top-content">
-		<div class="inner-bg">
-			<div class="container">
-				<div class="setting-position1">
-					<div class="col-sm-6 col-sm-offset-3 form-box">
-						<div class="profile-bar profile-display">
-							<div class="row-fluid">
-								<div class="span2">
-									<img
-										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-										class="img-avatar" />
-									<h3>Patrick Schmelzle</h3>
-									<h4 th:text="${benutzer.benutzerName}"></h4>
-								</div>
-								<div class=" col-md-9 col-lg-9">
-									<table class="table table-width">
-										<tbody>
-											<tr>
-												<td class="new-left"><strong>Studiengang:</strong></td>
-												<td class="new-right"><p>Wirtschaftsinformatik</p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Punkte:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Badges:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Achievements:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
+	<div class="up-bar">
+		<h2 class="text-left name-color">
+			<strong>PLP</strong>
+		</h2>
+	</div>
+	<div class="col-sm-6 col-sm-offset-3 form-box">
+		<div class="container-fluid  profile-bar">
+			<div class="row-fluid">
+				<div class="span2">
+					<img
+						src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+						class="img-avatar" />
 				</div>
-				<div class="setting-position2 pinnwand-position pull-right">
-					<form>
-						<input type="text" placeholder="Nachricht" class="input-size" maxlength="500" />
-						<button class='btn btn-primary submit-button' type='button'>Posten</button>
-					</form>
-					<div class="container content">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
-								<div class="testimonials">
-									<div class="active item">
-										<blockquote>
-											<p>Hey, dein Profil gef&auml;llt mir. Find ich super
-												gemacht.</p>
-										</blockquote>
-										<div class="carousel-info">
-											<img alt=""
-												src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-												class="pull-left" />
-											<div class="pull-left">
-												<span class="testimonials-name">BenjoMahenjo</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<table>
+					<tr>
+						<h3 th:text="${benutzer.benutzerName}"></h3>
+						<h4 class="font-weight1">Studiengang:</h4>
+						<h4>Wirtschaftsinformatik</h4>
+						<a href="file" class="button">Dateiupload</a>
+					</tr>
+					<tr>
+						<a href="Gruppenliste"><h4 class="font-weight1">Gruppen</h4></a>
+						<a href="Freundesliste"><h4 class="font-weight1">Freundesliste</h4></a>
+					</tr>
+					<tr>
+						<h4 class="font-weight1">Badges:</h4>
+						<h4 class="font-weight1">Achievments:</h4>
+						<h4 class="font-weight1">Punkte:</h4>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
-
-
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
