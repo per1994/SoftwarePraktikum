@@ -20,13 +20,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "GRUPPE")
 public class Gruppe {
 
 	@Id
-	@Column(name = "gruppe_id")
+	@Column(name = "gruppe_id", nullable = false, unique = true)
 	@GeneratedValue
 	private int gruppe_id;
 
@@ -38,14 +39,17 @@ public class Gruppe {
 	@JoinTable(name = "GRUPPE_MODERATOR", joinColumns = @JoinColumn(name = "gruppe_id"), inverseJoinColumns = @JoinColumn(name = "benutzer_id"))
 	private Set<Benutzer> moderatorenListe;
 
+	@Column(name="anzahlMitglieder")
 	private int anzahlMitglieder;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fachrichtung_id")
 	private Fachrichtung fachrichtung;
 
+	@Column(name="lernfortschritt")
 	private double lernfortschritt;
 
+	@Column(name="gruppenName")
 	private String gruppenName;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -62,6 +66,10 @@ public class Gruppe {
 		mitgliederListe = new HashSet<Benutzer>();
 		moderatorenListe = new HashSet<Benutzer>();
 		lernziele = new HashSet<Lernziel>();
+	}
+	
+	public Gruppe(String gruppenName){
+		this.gruppenName = gruppenName;
 	}
 
 	public int getGruppe_id() {

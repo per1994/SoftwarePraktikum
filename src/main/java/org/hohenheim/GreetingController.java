@@ -3,6 +3,7 @@ package org.hohenheim;
 import org.plp.benutzer.Benutzer;
 import org.plp.benutzer.User;
 import org.plp.dao.BenutzerService;
+import org.plp.dao.GruppeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ public class GreetingController {
 	@Autowired
 	private BenutzerService benutzerservice;
 	
+	@Autowired
+	private GruppeService gruppenservice;
+	
 	public GreetingController(){
 		
 	}
@@ -28,8 +32,8 @@ public class GreetingController {
 	public String greeting(Model model) {
 		
 		
-		
-		
+		gruppenservice.addNewGruppe();
+		benutzerservice.addNewBenutzer("Sükrü");
 		
 		
 		Message message= new Message();

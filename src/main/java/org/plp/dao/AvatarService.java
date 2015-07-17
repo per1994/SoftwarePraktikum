@@ -8,38 +8,42 @@ import org.plp.benutzer.Avatar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class AvatarService {
-	
+
 	@Autowired
 	private AvatarDAO avatarDAO;
-	
+
 	@Transactional
-	public void addNewAvatar(String avatarName){
-		System.out.println("Ich bin im Service, Methode addNewAvatar");
-		Avatar avatar=new Avatar();
-		avatarDAO.add(avatar);
-		
-	}
-	
-	@Transactional
-	public List<Avatar>listAllAvatar(){
-		return avatarDAO.listAvatars();
-	}
-	
-	@Transactional
-	public void löschen(int avatar_id){
-		avatarDAO.löschen(avatar_id);
-	}
-	
-	@Transactional
-	public void update( int avatar_id){
-		avatarDAO.update(avatar_id);
+	public void addNewAvatar() {
+
+		Avatar b = new Avatar();
+		avatarDAO.add(b);
+
 	}
 
 	@Transactional
-	public Avatar getAvatar(int avatar_id){
+	public List<Avatar> listAllAvatar() {
+		return avatarDAO.listAvatar();
+	}
+
+	@Transactional
+	public void löschen(int avatar_id) {
+		avatarDAO.löschen(avatar_id);
+	}
+
+	@Transactional
+	public void update(Avatar avatar) {
+		avatarDAO.update(avatar);
+	}
+
+	@Transactional
+	public Avatar getAvatar(int avatar_id) {
 		return avatarDAO.getAvatar(avatar_id);
+	}
+
+	@Transactional
+	public boolean vorhanden(int avatar_id) {
+		return avatarDAO.vorhanden(avatar_id);
 	}
 }

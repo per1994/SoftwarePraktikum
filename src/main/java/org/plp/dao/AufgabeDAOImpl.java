@@ -22,18 +22,17 @@ public class AufgabeDAOImpl implements AufgabeDAO {
 	}
 
 	@Override
-	public List<Aufgabe> listAufgaben() {
+	public List<Aufgabe> listAufgabe() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Aufgabe> aufgabeen = session.createQuery(
-				"from Aufgabe").list();
-		return aufgabeen;
+		List<Aufgabe> aufgabe = session.createQuery("from Aufgabe")
+				.list();
+		return aufgabe;
 	}
 
 	@Override
 	public void löschen(int aufgabe_id) {
 		Aufgabe aufgabe = (Aufgabe) sessionFactory
-				.getCurrentSession().load(Aufgabe.class,
-						aufgabe_id);
+				.getCurrentSession().load(Aufgabe.class, aufgabe_id);
 		if (null != aufgabe) {
 			this.sessionFactory.getCurrentSession().delete(aufgabe);
 		}
@@ -41,27 +40,33 @@ public class AufgabeDAOImpl implements AufgabeDAO {
 	}
 
 	@Override
-	public boolean update(int aufgabe_id) {
-		Aufgabe aufgabe = (Aufgabe) sessionFactory
-				.getCurrentSession().load(Aufgabe.class,
-						aufgabe_id);
-		if (null != aufgabe) {
-			this.sessionFactory.getCurrentSession().update(aufgabe);
-			return true;
-		} else {
-
-			return false;
-
-		}
+	public void update(Aufgabe aufgabe) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(aufgabe);
 
 	}
 
 	@Override
 	public Aufgabe getAufgabe(int aufgabe_id) {
 		Aufgabe aufgabe = (Aufgabe) sessionFactory
-				.getCurrentSession().load(Aufgabe.class,
-						aufgabe_id);
+				.getCurrentSession().get(Aufgabe.class, aufgabe_id);
 		return aufgabe;
+	}
+
+	@Override
+	public boolean vorhanden(int aufgabe_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Aufgabe> aufgabe = session.createQuery("from Aufgabe")
+				.list();
+		boolean vorhanden = false;
+		for (Aufgabe b : aufgabe) {
+			if (b.getAufgabe_id() == aufgabe_id) {
+				vorhanden = true;
+			}
+		}
+
+		return vorhanden;
+
 	}
 
 }

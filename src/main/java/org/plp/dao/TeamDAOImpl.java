@@ -22,18 +22,17 @@ public class TeamDAOImpl implements TeamDAO {
 	}
 
 	@Override
-	public List<Team> listTeams() {
+	public List<Team> listTeam() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Team> teamen = session.createQuery(
-				"from Team").list();
-		return teamen;
+		List<Team> team = session.createQuery("from Team")
+				.list();
+		return team;
 	}
 
 	@Override
 	public void löschen(int team_id) {
 		Team team = (Team) sessionFactory
-				.getCurrentSession().load(Team.class,
-						team_id);
+				.getCurrentSession().load(Team.class, team_id);
 		if (null != team) {
 			this.sessionFactory.getCurrentSession().delete(team);
 		}
@@ -41,27 +40,33 @@ public class TeamDAOImpl implements TeamDAO {
 	}
 
 	@Override
-	public boolean update(int team_id) {
-		Team team = (Team) sessionFactory
-				.getCurrentSession().load(Team.class,
-						team_id);
-		if (null != team) {
-			this.sessionFactory.getCurrentSession().update(team);
-			return true;
-		} else {
-
-			return false;
-
-		}
+	public void update(Team team) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(team);
 
 	}
 
 	@Override
 	public Team getTeam(int team_id) {
 		Team team = (Team) sessionFactory
-				.getCurrentSession().load(Team.class,
-						team_id);
+				.getCurrentSession().get(Team.class, team_id);
 		return team;
+	}
+
+	@Override
+	public boolean vorhanden(int team_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Team> team = session.createQuery("from Team")
+				.list();
+		boolean vorhanden = false;
+		for (Team b : team) {
+			if (b.getTeam_id() == team_id) {
+				vorhanden = true;
+			}
+		}
+
+		return vorhanden;
+
 	}
 
 }

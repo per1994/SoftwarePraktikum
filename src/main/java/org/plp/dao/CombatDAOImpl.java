@@ -22,18 +22,17 @@ public class CombatDAOImpl implements CombatDAO {
 	}
 
 	@Override
-	public List<Combat> listCombats() {
+	public List<Combat> listCombat() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Combat> combaten = session.createQuery(
-				"from Combat").list();
-		return combaten;
+		List<Combat> combat = session.createQuery("from Combat")
+				.list();
+		return combat;
 	}
 
 	@Override
 	public void löschen(int combat_id) {
 		Combat combat = (Combat) sessionFactory
-				.getCurrentSession().load(Combat.class,
-						combat_id);
+				.getCurrentSession().load(Combat.class, combat_id);
 		if (null != combat) {
 			this.sessionFactory.getCurrentSession().delete(combat);
 		}
@@ -41,27 +40,33 @@ public class CombatDAOImpl implements CombatDAO {
 	}
 
 	@Override
-	public boolean update(int combat_id) {
-		Combat combat = (Combat) sessionFactory
-				.getCurrentSession().load(Combat.class,
-						combat_id);
-		if (null != combat) {
-			this.sessionFactory.getCurrentSession().update(combat);
-			return true;
-		} else {
-
-			return false;
-
-		}
+	public void update(Combat combat) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(combat);
 
 	}
 
 	@Override
 	public Combat getCombat(int combat_id) {
 		Combat combat = (Combat) sessionFactory
-				.getCurrentSession().load(Combat.class,
-						combat_id);
+				.getCurrentSession().get(Combat.class, combat_id);
 		return combat;
+	}
+
+	@Override
+	public boolean vorhanden(int combat_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Combat> combat = session.createQuery("from Combat")
+				.list();
+		boolean vorhanden = false;
+		for (Combat b : combat) {
+			if (b.getCombat_id() == combat_id) {
+				vorhanden = true;
+			}
+		}
+
+		return vorhanden;
+
 	}
 
 }

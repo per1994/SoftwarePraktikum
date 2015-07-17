@@ -15,17 +15,16 @@ public class AntwortmöglichkeitService {
 	private AntwortmöglichkeitDAO antwortmöglichkeitDAO;
 
 	@Transactional
-	public void addNewAntwortmöglichkeit(String antwortmöglichkeitName) {
-		System.out
-				.println("Ich bin im Service, Methode addNewAntwortmöglichkeit");
-		Antwortmöglichkeit antwortmöglichkeit = new Antwortmöglichkeit();
-		antwortmöglichkeitDAO.add(antwortmöglichkeit);
+	public void addNewAntwortmöglichkeit() {
+
+		Antwortmöglichkeit b = new Antwortmöglichkeit();
+		antwortmöglichkeitDAO.add(b);
 
 	}
 
 	@Transactional
 	public List<Antwortmöglichkeit> listAllAntwortmöglichkeit() {
-		return antwortmöglichkeitDAO.listAntwortmöglichkeiten();
+		return antwortmöglichkeitDAO.listAntwortmöglichkeit();
 	}
 
 	@Transactional
@@ -34,13 +33,17 @@ public class AntwortmöglichkeitService {
 	}
 
 	@Transactional
-	public void update(int antwortmöglichkeit_id) {
-		antwortmöglichkeitDAO.update(antwortmöglichkeit_id);
+	public void update(Antwortmöglichkeit antwortmöglichkeit) {
+		antwortmöglichkeitDAO.update(antwortmöglichkeit);
 	}
 
 	@Transactional
 	public Antwortmöglichkeit getAntwortmöglichkeit(int antwortmöglichkeit_id) {
-		return antwortmöglichkeitDAO
-				.getAntwortmöglichkeit(antwortmöglichkeit_id);
+		return antwortmöglichkeitDAO.getAntwortmöglichkeit(antwortmöglichkeit_id);
+	}
+
+	@Transactional
+	public boolean vorhanden(int antwortmöglichkeit_id) {
+		return antwortmöglichkeitDAO.vorhanden(antwortmöglichkeit_id);
 	}
 }

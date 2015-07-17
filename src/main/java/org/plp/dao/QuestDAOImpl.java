@@ -22,18 +22,17 @@ public class QuestDAOImpl implements QuestDAO {
 	}
 
 	@Override
-	public List<Quest> listQuests() {
+	public List<Quest> listQuest() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Quest> questen = session.createQuery(
-				"from Quest").list();
-		return questen;
+		List<Quest> quest = session.createQuery("from Quest")
+				.list();
+		return quest;
 	}
 
 	@Override
 	public void löschen(int quest_id) {
 		Quest quest = (Quest) sessionFactory
-				.getCurrentSession().load(Quest.class,
-						quest_id);
+				.getCurrentSession().load(Quest.class, quest_id);
 		if (null != quest) {
 			this.sessionFactory.getCurrentSession().delete(quest);
 		}
@@ -41,27 +40,33 @@ public class QuestDAOImpl implements QuestDAO {
 	}
 
 	@Override
-	public boolean update(int quest_id) {
-		Quest quest = (Quest) sessionFactory
-				.getCurrentSession().load(Quest.class,
-						quest_id);
-		if (null != quest) {
-			this.sessionFactory.getCurrentSession().update(quest);
-			return true;
-		} else {
-
-			return false;
-
-		}
+	public void update(Quest quest) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(quest);
 
 	}
 
 	@Override
 	public Quest getQuest(int quest_id) {
 		Quest quest = (Quest) sessionFactory
-				.getCurrentSession().load(Quest.class,
-						quest_id);
+				.getCurrentSession().get(Quest.class, quest_id);
 		return quest;
+	}
+
+	@Override
+	public boolean vorhanden(int quest_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Quest> quest = session.createQuery("from Quest")
+				.list();
+		boolean vorhanden = false;
+		for (Quest b : quest) {
+			if (b.getQuest_id() == quest_id) {
+				vorhanden = true;
+			}
+		}
+
+		return vorhanden;
+
 	}
 
 }

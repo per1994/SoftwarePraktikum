@@ -6,23 +6,25 @@ import javax.transaction.Transactional;
 
 import org.plp.gamification.Aufgabe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AufgabeService {
 
 	@Autowired
 	private AufgabeDAO aufgabeDAO;
 
 	@Transactional
-	public void addNewAufgabe(String aufgabeName) {
-		System.out.println("Ich bin im Service, Methode addNewAufgabe");
-		Aufgabe aufgabe = new Aufgabe();
-		aufgabeDAO.add(aufgabe);
+	public void addNewAufgabe() {
+
+		Aufgabe b = new Aufgabe();
+		aufgabeDAO.add(b);
 
 	}
 
 	@Transactional
 	public List<Aufgabe> listAllAufgabe() {
-		return aufgabeDAO.listAufgaben();
+		return aufgabeDAO.listAufgabe();
 	}
 
 	@Transactional
@@ -31,12 +33,17 @@ public class AufgabeService {
 	}
 
 	@Transactional
-	public void update(int aufgabe_id) {
-		aufgabeDAO.update(aufgabe_id);
+	public void update(Aufgabe aufgabe) {
+		aufgabeDAO.update(aufgabe);
 	}
 
 	@Transactional
 	public Aufgabe getAufgabe(int aufgabe_id) {
 		return aufgabeDAO.getAufgabe(aufgabe_id);
+	}
+
+	@Transactional
+	public boolean vorhanden(int aufgabe_id) {
+		return aufgabeDAO.vorhanden(aufgabe_id);
 	}
 }

@@ -22,18 +22,17 @@ public class AntwortmöglichkeitDAOImpl implements AntwortmöglichkeitDAO {
 	}
 
 	@Override
-	public List<Antwortmöglichkeit> listAntwortmöglichkeiten() {
+	public List<Antwortmöglichkeit> listAntwortmöglichkeit() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Antwortmöglichkeit> antwortmöglichkeiten = session.createQuery(
-				"from Antwortmöglichkeit").list();
-		return antwortmöglichkeiten;
+		List<Antwortmöglichkeit> antwortmöglichkeit = session.createQuery("from Antwortmöglichkeit")
+				.list();
+		return antwortmöglichkeit;
 	}
 
 	@Override
 	public void löschen(int antwortmöglichkeit_id) {
 		Antwortmöglichkeit antwortmöglichkeit = (Antwortmöglichkeit) sessionFactory
-				.getCurrentSession().load(Antwortmöglichkeit.class,
-						antwortmöglichkeit_id);
+				.getCurrentSession().load(Antwortmöglichkeit.class, antwortmöglichkeit_id);
 		if (null != antwortmöglichkeit) {
 			this.sessionFactory.getCurrentSession().delete(antwortmöglichkeit);
 		}
@@ -41,27 +40,33 @@ public class AntwortmöglichkeitDAOImpl implements AntwortmöglichkeitDAO {
 	}
 
 	@Override
-	public boolean update(int antwortmöglichkeit_id) {
-		Antwortmöglichkeit antwortmöglichkeit = (Antwortmöglichkeit) sessionFactory
-				.getCurrentSession().load(Antwortmöglichkeit.class,
-						antwortmöglichkeit_id);
-		if (null != antwortmöglichkeit) {
-			this.sessionFactory.getCurrentSession().update(antwortmöglichkeit);
-			return true;
-		} else {
-
-			return false;
-
-		}
+	public void update(Antwortmöglichkeit antwortmöglichkeit) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(antwortmöglichkeit);
 
 	}
 
 	@Override
 	public Antwortmöglichkeit getAntwortmöglichkeit(int antwortmöglichkeit_id) {
 		Antwortmöglichkeit antwortmöglichkeit = (Antwortmöglichkeit) sessionFactory
-				.getCurrentSession().load(Antwortmöglichkeit.class,
-						antwortmöglichkeit_id);
+				.getCurrentSession().get(Antwortmöglichkeit.class, antwortmöglichkeit_id);
 		return antwortmöglichkeit;
+	}
+
+	@Override
+	public boolean vorhanden(int antwortmöglichkeit_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Antwortmöglichkeit> antwortmöglichkeit = session.createQuery("from Antwortmöglichkeit")
+				.list();
+		boolean vorhanden = false;
+		for (Antwortmöglichkeit b : antwortmöglichkeit) {
+			if (b.getAntwortmoeglichkeit_id() == antwortmöglichkeit_id) {
+				vorhanden = true;
+			}
+		}
+
+		return vorhanden;
+
 	}
 
 }
