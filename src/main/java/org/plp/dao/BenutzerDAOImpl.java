@@ -20,6 +20,7 @@ public class BenutzerDAOImpl implements BenutzerDAO {
 		session.persist(benutzer);
 		
 		
+		
 	}
 
 	@Override
@@ -42,7 +43,8 @@ public class BenutzerDAOImpl implements BenutzerDAO {
 	@Override
 	public void update(Benutzer benutzer) {
 		Session session= this.sessionFactory.getCurrentSession();
-		session.update(benutzer);
+		session.saveOrUpdate(benutzer);
+		
 		
 		
 	}
@@ -52,6 +54,21 @@ public class BenutzerDAOImpl implements BenutzerDAO {
 		Benutzer benutzer = (Benutzer) sessionFactory.getCurrentSession().get(
                 Benutzer.class, benutzer_id);
 		return benutzer;
+	}
+
+	@Override
+	public boolean vorhanden(int benutzer_id) {
+		Session session= this.sessionFactory.getCurrentSession();
+		List<Benutzer> benutzer=session.createQuery("from Benutzer").list();
+		boolean vorhanden=false;
+		for (Benutzer b: benutzer){
+			if(b.getBenutzer_id()==benutzer_id){
+				vorhanden=true;
+			}
+		}
+		
+		return vorhanden;
+		
 	}
 
 }

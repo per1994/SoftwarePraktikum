@@ -17,7 +17,7 @@ public class BenutzerService {
 	
 	@Transactional
 	public void addNewBenutzer(String benutzerName){
-		System.out.println("Ich bin im Service, Methode addNewBenutzer");
+	
 		Benutzer b=new Benutzer(benutzerName);
 		benutzerDAO.add(b);
 		
@@ -41,5 +41,10 @@ public class BenutzerService {
 	@Transactional
 	public Benutzer getBenutzer(int benutzer_id){
 		return benutzerDAO.getBenutzer(benutzer_id);
+	}
+	
+	@Transactional
+	public boolean vorhanden(int benutzer_id){
+		return benutzerDAO.vorhanden(benutzer_id);
 	}
 }
