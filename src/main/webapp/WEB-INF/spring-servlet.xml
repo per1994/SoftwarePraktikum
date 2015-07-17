@@ -80,7 +80,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 					org.hibernate.dialect.MySQL5Dialect
 				</prop>
 				<prop key="hibernate.show_sql">
-					false
+					true
 				</prop>
 				<prop key="hibernate.hbm2ddl.auto">
 					update
