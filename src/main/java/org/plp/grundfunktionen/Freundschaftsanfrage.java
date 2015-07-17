@@ -19,11 +19,13 @@ public class Freundschaftsanfrage extends Nachricht {
 	BenutzerService benutzerservice;
 
 	public Freundschaftsanfrage(int empfänger, int sender,
-			int anhang) {
+			int anhang, boolean bearbeitet, boolean statisch) {
 
 		this.setEmpfänger(empfänger);
 		this.setSender(sender);
 		this.setAnhang(anhang);
+		this.setBearbeitet(bearbeitet);
+		this.setStatisch(statisch);
 		
 		String inhalt1;
 		inhalt1=benutzerservice.getBenutzer(sender).getVorname() + " "

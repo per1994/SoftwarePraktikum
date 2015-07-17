@@ -54,6 +54,9 @@ public class Nachricht {
 	@Column(name="inhalt")
 	private String inhalt;
 	
+	@Column(name="satisch")
+	private boolean statisch;
+	
 	
 	
 	public Nachricht(){
@@ -132,6 +135,20 @@ public class Nachricht {
 
 	public void setInhalt(String inhalt) {
 		this.inhalt = inhalt;
+	}
+
+
+
+
+	public boolean isStatisch() {
+		return statisch;
+	}
+
+
+
+
+	public void setStatisch(boolean statisch) {
+		this.statisch = statisch;
 	}
 	
 	
