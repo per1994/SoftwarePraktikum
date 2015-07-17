@@ -30,11 +30,7 @@ public class GreetingController {
 		
 		
 		
-		Benutzer benutzer= new Benutzer();
-		benutzer.setBenutzer_id(20);
-		benutzer.setBenutzerName("SükrüStinkt");
 		
-		benutzerservice.update(benutzer);
 		
 		Message message= new Message();
 		message.setInhat("Willkommen bei PLP, deiner SocialLearningPlattform");
