@@ -34,8 +34,8 @@ public class BenutzerService {
 	}
 	
 	@Transactional
-	public void update( int benutzer_id){
-		benutzerDAO.update(benutzer_id);
+	public void update( Benutzer benutzer){
+		benutzerDAO.update(benutzer);
 	}
 
 	@Transactional

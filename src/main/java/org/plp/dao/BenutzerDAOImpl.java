@@ -40,23 +40,16 @@ public class BenutzerDAOImpl implements BenutzerDAO {
 	}
 
 	@Override
-	public boolean update(int benutzer_id) {
-		Benutzer benutzer = (Benutzer) sessionFactory.getCurrentSession().load(
-                Benutzer.class, benutzer_id);
-		if (null != benutzer) {
-            this.sessionFactory.getCurrentSession().update(benutzer);
-            return true;
-        }else{
-        	
-        	return false;
-        	
-        }
+	public void update(Benutzer benutzer) {
+		Session session= this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(benutzer);
+		
 		
 	}
 
 	@Override
 	public Benutzer getBenutzer(int benutzer_id) {
-		Benutzer benutzer = (Benutzer) sessionFactory.getCurrentSession().load(
+		Benutzer benutzer = (Benutzer) sessionFactory.getCurrentSession().get(
                 Benutzer.class, benutzer_id);
 		return benutzer;
 	}

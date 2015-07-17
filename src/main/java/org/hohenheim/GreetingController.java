@@ -27,10 +27,14 @@ public class GreetingController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String greeting(Model model) {
 		
-		benutzerservice.addNewBenutzer("BenjoMahenjo");
-		benutzerservice.addNewBenutzer("per1994");
 		
-		System.out.println("Anzahl der Einträge"+benutzerservice.listAllBenutzer().size()); 
+		
+		
+		Benutzer benutzer= new Benutzer();
+		benutzer.setBenutzer_id(10);
+		benutzer.setBenutzerName("SükrüStinkt");
+		
+		benutzerservice.update(benutzer);
 		
 		Message message= new Message();
 		message.setInhat("Willkommen bei PLP, deiner SocialLearningPlattform");
