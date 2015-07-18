@@ -3,6 +3,7 @@ package org.plp.grundfunktionen;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.dao.BenutzerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DiscriminatorValue("PinnwandEintrag")
 public class PinnwandEintragErhalten extends Nachricht {
 
+	@Transient
 	@Autowired
 	BenutzerService benutzerservice;
 
-	public PinnwandEintragErhalten(int empfänger, int sender, int anhang,
+	public PinnwandEintragErhalten(int sender, int empfänger, int anhang,
 			boolean bearbeitet, boolean statisch) {
 
 		this.setEmpfänger(empfänger);

@@ -3,6 +3,7 @@ package org.plp.grundfunktionen;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.benutzer.Benutzer;
 import org.plp.dao.BenutzerService;
@@ -16,15 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DiscriminatorValue("Gruppeneinladung")
 public class Gruppeneinladung extends Nachricht {
 	
-	
+	@Transient
 	@Autowired
 	BenutzerService benutzerservice;
 	
+	@Transient
 	@Autowired
 	GruppeService gruppenservice;
 	
 
-	public Gruppeneinladung(int empfänger, int sender,
+	public Gruppeneinladung(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 
 		this.setEmpfänger(empfänger);

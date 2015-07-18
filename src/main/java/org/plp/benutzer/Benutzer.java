@@ -126,8 +126,8 @@ public class Benutzer {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;
 	
-	@Transient
-	private Set<Nachricht> nachrichten;
+	//@Transient
+	//private Set<Nachricht> nachrichten;
 	
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -146,7 +146,7 @@ public class Benutzer {
 		moderierteGruppenListe= new HashSet<Gruppe>();
 		badges = new HashSet<Badge>();
 		achievements = new HashSet<Achievement>();
-		nachrichten = new HashSet<Nachricht>();
+		//nachrichten = new HashSet<Nachricht>();
 		quests= new HashSet<Quest>();
 		erstellteAufgaben= new HashSet<Aufgabe>();
 		einträge= new HashSet<Eintrag>();
@@ -155,14 +155,14 @@ public class Benutzer {
 		teams= new HashSet<Team>();
 		combats= new HashSet<Combat>();
 		achievements= new HashSet<Achievement>();
-		nachrichten= new HashSet<Nachricht>();
+		
 
 	}
 
 	public Benutzer(String benutzerName) {
 		this.benutzerName=benutzerName;
 	}
-
+/*
 	public void freundschaftsAnfrageVersenden(Benutzer empfänger)
 			throws Exception {
 		if (!freundesListe.contains(empfänger)) {
@@ -207,7 +207,7 @@ public class Benutzer {
 					+ freund.getVorname() + "befreundet");
 		}
 	}
-*/
+
 	public void eintragErstellen(Pinnwand pinnwand, String eintragstext,
 			Benutzer empfänger) {
 		Eintrag eintrag = new Eintrag();
@@ -233,7 +233,7 @@ public class Benutzer {
 				Nachricht.FREUNDSCHAFTSANRAGE, this);
 
 	}
-
+*/
 	public void annehmenEinladung() {
 
 	}
@@ -416,7 +416,7 @@ public class Benutzer {
 	}
 
 
-	public Set<Nachricht> getNachrichten() {
+	/*public Set<Nachricht> getNachrichten() {
 		return nachrichten;
 	}
 
@@ -424,7 +424,7 @@ public class Benutzer {
 		this.nachrichten = nachrichten;
 	}
 
-
+*/
 	public void setGruppenListe(Set<Gruppe> gruppenListe) {
 		this.gruppenListe = gruppenListe;
 	}

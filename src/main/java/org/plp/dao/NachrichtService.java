@@ -15,9 +15,9 @@ public class NachrichtService {
 	private NachrichtDAO nachrichtDAO;
 
 	@Transactional
-	public void addNewNachricht(int sender, int empfänger, int anhang) {
+	public void addNewNachricht(Nachricht b) {
 
-		Nachricht b = new Nachricht();
+		
 		nachrichtDAO.add(b);
 
 	}

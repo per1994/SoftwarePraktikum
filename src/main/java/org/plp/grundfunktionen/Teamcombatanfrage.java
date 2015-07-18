@@ -3,6 +3,7 @@ package org.plp.grundfunktionen;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.dao.GruppeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DiscriminatorValue("Teamcombat")
 public class Teamcombatanfrage extends Nachricht {
 	
+	
+	@Transient
 	@Autowired
 	GruppeService gruppenservice;
 	
-	public Teamcombatanfrage(int empfänger, int sender,
+	public Teamcombatanfrage(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch){
 		
 		this.setEmpfänger(empfänger);

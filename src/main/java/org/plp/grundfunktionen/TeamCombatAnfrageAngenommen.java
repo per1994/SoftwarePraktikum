@@ -1,18 +1,22 @@
 package org.plp.grundfunktionen;
 
+import javax.persistence.Transient;
+
 import org.plp.dao.BenutzerService;
 import org.plp.dao.GruppeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TeamCombatAnfrageAngenommen extends Nachricht {
 
+	@Transient
 	@Autowired
 	BenutzerService benutzerservice;
 
+	@Transient
 	@Autowired
 	GruppeService gruppeservice;
 
-	public TeamCombatAnfrageAngenommen(int empfänger, int sender, int anhang,
+	public TeamCombatAnfrageAngenommen(int sender, int empfänger, int anhang,
 			boolean bearbeitet, boolean statisch) {
 
 		this.setEmpfänger(empfänger);

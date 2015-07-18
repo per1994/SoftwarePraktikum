@@ -16,10 +16,11 @@ public class GruppeService {
 	private GruppeDAO gruppeDAO;
 
 	@Transactional
-	public void addNewGruppe() {
+	public void addNewGruppe(String gruppeName) {
 
 		
 		Gruppe b = new Gruppe();
+		b.setGruppenName(gruppeName);
 		gruppeDAO.add(b);
 
 	}

@@ -16,9 +16,11 @@ public class BenutzerService {
 	private BenutzerDAO benutzerDAO;
 	
 	@Transactional
-	public void addNewBenutzer(String benutzerName){
+	public void addNewBenutzer(String benutzerName, String vorname, String nachname){
 	
 		Benutzer b=new Benutzer(benutzerName);
+		b.setVorname(vorname);
+		b.setNachname(nachname);
 		benutzerDAO.add(b);
 		
 	}

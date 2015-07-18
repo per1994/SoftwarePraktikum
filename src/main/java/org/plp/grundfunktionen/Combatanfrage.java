@@ -3,6 +3,7 @@ package org.plp.grundfunktionen;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.plp.dao.BenutzerService;
 import org.plp.dao.CombatService;
@@ -14,14 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DiscriminatorValue("Combatanfrage")
 public class Combatanfrage extends Nachricht{
 	
+	@Transient
 	@Autowired
 	BenutzerService benutzerservice;
 	
+	@Transient
 	@Autowired
 	CombatService combatservice;
 	
 	
-	public Combatanfrage(int empfänger, int sender,
+	public Combatanfrage(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch){
 		
 		this.setEmpfänger(empfänger);
