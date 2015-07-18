@@ -5,7 +5,6 @@ import org.plp.benutzer.User;
 import org.plp.dao.BenutzerService;
 import org.plp.dao.GruppeService;
 import org.plp.dao.NachrichtService;
-import org.plp.grundfunktionen.Freundschaftsanfrage;
 import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,8 +35,11 @@ public class GreetingController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String greeting(Model model) {
 
-		nachrichtengenerator.ertsellFreundschaftsanfrage(59, 50, 49, false,
-				false);
+		//benutzerservice.addNewBenutzer("sürkrü123", "Sükrü", "Sever");
+		//benutzerservice.addNewBenutzer("Beno123", "Benjo", "Mahenjo");
+		
+		nachrichtengenerator.freundschaftsanfrageErstellen(1, 2, 1, false, false);
+		nachrichtengenerator.freundschaftsanfrageAngenommenErstllen(2, 1, 2, false, true);
 
 		Message message = new Message();
 		message.setInhat("Willkommen bei PLP, deiner SocialLearningPlattform");

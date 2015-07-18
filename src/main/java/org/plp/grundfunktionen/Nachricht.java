@@ -26,12 +26,6 @@ import org.plp.gruppenfunktionen.Gruppe;
 
 @Entity
 @Table(name = "NACHRICHT")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name="discriminator",
-    discriminatorType=DiscriminatorType.STRING
-)
-@DiscriminatorValue(value="Nachricht")
 public class Nachricht {
 
 	@Id
@@ -39,118 +33,103 @@ public class Nachricht {
 	@GeneratedValue
 	private int nachricht_id;
 
-	@Column(name="sender")
+	@Column(name = "sender")
 	private int sender;
-	
-	@Column(name="empfänger")
+
+	@Column(name = "empfänger")
 	private int empfänger;
 
-	@Column(name="anhang")
+	@Column(name = "anhang")
 	private int anhang;
-	
-	@Column(name="bearbeitet")
+
+	@Column(name = "bearbeitet")
 	private boolean bearbeitet;
-	
-	@Column(name="inhalt")
+
+	@Column(name = "inhalt")
 	private String inhalt;
-	
-	@Column(name="satisch")
+
+	@Column(name = "statisch")
 	private boolean statisch;
-	
-	
-	
-	public Nachricht(){
-		
-		
+
+	@Column(name = "nachrichtentyp")
+	private int nachrichtenTyp;
+
+	public Nachricht() {
+
 	}
-	
 
-
+	public Nachricht(int sender, int empfänger, int anhang, boolean bearbeitet,
+			boolean statisch, int nachrichtenTyp) {
+		this.setEmpfänger(empfänger);
+		this.setSender(sender);
+		this.setAnhang(anhang);
+		this.setBearbeitet(bearbeitet);
+		this.setStatisch(statisch);
+		this.setNachrichtenTyp(nachrichtenTyp);
+	}
 
 	public int getNachricht_id() {
 		return nachricht_id;
 	}
 
-
-
 	public void setNachricht_id(int nachricht_id) {
 		this.nachricht_id = nachricht_id;
 	}
-
-
 
 	public int getSender() {
 		return sender;
 	}
 
-
-
 	public void setSender(int sender) {
 		this.sender = sender;
 	}
-
-
 
 	public int getEmpfänger() {
 		return empfänger;
 	}
 
-
-
 	public void setEmpfänger(int empfänger) {
 		this.empfänger = empfänger;
 	}
-
-
 
 	public int getAnhang() {
 		return anhang;
 	}
 
-
-
 	public void setAnhang(int anhang) {
 		this.anhang = anhang;
 	}
-
-
 
 	public boolean isBearbeitet() {
 		return bearbeitet;
 	}
 
-
-
 	public void setBearbeitet(boolean bearbeitet) {
 		this.bearbeitet = bearbeitet;
 	}
-
-
 
 	public String getInhalt() {
 		return inhalt;
 	}
 
-
-
 	public void setInhalt(String inhalt) {
 		this.inhalt = inhalt;
 	}
-
-
-
 
 	public boolean isStatisch() {
 		return statisch;
 	}
 
-
-
-
 	public void setStatisch(boolean statisch) {
 		this.statisch = statisch;
 	}
-	
-	
+
+	public int getNachrichtenTyp() {
+		return nachrichtenTyp;
+	}
+
+	public void setNachrichtenTyp(int nachrichtenTyp) {
+		this.nachrichtenTyp = nachrichtenTyp;
+	}
 
 }
