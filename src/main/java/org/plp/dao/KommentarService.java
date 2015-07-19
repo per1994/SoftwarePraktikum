@@ -15,9 +15,8 @@ public class KommentarService {
 	private KommentarDAO kommentarDAO;
 
 	@Transactional
-	public void addNewKommentar() {
+	public void addNewKommentar(Kommentar b) {
 
-		Kommentar b = new Kommentar();
 		kommentarDAO.add(b);
 
 	}

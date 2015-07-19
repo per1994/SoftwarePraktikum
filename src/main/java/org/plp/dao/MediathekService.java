@@ -15,9 +15,8 @@ public class MediathekService {
 	private MediathekDAO mediathekDAO;
 
 	@Transactional
-	public void addNewMediathek() {
+	public void addNewMediathek(Mediathek b) {
 
-		Mediathek b = new Mediathek();
 		mediathekDAO.add(b);
 
 	}

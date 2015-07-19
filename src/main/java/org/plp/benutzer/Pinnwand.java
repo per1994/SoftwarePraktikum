@@ -19,15 +19,15 @@ import javax.persistence.Table;
 public class Pinnwand {
 
 	@Id
-	@Column(name = "pinnwand_id")
+	@Column(name = "pinnwand_id", nullable = false, unique = true)
 	@GeneratedValue
 	private int pinnwand_id;
-	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="pinnwand")
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+	mappedBy="pinnwand")
 	private Benutzer besitzer;
 
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "pinnwand")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pinnwand")
 	private Set<Eintrag> einträge;
 
 	public Pinnwand() {
@@ -50,12 +50,12 @@ public class Pinnwand {
 		this.pinnwand_id = pinnwand_id;
 	}
 
-	public Benutzer getBesitzer() {
-		return besitzer;
-	}
-
-	public void setBesitzer(Benutzer besitzer) {
-		this.besitzer = besitzer;
-	}
+	// public Benutzer getBesitzer() {
+	// return besitzer;
+	// }
+	//
+	// public void setBesitzer(Benutzer besitzer) {
+	// this.besitzer = besitzer;
+	// }
 
 }

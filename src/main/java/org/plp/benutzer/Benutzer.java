@@ -19,15 +19,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
+import org.plp.dao.BenutzerService;
 import org.plp.gamification.Aufgabe;
 import org.plp.gamification.Combat;
 import org.plp.gamification.Quest;
 import org.plp.gamification.Team;
 import org.plp.grundfunktionen.Nachricht;
+import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.plp.gruppenfunktionen.Fachrichtung;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.plp.gruppenfunktionen.Lernziel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 @Entity
@@ -53,7 +59,6 @@ public class Benutzer {
 
 	@Column(name = "email")
 	private String email;
-
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "mitgliederListe")
 	private Set<Gruppe> gruppenListe;
@@ -91,7 +96,7 @@ public class Benutzer {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "autor")
 	private Set<Kommentar> kommentare;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pinnwand_id")
 	private Pinnwand pinnwand;
 
@@ -100,123 +105,91 @@ public class Benutzer {
 
 	@Column(name = "geschlecht")
 	private char geschlecht;
-	
+
 	@Column(name = "studiengang")
 	private String studiengang;
-	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
-	private Set<Badge> badges;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "badge_id")
+	private Badge badge;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "avatar_id")
 	private Avatar avatar;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teamMitglieder")
 	private Set<Team> teams;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilnehmer")
 	private Set<Combat> combats;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "gewinner")
 	private Set<Combat> gewonneneCombats;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "verlierer")
 	private Set<Combat> verloreneCombats;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;
-	
-	//@Transient
-	//private Set<Nachricht> nachrichten;
-	
-	
+
+	// @Transient
+	// private Set<Nachricht> nachrichten;
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "BENUTZER_FREUNDE", joinColumns = 
-	@JoinColumn(name = "benutzer_id"), inverseJoinColumns = 
-	@JoinColumn(name = "freunde_id"))
+	@JoinTable(name = "BENUTZER_FREUNDE", joinColumns = @JoinColumn(name = "benutzer_id"), inverseJoinColumns = @JoinColumn(name = "freunde_id"))
 	private Set<Benutzer> freundesListe;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "freundesListe")
 	private Set<Benutzer> freunde;
 
+	@Transient
+	@Autowired
+	private Nachrichtengenerator nachrichtengenerator = new Nachrichtengenerator();
+
+	@Transient
+	@Autowired
+	private BenutzerService benutzerservice = new BenutzerService();
 
 	public Benutzer() {
 		freundesListe = new HashSet<Benutzer>();
 		gruppenListe = new HashSet<Gruppe>();
-		moderierteGruppenListe= new HashSet<Gruppe>();
-		badges = new HashSet<Badge>();
+		moderierteGruppenListe = new HashSet<Gruppe>();
 		achievements = new HashSet<Achievement>();
-		//nachrichten = new HashSet<Nachricht>();
-		quests= new HashSet<Quest>();
-		erstellteAufgaben= new HashSet<Aufgabe>();
-		einträge= new HashSet<Eintrag>();
-		kommentare= new HashSet<Kommentar>();
-		badges= new HashSet<Badge>();
-		teams= new HashSet<Team>();
-		combats= new HashSet<Combat>();
-		achievements= new HashSet<Achievement>();
-		
+		// nachrichten = new HashSet<Nachricht>();
+		quests = new HashSet<Quest>();
+		erstellteAufgaben = new HashSet<Aufgabe>();
+		einträge = new HashSet<Eintrag>();
+		kommentare = new HashSet<Kommentar>();
+		teams = new HashSet<Team>();
+		combats = new HashSet<Combat>();
+		achievements = new HashSet<Achievement>();
 
 	}
 
 	public Benutzer(String benutzerName) {
-		this.benutzerName=benutzerName;
-	}
-/*
-	public void freundschaftsAnfrageVersenden(Benutzer empfänger)
-			throws Exception {
-		if (!freundesListe.contains(empfänger)) {
-			Nachricht nachricht = new Nachricht(this, empfänger,
-					Nachricht.FREUNDSCHAFTSANRAGE, this);
-			empfänger.nachrichten.add(nachricht);
-		} else {
-			throw new Exception("Du bist bereits mit diesem Nutzer befreundet");
-		}
+		this.benutzerName = benutzerName;
 	}
 
-	public void freundschaftsAnfrageAnnehmen(Nachricht freundschaftsAnfrage) {
-		this.freundesListe.add((Benutzer) freundschaftsAnfrage.getAnhang());
-		((Benutzer) freundschaftsAnfrage.getAnhang()).freundesListe.add(this);
-		this.nachrichten.remove(freundschaftsAnfrage);
-		Nachricht nachricht = new Nachricht(this,
-				freundschaftsAnfrage.getAnhang(),
-				Nachricht.FREUNDSCHAFTSANFRAGEANGENOMMEN, this);
-		((Benutzer) freundschaftsAnfrage.getAnhang()).nachrichten
-				.add(nachricht);
-	}
-
-	// public void freundHinzufügen(Benutzer benutzer) throws Exception {
-	// if (!freundesliste.contains(benutzer)) {
-	// freundesliste.add(benutzer);
-	// benutzer.getFreundesliste().add(this);
+	// public void freundEntfernen(Benutzer freund) throws Exception {
+	// if (freundesliste.contains(freund)) {
+	// freundesliste.remove(freund);
+	// freund.getFreundesliste().remove(this);
 	//
 	// } else {
-	// throw new Exception(
-	// "Du hast diesen Benutzer bereits zu deiner Freundesliste hinzugefügt");
+	// throw new Exception("Du bist aktuell nicht mit" + " "
+	// + freund.getVorname() + "befreundet");
 	// }
-	//
 	// }
 
-	/*public void freundEntfernen(Benutzer freund) throws Exception {
-		if (freundesliste.contains(freund)) {
-			freundesliste.remove(freund);
-			freund.getFreundesliste().remove(this);
-
-		} else {
-			throw new Exception("Du bist aktuell nicht mit" + " "
-					+ freund.getVorname() + "befreundet");
-		}
-	}
-
-	public void eintragErstellen(Pinnwand pinnwand, String eintragstext,
-			Benutzer empfänger) {
-		Eintrag eintrag = new Eintrag();
-		eintrag.setEintragstext(eintragstext);
-		pinnwand.getEinträge().add(eintrag);
-		Nachricht nachricht = new Nachricht(pinnwand, empfänger,
-				Nachricht.PINNWANDEINTRAGERHALTEN, this);
-		empfänger.nachrichten.add(nachricht);
-	}
+	// public void eintragErstellen(Pinnwand pinnwand, String eintragstext,
+	// Benutzer empfänger) {
+	// Eintrag eintrag = new Eintrag();
+	// eintrag.setEintragstext(eintragstext);
+	// pinnwand.getEinträge().add(eintrag);
+	// Nachricht nachricht = new Nachricht(pinnwand, empfänger,
+	// Nachricht.PINNWANDEINTRAGERHALTEN, this);
+	// empfänger.nachrichten.add(nachricht);
+	// }
 
 	public void kommentarSchreiben(Eintrag eintrag, Kommentar kommentar) {
 		eintrag.getKommentare().add(kommentar);
@@ -228,12 +201,12 @@ public class Benutzer {
 
 	}
 
-	public void einladenBenutzer(Benutzer empfänger) {
-		Nachricht nachricht = new Nachricht(this, empfänger,
-				Nachricht.FREUNDSCHAFTSANRAGE, this);
+	// public void einladenBenutzer(Benutzer empfänger) {
+	// Nachricht nachricht = new Nachricht(this, empfänger,
+	// Nachricht.FREUNDSCHAFTSANRAGE, this);
+	//
+	// }
 
-	}
-*/
 	public void annehmenEinladung() {
 
 	}
@@ -264,8 +237,7 @@ public class Benutzer {
 		this.email = email;
 	}
 
-
-	public Set getGruppenListe() {
+	public Set<Gruppe> getGruppenListe() {
 		return gruppenListe;
 	}
 
@@ -373,11 +345,13 @@ public class Benutzer {
 		this.gebDatum = gebDatum;
 	}
 
-	/*
-	 * public int getAlter() { return alter; }
-	 * 
-	 * public void setAlter(int alter) { this.alter = alter; }
-	 */
+	// public int getAlter() {
+	// return alter;
+	// }
+	//
+	// public void setAlter(int alter) {
+	// this.alter = alter;
+	// }
 
 	public char getGeschlecht() {
 		return geschlecht;
@@ -387,12 +361,12 @@ public class Benutzer {
 		this.geschlecht = geschlecht;
 	}
 
-	public Set<Badge> getBadges() {
-		return badges;
+	public Badge getBadge() {
+		return badge;
 	}
 
-	public void setBadges(Set<Badge> badges) {
-		this.badges = badges;
+	public void setBadge(Badge badge) {
+		this.badge = badge;
 	}
 
 	public Avatar getAvatar() {
@@ -415,16 +389,14 @@ public class Benutzer {
 		this.punktzahl = punktzahl;
 	}
 
+	// public Set<Nachricht> getNachrichten() {
+	// return nachrichten;
+	// }
 
-	/*public Set<Nachricht> getNachrichten() {
-		return nachrichten;
-	}
+	// public void setNachrichten(Set<Nachricht> nachrichten) {
+	// this.nachrichten = nachrichten;
+	// }
 
-	public void setNachrichten(Set<Nachricht> nachrichten) {
-		this.nachrichten = nachrichten;
-	}
-
-*/
 	public void setGruppenListe(Set<Gruppe> gruppenListe) {
 		this.gruppenListe = gruppenListe;
 	}

@@ -15,9 +15,8 @@ public class EintragService {
 	private EintragDAO eintragDAO;
 
 	@Transactional
-	public void addNewEintrag() {
+	public void addNewEintrag(Eintrag b) {
 
-		Eintrag b = new Eintrag();
 		eintragDAO.add(b);
 
 	}

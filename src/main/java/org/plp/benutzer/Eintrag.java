@@ -35,7 +35,7 @@ public class Eintrag {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "eintrag")
 	private Set<Kommentar> kommentare;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pinnwand_id")
 	private Pinnwand pinnwand;
 

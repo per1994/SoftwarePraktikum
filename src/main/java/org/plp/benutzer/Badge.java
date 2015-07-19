@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,10 +30,7 @@ public class Badge {
 	@Column(name = "benötigtePunkte")
 	private int benötigtePunkte;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "BADGE_BESITZER", joinColumns = 
-	@JoinColumn(name = "badge_id"), inverseJoinColumns = 
-	@JoinColumn(name = "benutzer_id"))
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "badge")
 	private Set<Benutzer> besitzer;
 	
 	public Badge() {
