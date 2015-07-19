@@ -15,9 +15,9 @@ public class FachrichtungService {
 	private FachrichtungDAO fachrichtungDAO;
 
 	@Transactional
-	public void addNewFachrichtung() {
+	public void addNewFachrichtung(Fachrichtung b) {
 
-		Fachrichtung b = new Fachrichtung();
+		
 		fachrichtungDAO.add(b);
 
 	}

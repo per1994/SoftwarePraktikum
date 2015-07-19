@@ -15,9 +15,7 @@ public class AufgabeService {
 	private AufgabeDAO aufgabeDAO;
 
 	@Transactional
-	public void addNewAufgabe() {
-
-		Aufgabe b = new Aufgabe();
+	public void addNewAufgabe(Aufgabe b) {
 		aufgabeDAO.add(b);
 
 	}

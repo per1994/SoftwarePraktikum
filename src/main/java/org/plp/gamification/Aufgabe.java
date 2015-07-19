@@ -39,7 +39,7 @@ public class Aufgabe {
 	@Column(name = "punktzahl")
 	private int punktzahl;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	@JoinColumn(name = "fachrichtung_id")
 	private Fachrichtung fachrichtung;
 
@@ -66,6 +66,40 @@ public class Aufgabe {
 		teamCombats = new HashSet<Teamcombat>();
 		quests = new HashSet<Quest>();
 	}
+	
+	
+	public Teilaufgabe getNächsteTeilaufgabe(){
+		for (Teilaufgabe  t : teilAufgaben){
+			
+			if (!t.isBearbeitet()){
+				t.setBearbeitet(true);
+				return t;
+			}
+			
+			
+			
+		}
+		return null;
+		
+	}
+	
+	public void korrigiere(){
+		int score=0;
+		
+		for (Teilaufgabe t: teilAufgaben){
+			if (t.isRichtig()){
+				score++;
+			}
+		}
+		
+		this.punktzahl=score;
+		
+		
+		
+	}
+	
+	
+	
 
 	public Benutzer getAufgabenAutor() {
 		return aufgabenAutor;

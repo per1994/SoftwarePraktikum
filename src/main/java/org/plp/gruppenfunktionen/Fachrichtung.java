@@ -19,7 +19,7 @@ import org.plp.gamification.Aufgabe;
 public class Fachrichtung {
 
 	@Id
-	@Column(name = "fachrichtung_id")
+	@Column(name = "fachrichtung_id" ,nullable = false, unique = true)
 	@GeneratedValue
 	private int fachrichtung_id;
 

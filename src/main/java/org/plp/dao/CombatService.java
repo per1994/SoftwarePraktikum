@@ -15,9 +15,8 @@ public class CombatService {
 	private CombatDAO combatDAO;
 
 	@Transactional
-	public void addNewCombat() {
+	public void addNewCombat(Combat b) {
 
-		Combat b = new Combat();
 		combatDAO.add(b);
 
 	}

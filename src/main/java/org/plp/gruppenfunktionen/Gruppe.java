@@ -1,10 +1,15 @@
 package org.plp.gruppenfunktionen;
 
 import org.plp.benutzer.*;
+import org.plp.dao.CombatService;
+import org.plp.gamification.Combat;
 import org.plp.grundfunktionen.Nachricht;
+import org.plp.grundfunktionen.Nachrichtengenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,6 +31,10 @@ import javax.persistence.Transient;
 @Table(name = "GRUPPE")
 public class Gruppe {
 
+//	@Transient
+//	@Autowired
+//	private Nachrichtengenerator nachrichtengenerator;
+	
 	@Id
 	@Column(name = "gruppe_id", nullable = false, unique = true)
 	@GeneratedValue
@@ -42,7 +51,7 @@ public class Gruppe {
 	@Column(name="anzahlMitglieder")
 	private int anzahlMitglieder;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL  )
 	@JoinColumn(name = "fachrichtung_id")
 	private Fachrichtung fachrichtung;
 
@@ -55,12 +64,16 @@ public class Gruppe {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Nachricht> nachrichten;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="gruppe")
 	private Set<Lernziel> lernziele;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "mediathek_id")
 	private Mediathek mediathek;
+	
+//	@Transient
+//	@Autowired
+//	private CombatService combatservice;
 
 	public Gruppe() {
 		mitgliederListe = new HashSet<Benutzer>();
@@ -144,4 +157,14 @@ public class Gruppe {
 		this.mediathek = mediathek;
 	}
 
+	public Set<Nachricht> getNachrichten() {
+		return nachrichten;
+	}
+
+	public void setNachrichten(Set<Nachricht> nachrichten) {
+		this.nachrichten = nachrichten;
+	}
+
+	
+	
 }

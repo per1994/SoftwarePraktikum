@@ -25,12 +25,16 @@ public class Teilaufgabe {
 
 	@Column(name = "frage")
 	private String frage;
+	
+	@Column(name="bearbeitet")
+	private boolean bearbeitet;
+	
+	@Column(name="richtig")
+	private boolean richtig;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "teilAufgabe")
 	private Set<Antwortmöglichkeit> antwortMöglichkeiten;
 
-	@Column(name = "punktzahl")
-	private int punktzahl;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="aufgabe_id")
@@ -57,13 +61,7 @@ public class Teilaufgabe {
 		this.antwortMöglichkeiten = antwortMöglichkeiten;
 	}
 
-	public int getPunktzahl() {
-		return punktzahl;
-	}
-
-	public void setPunktzahl(int punktzahl) {
-		this.punktzahl = punktzahl;
-	}
+	
 
 	public int getTeilaufgabe_id() {
 		return teilaufgabe_id;
@@ -79,6 +77,22 @@ public class Teilaufgabe {
 
 	public void setAufgabe(Aufgabe aufgabe) {
 		this.aufgabe = aufgabe;
+	}
+
+	public boolean isBearbeitet() {
+		return bearbeitet;
+	}
+
+	public void setBearbeitet(boolean bearbeitet) {
+		this.bearbeitet = bearbeitet;
+	}
+
+	public boolean isRichtig() {
+		return richtig;
+	}
+
+	public void setRichtig(boolean richtig) {
+		this.richtig = richtig;
 	}
 
 }

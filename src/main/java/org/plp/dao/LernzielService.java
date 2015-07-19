@@ -15,9 +15,8 @@ public class LernzielService {
 	private LernzielDAO lernzielDAO;
 
 	@Transactional
-	public void addNewLernziel() {
+	public void addNewLernziel(Lernziel b) {
 
-		Lernziel b = new Lernziel();
 		lernzielDAO.add(b);
 
 	}

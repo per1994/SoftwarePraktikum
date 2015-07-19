@@ -45,16 +45,16 @@ public class Nachrichtengenerator {
 	}
 
 	public Nachricht gruppeneinladungErstellen(int sender, int empfänger,
-			int anhang, boolean bearbeitet, boolean statisch, int nachrichtenTyp) {
+			int anhang, boolean bearbeitet, boolean statisch) {
 		Nachricht gruppenEinladung = new Nachricht(sender, empfänger, anhang,
 				bearbeitet, statisch, 1);
 		gruppenEinladung.setInhalt(benutzerservice.getBenutzer(sender)
 				.getVorname()
 				+ " "
 				+ "hat dich in die Gruppe"
-				+ ""
+				+ " "
 				+ gruppenservice.getGruppe(anhang).getGruppenName()
-				+ "eingeladen");
+				+" "+ "eingeladen");
 		nachrichtservice.addNewNachricht(gruppenEinladung);
 		return gruppenEinladung;
 	}
@@ -67,7 +67,7 @@ public class Nachrichtengenerator {
 				.getVorname()
 				+ " "
 				+ "will dich zu einem Combat im Fachgebiet"
-				+ ""
+				+ " "
 				+ combatservice.getCombat(anhang).getAufgabe()
 						.getThemengebiet() + " herausfordern");
 		nachrichtservice.addNewNachricht(combatAnfrage);
