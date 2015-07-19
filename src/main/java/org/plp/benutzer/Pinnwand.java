@@ -50,12 +50,14 @@ public class Pinnwand {
 		this.pinnwand_id = pinnwand_id;
 	}
 
-	// public Benutzer getBesitzer() {
-	// return besitzer;
-	// }
-	//
-	// public void setBesitzer(Benutzer besitzer) {
-	// this.besitzer = besitzer;
-	// }
+	public Benutzer getBesitzer() {
+		return besitzer;
+	}
+
+	public void setBesitzer(Benutzer besitzer) {
+		this.besitzer = besitzer;
+	}
+
+	
 
 }

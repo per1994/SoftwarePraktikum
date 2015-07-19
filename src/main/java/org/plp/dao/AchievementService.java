@@ -15,9 +15,8 @@ public class AchievementService {
 	private AchievementDAO achievementDAO;
 
 	@Transactional
-	public void addNewAchievement() {
+	public void addNewAchievement(Achievement b) {
 
-		Achievement b = new Achievement();
 		achievementDAO.add(b);
 
 	}

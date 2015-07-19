@@ -30,10 +30,6 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "GRUPPE")
 public class Gruppe {
-
-//	@Transient
-//	@Autowired
-//	private Nachrichtengenerator nachrichtengenerator;
 	
 	@Id
 	@Column(name = "gruppe_id", nullable = false, unique = true)
@@ -71,9 +67,6 @@ public class Gruppe {
 	@JoinColumn(name = "mediathek_id")
 	private Mediathek mediathek;
 	
-//	@Transient
-//	@Autowired
-//	private CombatService combatservice;
 
 	public Gruppe() {
 		mitgliederListe = new HashSet<Benutzer>();

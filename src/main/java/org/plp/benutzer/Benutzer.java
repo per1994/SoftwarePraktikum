@@ -133,9 +133,6 @@ public class Benutzer {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "besitzer")
 	private Set<Achievement> achievements;
 
-	// @Transient
-	// private Set<Nachricht> nachrichten;
-
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "BENUTZER_FREUNDE", joinColumns = @JoinColumn(name = "benutzer_id"), inverseJoinColumns = @JoinColumn(name = "freunde_id"))
 	private Set<Benutzer> freundesListe;
@@ -143,54 +140,24 @@ public class Benutzer {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "freundesListe")
 	private Set<Benutzer> freunde;
 
-	@Transient
-	@Autowired
-	private Nachrichtengenerator nachrichtengenerator = new Nachrichtengenerator();
-
-	@Transient
-	@Autowired
-	private BenutzerService benutzerservice = new BenutzerService();
-
 	public Benutzer() {
 		freundesListe = new HashSet<Benutzer>();
 		gruppenListe = new HashSet<Gruppe>();
 		moderierteGruppenListe = new HashSet<Gruppe>();
 		achievements = new HashSet<Achievement>();
-		// nachrichten = new HashSet<Nachricht>();
+		freunde = new HashSet<Benutzer>();
 		quests = new HashSet<Quest>();
 		erstellteTeilaufgaben = new HashSet<Teilaufgabe>();
 		einträge = new HashSet<Eintrag>();
 		kommentare = new HashSet<Kommentar>();
 		teams = new HashSet<Team>();
 		combats = new HashSet<Combat>();
-		achievements = new HashSet<Achievement>();
 
 	}
 
 	public Benutzer(String benutzerName) {
 		this.benutzerName = benutzerName;
 	}
-
-	// public void freundEntfernen(Benutzer freund) throws Exception {
-	// if (freundesliste.contains(freund)) {
-	// freundesliste.remove(freund);
-	// freund.getFreundesliste().remove(this);
-	//
-	// } else {
-	// throw new Exception("Du bist aktuell nicht mit" + " "
-	// + freund.getVorname() + "befreundet");
-	// }
-	// }
-
-	// public void eintragErstellen(Pinnwand pinnwand, String eintragstext,
-	// Benutzer empfänger) {
-	// Eintrag eintrag = new Eintrag();
-	// eintrag.setEintragstext(eintragstext);
-	// pinnwand.getEinträge().add(eintrag);
-	// Nachricht nachricht = new Nachricht(pinnwand, empfänger,
-	// Nachricht.PINNWANDEINTRAGERHALTEN, this);
-	// empfänger.nachrichten.add(nachricht);
-	// }
 
 	public void kommentarSchreiben(Eintrag eintrag, Kommentar kommentar) {
 		eintrag.getKommentare().add(kommentar);
@@ -199,29 +166,6 @@ public class Benutzer {
 
 	public void gruppeErstellen(Fachrichtung fachrichtung, String name,
 			Lernziel lernziel, String passwort) throws Exception {
-
-	}
-
-	// public void einladenBenutzer(Benutzer empfänger) {
-	// Nachricht nachricht = new Nachricht(this, empfänger,
-	// Nachricht.FREUNDSCHAFTSANRAGE, this);
-	//
-	// }
-
-	public void annehmenEinladung() {
-
-	}
-
-	public void ablehnenEinladung() {
-
-	}
-
-	public void beitretenGruppe(Gruppe gruppe) throws Exception {
-
-	}
-
-	public void erstellenQuest() {
-		Quest quest = new Quest();
 
 	}
 
@@ -346,14 +290,6 @@ public class Benutzer {
 		this.gebDatum = gebDatum;
 	}
 
-	// public int getAlter() {
-	// return alter;
-	// }
-	//
-	// public void setAlter(int alter) {
-	// this.alter = alter;
-	// }
-
 	public char getGeschlecht() {
 		return geschlecht;
 	}
@@ -390,14 +326,6 @@ public class Benutzer {
 		this.punktzahl = punktzahl;
 	}
 
-	// public Set<Nachricht> getNachrichten() {
-	// return nachrichten;
-	// }
-
-	// public void setNachrichten(Set<Nachricht> nachrichten) {
-	// this.nachrichten = nachrichten;
-	// }
-
 	public void setGruppenListe(Set<Gruppe> gruppenListe) {
 		this.gruppenListe = gruppenListe;
 	}
@@ -425,8 +353,6 @@ public class Benutzer {
 	public void setQuests(Set<Quest> quests) {
 		this.quests = quests;
 	}
-
-	
 
 	public Set<Eintrag> getEinträge() {
 		return einträge;
@@ -484,8 +410,6 @@ public class Benutzer {
 		this.studiengang = studiengang;
 	}
 
-	
-
 	public Set<Combat> getGewonneneCombats() {
 		return gewonneneCombats;
 	}
@@ -500,22 +424,6 @@ public class Benutzer {
 
 	public void setVerloreneCombats(Set<Combat> verloreneCombats) {
 		this.verloreneCombats = verloreneCombats;
-	}
-
-	public Nachrichtengenerator getNachrichtengenerator() {
-		return nachrichtengenerator;
-	}
-
-	public void setNachrichtengenerator(Nachrichtengenerator nachrichtengenerator) {
-		this.nachrichtengenerator = nachrichtengenerator;
-	}
-
-	public BenutzerService getBenutzerservice() {
-		return benutzerservice;
-	}
-
-	public void setBenutzerservice(BenutzerService benutzerservice) {
-		this.benutzerservice = benutzerservice;
 	}
 
 	public Set<Teilaufgabe> getErstellteTeilaufgaben() {

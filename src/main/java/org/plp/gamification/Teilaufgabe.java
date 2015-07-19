@@ -60,9 +60,6 @@ public class Teilaufgabe {
 	@Column(name="gewählteLösung")
 	private String gewählteLösung;
 
-//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "teilAufgabe")
-//	private Set<Antwortmöglichkeit> antwortMöglichkeiten;
-
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilAufgaben")
 	private Set<Aufgabe>aufgaben;
@@ -87,15 +84,6 @@ public class Teilaufgabe {
 		this.frage = frage;
 	}
 
-//	public Set<Antwortmöglichkeit> getAntwortMöglichkeiten() {
-//		return antwortMöglichkeiten;
-//	}
-//
-//	public void setAntwortMöglichkeiten(Set<Antwortmöglichkeit> antwortMöglichkeiten) {
-//		this.antwortMöglichkeiten = antwortMöglichkeiten;
-//	}
-
-	
 
 	public int getTeilaufgabe_id() {
 		return teilaufgabe_id;

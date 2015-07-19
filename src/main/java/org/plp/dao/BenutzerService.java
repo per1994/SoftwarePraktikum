@@ -114,6 +114,7 @@ public class BenutzerService {
 		Eintrag eintrag = new Eintrag();
 		eintrag.setEintragstext(eintragsText);
 		eintrag.setAutor(this.getBenutzer(sender));
+		this.getBenutzer(sender).getEinträge().add(eintrag);
 		eintrag.setPinnwand(this.getBenutzer(empfänger).getPinnwand());
 		eintragService.addNewEintrag(eintrag);
 		this.getBenutzer(empfänger).getPinnwand().getEinträge().add(eintrag);
@@ -127,6 +128,7 @@ public class BenutzerService {
 		Kommentar kommentar = new Kommentar();
 		kommentar.setInhalt(eintragsText);
 		kommentar.setAutor(this.getBenutzer(sender));
+		this.getBenutzer(sender).getKommentare().add(kommentar);
 		kommentar.setEintrag(eintragService.getEintrag(eintrag_id));
 		kommentarService.addNewKommentar(kommentar);
 		eintragService.getEintrag(eintrag_id).getKommentare().add(kommentar);
@@ -141,6 +143,7 @@ public class BenutzerService {
 		gruppe.setFachrichtung(fachrichtungService
 				.getFachrichtung(fachrichtung_id));
 		gruppe.setMediathek(mediathek);
+		mediathek.setGruppe(gruppe);
 		gruppe.getMitgliederListe().add(this.getBenutzer(ersteller));
 		gruppe.getModeratorenListe().add(this.getBenutzer(ersteller));
 		gruppe.setAnzahlMitglieder(gruppe.getMitgliederListe().size());

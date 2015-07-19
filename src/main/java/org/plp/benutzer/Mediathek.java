@@ -37,22 +37,7 @@ public class Mediathek {
 		set = new HashSet<Datei>();
 	}
 
-	public void dateiHinzufügen(Datei datei) {
-		set.add(datei);
-
-	}
-
-	public boolean dateilöschen(Datei datei) {
-
-		if (set.contains(datei)) {
-			set.remove(datei);
-
-			return true;
-		} else {
-			return false;
-		}
-
-	}
+	
 
 	public Set<Datei> getSet() {
 		return set;

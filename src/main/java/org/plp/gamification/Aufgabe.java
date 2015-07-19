@@ -44,11 +44,6 @@ public class Aufgabe {
 	@JoinColumn(name = "fachrichtung_id")
 	private Fachrichtung fachrichtung;
 
-	@Column(name = "themengebiet")
-	private String themengebiet;
-
-	@Transient
-	private Aufgabensammlung aufgabenSammlung;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "AUFGABE_TEAMCOMBAT", joinColumns = @JoinColumn(name = "aufgabe_id"), inverseJoinColumns = @JoinColumn(name = "teamcombat_id"))
@@ -128,14 +123,7 @@ public class Aufgabe {
 		this.fachrichtung = fachrichtung;
 	}
 
-	public String getThemengebiet() {
-		return themengebiet;
-	}
-
-	public void setThemengebiet(String themengebiet) {
-		this.themengebiet = themengebiet;
-	}
-
+	
 	public int getAufgabe_id() {
 		return aufgabe_id;
 	}
@@ -144,13 +132,7 @@ public class Aufgabe {
 		this.aufgabe_id = aufgabe_id;
 	}
 
-	public Aufgabensammlung getAufgabenSammlung() {
-		return aufgabenSammlung;
-	}
-
-	public void setAufgabenSammlung(Aufgabensammlung aufgabenSammlung) {
-		this.aufgabenSammlung = aufgabenSammlung;
-	}
+	
 
 	public Set<Teamcombat> getTeamCombats() {
 		return teamCombats;

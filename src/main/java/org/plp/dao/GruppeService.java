@@ -58,15 +58,14 @@ public class GruppeService {
 		c.getTeilnehmer().add(b1);
 		c.getTeilnehmer().add(b2);
 		b1.getCombats().add(c);
-		b2.getCombats();
+		b2.getCombats().add(c);
 		
 		
 		
 		combatservice.addNewCombat(c);
-		List<Combat> combats= combatservice.listAllCombat();
-		int combatId=combats.get(combats.size()-1).getCombat_id();
 		
-		nachrichtengenerator.combatanfrageErstellen(sender, empfänger, combatId, false, false);
+		
+		nachrichtengenerator.combatanfrageErstellen(sender, empfänger, c.getCombat_id(), false, false);
 		
 		
 		

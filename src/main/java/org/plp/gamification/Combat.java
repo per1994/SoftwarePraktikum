@@ -56,11 +56,6 @@ public class Combat {
 	@Column(name = "unentschieden")
 	private boolean unentschieden;
 
-	// Hier kommt der Konstruktor hin
-	public Combat(Benutzer teilnehmer1, Benutzer teilnehmer2) {
-		teilnehmer.add(teilnehmer1);
-		teilnehmer.add(teilnehmer2);
-	}
 
 	public Combat(){
 		teilnehmer= new HashSet<Benutzer>();

@@ -21,11 +21,18 @@ public class Lernziel {
 	private int lernziel_id;
 
 
+	@Column(name="inhalt")
 	private String inhalt;
-	private Date erstellDatum;
-	private Date zielDatum;
+	
+	@Column(name="erstellDatum")
+	private String erstellDatum;
+	
+	@Column(name="zielDatum")
+	private String zielDatum;
+	
+	@Column(name="erreicht")
 	private boolean erreicht;
-	private int bearbeitungsZeit;
+
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -40,21 +47,9 @@ public class Lernziel {
 		this.inhalt = inhalt;
 	}
 	
-	public Date getErstellDatum() {
-		return erstellDatum;
-	}
 	
-	public void setErstellDatum(Date erstellDatum) {
-		this.erstellDatum = erstellDatum;
-	}
 	
-	public Date getZielDatum() {
-		return zielDatum;
-	}
 	
-	public void setZielDatum(Date zielDatum) {
-		this.zielDatum = zielDatum;
-	}
 	
 	public boolean isErreicht() {
 		return erreicht;
@@ -64,13 +59,6 @@ public class Lernziel {
 		this.erreicht = erreicht;
 	}
 	
-	public int getBearbeitungsZeit() {
-		return bearbeitungsZeit;
-	}
-	
-	public void setBearbeitungsZeit(int bearbeitungsZeit) {
-		this.bearbeitungsZeit = bearbeitungsZeit;
-	}
 
 	public Gruppe getGruppe() {
 		return gruppe;
@@ -86,6 +74,22 @@ public class Lernziel {
 
 	public void setLernziel_id(int lernziel_id) {
 		this.lernziel_id = lernziel_id;
+	}
+
+	public String getErstellDatum() {
+		return erstellDatum;
+	}
+
+	public void setErstellDatum(String erstellDatum) {
+		this.erstellDatum = erstellDatum;
+	}
+
+	public String getZielDatum() {
+		return zielDatum;
+	}
+
+	public void setZielDatum(String zielDatum) {
+		this.zielDatum = zielDatum;
 	}
 
 }

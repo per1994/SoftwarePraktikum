@@ -76,10 +76,10 @@ public class Nachrichtengenerator {
 		combatAnfrage.setInhalt(benutzerservice.getBenutzer(sender)
 				.getVorname()
 				+ " "
-				+ "will dich zu einem Combat im Themengebiet"
+				+ "will dich zu einem Combat im Fachgebiet"
 				+ " "
-				+ combatservice.getCombat(anhang).getAufgabe()
-						.getThemengebiet() + " herausfordern");
+				+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
+						 + " herausfordern");
 		nachrichtservice.addNewNachricht(combatAnfrage);
 		return combatAnfrage;
 	}
@@ -209,9 +209,9 @@ public class Nachrichtengenerator {
 			}
 			combatErgebnisBenachrichtigung.setInhalt("Dein Combat gegen "
 					+ benutzer.getBenutzerName()
-					+ " im Themengebiet "
-					+ combatservice.getCombat(anhang).getAufgabe()
-							.getThemengebiet()
+					+ " Fachgebiet "
+					+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
+							
 					+ " hat keinen Sieger hevorgebracht! Dir werden "
 					+ combatservice.getCombat(anhang).getPunkteUnentschieden()
 					+ " gutgeschrieben");
@@ -222,9 +222,9 @@ public class Nachrichtengenerator {
 			combatErgebnisBenachrichtigung.setInhalt("Du hast da Combat gegen "
 					+ combatservice.getCombat(anhang).getVerlierer()
 							.getBenutzerName()
-					+ " im Themengebiet "
-					+ combatservice.getCombat(anhang).getAufgabe()
-							.getThemengebiet() + " gewonnen! Dir werden "
+					+ " im Fachgebiet "
+					+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
+							+ " gewonnen! Dir werden "
 					+ combatservice.getCombat(anhang).getPunkteGewinner()
 					+ " Punkte gutgeschrieben.");
 		}
@@ -233,9 +233,9 @@ public class Nachrichtengenerator {
 			combatErgebnisBenachrichtigung.setInhalt("Du hast da Combat gegen "
 					+ combatservice.getCombat(anhang).getVerlierer()
 							.getBenutzerName()
-					+ " im Themengebiet "
-					+ combatservice.getCombat(anhang).getAufgabe()
-							.getThemengebiet() + " gewonnen! Dir werden "
+					+ " im Fachgebiet "
+					+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
+							 + " gewonnen! Dir werden "
 					+ combatservice.getCombat(anhang).getPunkteGewinner()
 					+ " Punkte gutgeschrieben.");
 		}
