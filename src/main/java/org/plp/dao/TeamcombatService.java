@@ -15,9 +15,8 @@ public class TeamcombatService {
 	private TeamcombatDAO teamcombatDAO;
 
 	@Transactional
-	public void addNewTeamcombat() {
+	public void addNewTeamcombat(Teamcombat b) {
 
-		Teamcombat b = new Teamcombat();
 		teamcombatDAO.add(b);
 
 	}

@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.plp.benutzer.Benutzer;
 import org.plp.gamification.Aufgabe;
 import org.plp.gamification.Combat;
+import org.plp.gamification.Team;
+import org.plp.gamification.Teamcombat;
 import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.plp.gruppenfunktionen.Lernziel;
@@ -17,6 +19,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GruppeService {
+	
+	
+	@Autowired
+	private TeamcombatService teamcombatservice;
+	
+	@Autowired
+	private TeamService teamservice;
 	
 	@Autowired
 	private LernzielService lernzielservice;
@@ -38,24 +47,11 @@ public class GruppeService {
 
 	
 	@Transactional
-	public void CombatanfrageErstellen(int sender, int empfänger, int gruppe){
+	public void combatanfrageErstellen(int sender, int empfänger, int gruppe){
 		Combat c = new Combat();
 		List<Aufgabe> aufgaben= aufgabenservice.listAllAufgabe();
-		List<Aufgabe>aufgabenImFachgebiet=new ArrayList<Aufgabe>();
-		String gruppeFachrichtungName=this.getGruppe(gruppe).getFachrichtung().getName();
 		
-		for (Aufgabe a: aufgaben){
-			if(a.getFachrichtung().getName().equals(gruppeFachrichtungName)){
-				aufgabenImFachgebiet.add(a);
-				
-			}
-		}
-		
-		int zufallszahl = (int) ((Math.random()*aufgabenImFachgebiet.size()));
-		System.out.println(aufgabenImFachgebiet.size());
-		System.out.println(zufallszahl);
-		Aufgabe aufgabe=aufgabenImFachgebiet.get(zufallszahl);
-		c.setAufgabe(aufgabe);
+		c.setAufgabe(this.zufallsaufgabeAusGruppenFachgebietErstellen(gruppe));
 		Benutzer b1= benutzerservice.getBenutzer(sender);
 		Benutzer b2= benutzerservice.getBenutzer(empfänger);
 		
@@ -129,7 +125,77 @@ public class GruppeService {
 	}
 	
 	
+	@Transactional
+	public void teamcombatAnfrageErstellen(int sender, int empfänger){
+		Gruppe herausfordererGruppe= this.getGruppe(sender);
+		Gruppe gegnerGruppe=this.getGruppe(empfänger);
+		
+		Teamcombat c= new Teamcombat();
+		
+		
+		
+		// Team 1 befüllen
+		Team herausforderer= new Team();
+		for (int i=0; i<3;i++){
+			Benutzer b=herausfordererGruppe.getMitgliederListe().iterator().next();
+			if(!herausforderer.getTeamMitglieder().contains(b)){
+				herausforderer.getTeamMitglieder().add(b);
+				b.getTeams().add(herausforderer);
+			}
+			
+		}
+		
+		
+		// Team 2 befüllen
+		Team gegner= new Team();
+		for (int i=0; i<3;i++){
+			Benutzer b=gegnerGruppe.getMitgliederListe().iterator().next();
+			if(!gegner.getTeamMitglieder().contains(b)){
+				gegner.getTeamMitglieder().add(b);
+				b.getTeams().add(gegner);
+			}
+			
+		}
+		// Teams in DB speichern
+		teamservice.addNewTeam(herausforderer);
+		teamservice.addNewTeam(gegner);
+		
+		// Aufgabenliste befüllen
+		while (c.getAufgabeliste().size()<3){
+			Aufgabe a=this.zufallsaufgabeAusGruppenFachgebietErstellen(sender);
+			if(!c.getAufgabeliste().contains(a))
+			c.getAufgabeliste().add(a);
+			
+		}
+		
+		teamcombatservice.addNewTeamcombat(c);
+		
+		for (Benutzer b: gegner.getTeamMitglieder()){
+			nachrichtengenerator.teamcombatanfrageErstellen(sender, b.getBenutzer_id(), c.getTeamcombat_id(), false, false);
+			
+		}
+		
+		
+		
+	}
 	
+	public Aufgabe zufallsaufgabeAusGruppenFachgebietErstellen(int gruppe){
+		List<Aufgabe> aufgaben= aufgabenservice.listAllAufgabe();
+		List<Aufgabe>aufgabenImFachgebiet=new ArrayList<Aufgabe>();
+		String gruppeFachrichtungName=this.getGruppe(gruppe).getFachrichtung().getName();
+		
+		for (Aufgabe a: aufgaben){
+			if(a.getFachrichtung().getName().equals(gruppeFachrichtungName)){
+				aufgabenImFachgebiet.add(a);
+				
+			}
+		}
+		
+		int zufallszahl = (int) ((Math.random()*aufgabenImFachgebiet.size()));
+		Aufgabe aufgabe=aufgabenImFachgebiet.get(zufallszahl);
+		return aufgabe;
+		
+	}
 	
 	@Transactional
 	public void addNewGruppe(Gruppe b) {

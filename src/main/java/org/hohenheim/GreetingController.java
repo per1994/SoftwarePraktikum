@@ -10,6 +10,7 @@ import org.plp.benutzer.User;
 import org.plp.dao.AufgabeService;
 import org.plp.dao.BadgeService;
 import org.plp.dao.BenutzerService;
+import org.plp.dao.FachrichtungService;
 import org.plp.dao.GruppeService;
 import org.plp.dao.MediathekService;
 import org.plp.dao.NachrichtService;

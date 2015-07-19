@@ -15,9 +15,9 @@ public class TeamService {
 	private TeamDAO teamDAO;
 
 	@Transactional
-	public void addNewTeam() {
+	public void addNewTeam(Team b) {
 
-		Team b = new Team();
+		
 		teamDAO.add(b);
 
 	}

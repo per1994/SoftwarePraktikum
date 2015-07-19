@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,9 +33,20 @@ public class Teilaufgabe {
 	
 	@Column(name="richtig")
 	private boolean richtig;
+	
+	
+	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+	@CollectionTable(name="FRAGE_ANTWORTMOEGLICHKEITEN", joinColumns=@JoinColumn(name="teilaufgabe_id"))
+	private Set<String>antwortmöglichkeiten;
+	
+	@Column(name="lösung")
+	private String lösung;
+	
+	@Column(name="gewählteLösung")
+	private String gewählteLösung;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "teilAufgabe")
-	private Set<Antwortmöglichkeit> antwortMöglichkeiten;
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy= "teilAufgabe")
+//	private Set<Antwortmöglichkeit> antwortMöglichkeiten;
 
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -41,8 +54,15 @@ public class Teilaufgabe {
 	private Aufgabe aufgabe;
 	
 	
+	public  void teilaufgabeKorrigieren(){
+		if (gewählteLösung.equals(lösung)){
+			richtig= true;
+		}
+	}
+	
+	
 	public Teilaufgabe(){
-		antwortMöglichkeiten= new HashSet<Antwortmöglichkeit>();
+		antwortmöglichkeiten= new HashSet<String>();
 	}
 
 	public String getFrage() {
@@ -53,13 +73,13 @@ public class Teilaufgabe {
 		this.frage = frage;
 	}
 
-	public Set<Antwortmöglichkeit> getAntwortMöglichkeiten() {
-		return antwortMöglichkeiten;
-	}
-
-	public void setAntwortMöglichkeiten(Set<Antwortmöglichkeit> antwortMöglichkeiten) {
-		this.antwortMöglichkeiten = antwortMöglichkeiten;
-	}
+//	public Set<Antwortmöglichkeit> getAntwortMöglichkeiten() {
+//		return antwortMöglichkeiten;
+//	}
+//
+//	public void setAntwortMöglichkeiten(Set<Antwortmöglichkeit> antwortMöglichkeiten) {
+//		this.antwortMöglichkeiten = antwortMöglichkeiten;
+//	}
 
 	
 
