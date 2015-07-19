@@ -32,15 +32,19 @@ public class Achievement {
 	@Column(name = "benötigteQuests")
 	private int benötigteQuests;
 
+	@Column(name = "punkteWert")
+	private int punkteWert;
+
+	@Column(name = "name")
+	private String name;
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "ACHIEVEMENT_BESITZER", joinColumns = 
-	@JoinColumn(name = "achievement_id"), inverseJoinColumns = 
-	@JoinColumn(name = "benutzer_id"))
+	@JoinTable(name = "ACHIEVEMENT_BESITZER", joinColumns = @JoinColumn(name = "achievement_id"), inverseJoinColumns = @JoinColumn(name = "benutzer_id"))
 	private Set<Benutzer> besitzer;
 
 	// Hibernate braucht leeren Konstruktor
 	public Achievement() {
-		 besitzer=new HashSet<Benutzer>();
+		besitzer = new HashSet<Benutzer>();
 	}
 
 	public int getBenötigteCombatsiege() {
@@ -81,6 +85,22 @@ public class Achievement {
 
 	public void setBesitzer(Set<Benutzer> besitzer) {
 		this.besitzer = besitzer;
+	}
+
+	public int getPunkteWert() {
+		return punkteWert;
+	}
+
+	public void setPunkteWert(int punkteWert) {
+		this.punkteWert = punkteWert;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

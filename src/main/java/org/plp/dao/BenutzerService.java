@@ -1,9 +1,11 @@
 package org.plp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.plp.benutzer.Badge;
 import org.plp.benutzer.Benutzer;
 import org.plp.benutzer.Eintrag;
 import org.plp.benutzer.Kommentar;
@@ -44,6 +46,9 @@ public class BenutzerService {
 
 	@Autowired
 	private GruppeService gruppeService;
+
+	@Autowired
+	private BadgeService badgeService;
 
 	@Transactional
 	public void addNewBenutzer(String benutzerName, String vorname,
@@ -86,7 +91,6 @@ public class BenutzerService {
 			int anhang) {
 		nachrichtengenerator.freundschaftsanfrageErstellen(sender, empfänger,
 				anhang, false, false);
-		combatService.addNewCombat();
 	}
 
 	@Transactional
@@ -162,6 +166,7 @@ public class BenutzerService {
 
 	}
 
+	@Transactional
 	public void freundLöschen(int benutzer, int freund) {
 
 		this.getBenutzer(benutzer).getFreundesListe()
@@ -169,6 +174,26 @@ public class BenutzerService {
 		this.getBenutzer(freund).getFreundesListe()
 				.remove(this.getBenutzer(benutzer));
 	}
-	
-	
+
+	@Transactional
+	public void aufBadgeÜberprüfen(int benutzer) {
+
+		List<Badge> badgeListe = badgeService.listAllBadge();
+		List benutzerListe = this.listAllBenutzer();
+
+		Badge temp;
+		for (int i = 1; i < badgeListe.size(); i++) {
+			for (int j = 0; j < badgeListe.size() - i; j++) {
+				if (badgeListe.get(j).getBenötigtePunkte() > badgeListe.get(
+						j + 1).getBenötigtePunkte()) {
+					temp = badgeListe.get(j);
+					badgeListe.set(i, badgeListe.get(j + 1));
+					badgeListe.set(j + 1, temp);
+
+				}
+
+			}
+		}
+
+	}
 }

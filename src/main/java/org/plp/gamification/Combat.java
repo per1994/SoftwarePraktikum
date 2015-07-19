@@ -53,6 +53,7 @@ public class Combat {
 	@Column(name = "punkteUnentschieden")
 	private int punkteUnentschieden;
 
+	@Column(name = "unentschieden")
 	private boolean unentschieden;
 
 	// Hier kommt der Konstruktor hin
@@ -159,4 +160,6 @@ public class Combat {
 		this.teilnehmer = teilnehmer;
 	}
 
+	
+	
 }

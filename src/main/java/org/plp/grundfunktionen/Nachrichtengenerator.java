@@ -1,5 +1,8 @@
 package org.plp.grundfunktionen;
 
+import org.plp.benutzer.Benutzer;
+import org.plp.dao.AchievementService;
+import org.plp.dao.BadgeService;
 import org.plp.dao.BenutzerService;
 import org.plp.dao.CombatService;
 import org.plp.dao.GruppeService;
@@ -28,6 +31,12 @@ public class Nachrichtengenerator {
 	@Autowired
 	GruppeService gruppenservice;
 
+	@Autowired
+	BadgeService badgeservice;
+
+	@Autowired
+	AchievementService achievementservice;
+
 	public Nachricht freundschaftsanfrageErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -54,7 +63,8 @@ public class Nachrichtengenerator {
 				+ "hat dich in die Gruppe"
 				+ " "
 				+ gruppenservice.getGruppe(anhang).getGruppenName()
-				+" "+ "eingeladen");
+				+ " "
+				+ "eingeladen");
 		nachrichtservice.addNewNachricht(gruppenEinladung);
 		return gruppenEinladung;
 	}
@@ -66,7 +76,7 @@ public class Nachrichtengenerator {
 		combatAnfrage.setInhalt(benutzerservice.getBenutzer(sender)
 				.getVorname()
 				+ " "
-				+ "will dich zu einem Combat im Fachgebiet"
+				+ "will dich zu einem Combat im Themengebiet"
 				+ " "
 				+ combatservice.getCombat(anhang).getAufgabe()
 						.getThemengebiet() + " herausfordern");
@@ -154,5 +164,81 @@ public class Nachrichtengenerator {
 		nachrichtservice.addNewNachricht(pinnwandEintragErhalten);
 		return pinnwandEintragErhalten;
 
+	}
+
+	public Nachricht neueBadgeErhaltenErstellen(int sender, int empfänger,
+			int anhang, boolean bearbeitet, boolean statisch) {
+
+		Nachricht neueBadgeErhalten = new Nachricht(sender, empfänger, anhang,
+				bearbeitet, statisch, 9);
+		neueBadgeErhalten.setInhalt("Glückwunsch! Du hast "
+				+ badgeservice.getBadge(anhang).getBenötigtePunkte()
+				+ "gesammelt. Deiner neuer Rang lautet "
+				+ badgeservice.getBadge(anhang).getName());
+		nachrichtservice.addNewNachricht(neueBadgeErhalten);
+		return neueBadgeErhalten;
+	}
+
+	public Nachricht neuesAchievementErhaltenErstellen(int sender,
+			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
+
+		Nachricht neuesAchievementErhalten = new Nachricht(sender, empfänger,
+				anhang, bearbeitet, statisch, 10);
+		neuesAchievementErhalten
+				.setInhalt("Glückwünsch! Du hast das Achievement "
+						+ achievementservice.getAchievement(anhang).getName()
+						+ " erhalten. Dir werden "
+						+ achievementservice.getAchievement(anhang)
+								.getPunkteWert() + " Punkte gutgeschrieben.");
+		nachrichtservice.addNewNachricht(neuesAchievementErhalten);
+		return neuesAchievementErhalten;
+	}
+
+	public Nachricht combatErgebnisBenachrichtungErstellen(int sender,
+			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
+
+		Benutzer benutzer = combatservice.getCombat(anhang).getTeilnehmer()
+				.iterator().next();
+
+		Nachricht combatErgebnisBenachrichtigung = new Nachricht(sender,
+				empfänger, anhang, bearbeitet, statisch, 11);
+		if (combatservice.getCombat(anhang).isUnentschieden()) {
+			if (benutzer.getBenutzer_id() == empfänger) {
+				benutzer = combatservice.getCombat(anhang).getTeilnehmer()
+						.iterator().next();
+			}
+			combatErgebnisBenachrichtigung.setInhalt("Dein Combat gegen "
+					+ benutzer.getBenutzerName()
+					+ " im Themengebiet "
+					+ combatservice.getCombat(anhang).getAufgabe()
+							.getThemengebiet()
+					+ " hat keinen Sieger hevorgebracht! Dir werden "
+					+ combatservice.getCombat(anhang).getPunkteUnentschieden()
+					+ " gutgeschrieben");
+		}
+
+		if (empfänger == combatservice.getCombat(anhang).getGewinner()
+				.getBenutzer_id()) {
+			combatErgebnisBenachrichtigung.setInhalt("Du hast da Combat gegen "
+					+ combatservice.getCombat(anhang).getVerlierer()
+							.getBenutzerName()
+					+ " im Themengebiet "
+					+ combatservice.getCombat(anhang).getAufgabe()
+							.getThemengebiet() + " gewonnen! Dir werden "
+					+ combatservice.getCombat(anhang).getPunkteGewinner()
+					+ " Punkte gutgeschrieben.");
+		}
+		if (empfänger == combatservice.getCombat(anhang).getGewinner()
+				.getBenutzer_id()) {
+			combatErgebnisBenachrichtigung.setInhalt("Du hast da Combat gegen "
+					+ combatservice.getCombat(anhang).getVerlierer()
+							.getBenutzerName()
+					+ " im Themengebiet "
+					+ combatservice.getCombat(anhang).getAufgabe()
+							.getThemengebiet() + " gewonnen! Dir werden "
+					+ combatservice.getCombat(anhang).getPunkteGewinner()
+					+ " Punkte gutgeschrieben.");
+		}
+		return combatErgebnisBenachrichtigung;
 	}
 }
