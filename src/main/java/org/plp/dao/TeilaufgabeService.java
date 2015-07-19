@@ -15,9 +15,8 @@ public class TeilaufgabeService {
 	private TeilaufgabeDAO teilaufgabeDAO;
 
 	@Transactional
-	public void addNewTeilaufgabe() {
+	public void addNewTeilaufgabe(Teilaufgabe b) {
 
-		Teilaufgabe b = new Teilaufgabe();
 		teilaufgabeDAO.add(b);
 
 	}

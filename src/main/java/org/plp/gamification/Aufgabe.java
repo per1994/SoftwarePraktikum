@@ -29,13 +29,14 @@ public class Aufgabe {
 	@GeneratedValue
 	private int aufgabe_id;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "benutzer_id")
-	private Benutzer aufgabenAutor;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabe")
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "AUFGABE_TEILAUFGABE", joinColumns = @JoinColumn(name = "aufgabe_id"), inverseJoinColumns = @JoinColumn(name = "teilaufgabe_id"))
 	private Set<Teilaufgabe> teilAufgaben;
 
+	
+	
 	@Column(name = "punktzahl")
 	private int punktzahl;
 
@@ -101,13 +102,7 @@ public class Aufgabe {
 	
 	
 
-	public Benutzer getAufgabenAutor() {
-		return aufgabenAutor;
-	}
-
-	public void setAufgabenAutor(Benutzer aufgabenAutor) {
-		this.aufgabenAutor = aufgabenAutor;
-	}
+	
 
 	public Set<Teilaufgabe> getTeilAufgaben() {
 		return teilAufgaben;

@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.plp.gamification.Aufgabe;
+import org.plp.gamification.Teilaufgabe;
 
 @Entity
 @Table(name = "FACHRICHTUNG")
@@ -28,6 +29,9 @@ public class Fachrichtung {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
 	private Set<Aufgabe> aufgaben;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
+	private Set<Teilaufgabe> teilaufgaben;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
 	private Set<Gruppe>gruppen;
@@ -67,6 +71,14 @@ public class Fachrichtung {
 
 	public void setGruppen(Set<Gruppe> gruppen) {
 		this.gruppen = gruppen;
+	}
+
+	public Set<Teilaufgabe> getTeilaufgaben() {
+		return teilaufgaben;
+	}
+
+	public void setTeilaufgaben(Set<Teilaufgabe> teilaufgaben) {
+		this.teilaufgaben = teilaufgaben;
 	}
 
 }

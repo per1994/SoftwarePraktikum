@@ -26,6 +26,7 @@ import org.plp.gamification.Aufgabe;
 import org.plp.gamification.Combat;
 import org.plp.gamification.Quest;
 import org.plp.gamification.Team;
+import org.plp.gamification.Teilaufgabe;
 import org.plp.grundfunktionen.Nachricht;
 import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.plp.gruppenfunktionen.Fachrichtung;
@@ -88,7 +89,7 @@ public class Benutzer {
 	private int punktzahl;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabenAutor")
-	private Set<Aufgabe> erstellteAufgaben;
+	private Set<Teilaufgabe> erstellteTeilaufgaben;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "autor")
 	private Set<Eintrag> einträge;
@@ -157,7 +158,7 @@ public class Benutzer {
 		achievements = new HashSet<Achievement>();
 		// nachrichten = new HashSet<Nachricht>();
 		quests = new HashSet<Quest>();
-		erstellteAufgaben = new HashSet<Aufgabe>();
+		erstellteTeilaufgaben = new HashSet<Teilaufgabe>();
 		einträge = new HashSet<Eintrag>();
 		kommentare = new HashSet<Kommentar>();
 		teams = new HashSet<Team>();
@@ -425,13 +426,7 @@ public class Benutzer {
 		this.quests = quests;
 	}
 
-	public Set<Aufgabe> getErstellteAufgaben() {
-		return erstellteAufgaben;
-	}
-
-	public void setErstellteAufgaben(Set<Aufgabe> erstellteAufgaben) {
-		this.erstellteAufgaben = erstellteAufgaben;
-	}
+	
 
 	public Set<Eintrag> getEinträge() {
 		return einträge;
@@ -487,6 +482,48 @@ public class Benutzer {
 
 	public void setStudiengang(String studiengang) {
 		this.studiengang = studiengang;
+	}
+
+	
+
+	public Set<Combat> getGewonneneCombats() {
+		return gewonneneCombats;
+	}
+
+	public void setGewonneneCombats(Set<Combat> gewonneneCombats) {
+		this.gewonneneCombats = gewonneneCombats;
+	}
+
+	public Set<Combat> getVerloreneCombats() {
+		return verloreneCombats;
+	}
+
+	public void setVerloreneCombats(Set<Combat> verloreneCombats) {
+		this.verloreneCombats = verloreneCombats;
+	}
+
+	public Nachrichtengenerator getNachrichtengenerator() {
+		return nachrichtengenerator;
+	}
+
+	public void setNachrichtengenerator(Nachrichtengenerator nachrichtengenerator) {
+		this.nachrichtengenerator = nachrichtengenerator;
+	}
+
+	public BenutzerService getBenutzerservice() {
+		return benutzerservice;
+	}
+
+	public void setBenutzerservice(BenutzerService benutzerservice) {
+		this.benutzerservice = benutzerservice;
+	}
+
+	public Set<Teilaufgabe> getErstellteTeilaufgaben() {
+		return erstellteTeilaufgaben;
+	}
+
+	public void setErstellteTeilaufgaben(Set<Teilaufgabe> erstellteTeilaufgaben) {
+		this.erstellteTeilaufgaben = erstellteTeilaufgaben;
 	}
 
 }

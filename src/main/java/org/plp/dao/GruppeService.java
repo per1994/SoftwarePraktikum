@@ -49,7 +49,7 @@ public class GruppeService {
 	@Transactional
 	public void combatanfrageErstellen(int sender, int empfänger, int gruppe){
 		Combat c = new Combat();
-		List<Aufgabe> aufgaben= aufgabenservice.listAllAufgabe();
+		
 		
 		c.setAufgabe(this.zufallsaufgabeAusGruppenFachgebietErstellen(gruppe));
 		Benutzer b1= benutzerservice.getBenutzer(sender);
@@ -180,19 +180,9 @@ public class GruppeService {
 	}
 	
 	public Aufgabe zufallsaufgabeAusGruppenFachgebietErstellen(int gruppe){
-		List<Aufgabe> aufgaben= aufgabenservice.listAllAufgabe();
-		List<Aufgabe>aufgabenImFachgebiet=new ArrayList<Aufgabe>();
-		String gruppeFachrichtungName=this.getGruppe(gruppe).getFachrichtung().getName();
 		
-		for (Aufgabe a: aufgaben){
-			if(a.getFachrichtung().getName().equals(gruppeFachrichtungName)){
-				aufgabenImFachgebiet.add(a);
-				
-			}
-		}
+		Aufgabe aufgabe=aufgabenservice.aufgabeAusFachrichtungErstellen(this.getGruppe(gruppe).getFachrichtung().getFachrichtung_id());
 		
-		int zufallszahl = (int) ((Math.random()*aufgabenImFachgebiet.size()));
-		Aufgabe aufgabe=aufgabenImFachgebiet.get(zufallszahl);
 		return aufgabe;
 		
 	}

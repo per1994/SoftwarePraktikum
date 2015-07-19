@@ -12,9 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.plp.benutzer.Benutzer;
+import org.plp.gruppenfunktionen.Fachrichtung;
 
 @Entity
 @Table(name = "TEILAUFGABE")
@@ -28,11 +32,22 @@ public class Teilaufgabe {
 	@Column(name = "frage")
 	private String frage;
 	
+	@Column(name="themengebiet")
+	private String themengebiet;
+	
 	@Column(name="bearbeitet")
 	private boolean bearbeitet;
 	
 	@Column(name="richtig")
 	private boolean richtig;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@JoinColumn(name = "fachrichtung_id")
+	private Fachrichtung fachrichtung;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "benutzer_id")
+	private Benutzer aufgabenAutor;
 	
 	
 	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
@@ -49,9 +64,8 @@ public class Teilaufgabe {
 //	private Set<Antwortmöglichkeit> antwortMöglichkeiten;
 
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="aufgabe_id")
-	private Aufgabe aufgabe;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilAufgaben")
+	private Set<Aufgabe>aufgaben;
 	
 	
 	public  void teilaufgabeKorrigieren(){
@@ -91,13 +105,7 @@ public class Teilaufgabe {
 		this.teilaufgabe_id = teilaufgabe_id;
 	}
 
-	public Aufgabe getAufgabe() {
-		return aufgabe;
-	}
-
-	public void setAufgabe(Aufgabe aufgabe) {
-		this.aufgabe = aufgabe;
-	}
+	
 
 	public boolean isBearbeitet() {
 		return bearbeitet;
@@ -113,6 +121,76 @@ public class Teilaufgabe {
 
 	public void setRichtig(boolean richtig) {
 		this.richtig = richtig;
+	}
+
+
+	public String getThemengebiet() {
+		return themengebiet;
+	}
+
+
+	public void setThemengebiet(String themengebiet) {
+		this.themengebiet = themengebiet;
+	}
+
+
+	public Set<String> getAntwortmöglichkeiten() {
+		return antwortmöglichkeiten;
+	}
+
+
+	public void setAntwortmöglichkeiten(Set<String> antwortmöglichkeiten) {
+		this.antwortmöglichkeiten = antwortmöglichkeiten;
+	}
+
+
+	public String getLösung() {
+		return lösung;
+	}
+
+
+	public void setLösung(String lösung) {
+		this.lösung = lösung;
+	}
+
+
+	public String getGewählteLösung() {
+		return gewählteLösung;
+	}
+
+
+	public void setGewählteLösung(String gewählteLösung) {
+		this.gewählteLösung = gewählteLösung;
+	}
+
+
+	public Set<Aufgabe> getAufgaben() {
+		return aufgaben;
+	}
+
+
+	public void setAufgaben(Set<Aufgabe> aufgaben) {
+		this.aufgaben = aufgaben;
+	}
+
+
+	public Fachrichtung getFachrichtung() {
+		return fachrichtung;
+	}
+
+
+	public void setFachrichtung(Fachrichtung fachrichtung) {
+		this.fachrichtung = fachrichtung;
+	}
+
+
+	public Benutzer getAufgabenAutor() {
+		return aufgabenAutor;
+	}
+
+
+	public void setAufgabenAutor(Benutzer aufgabenAutor) {
+		this.aufgabenAutor = aufgabenAutor;
 	}
 
 }
