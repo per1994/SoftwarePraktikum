@@ -238,6 +238,8 @@ public class BenutzerService {
 	public void registrieren(String vorname, String nachname,
 			String studiengang, String tag, String monat, String jahr,
 			String passwort, String geschlecht) {
+		
+		
 		Pinnwand pinnwand = new Pinnwand();
 		pinnwandService.addNewPinnwand(pinnwand);
 		Benutzer benutzer = new Benutzer();

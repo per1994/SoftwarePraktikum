@@ -20,7 +20,7 @@ import org.plp.gamification.Teilaufgabe;
 public class Fachrichtung {
 
 	@Id
-	@Column(name = "fachrichtung_id" ,nullable = false, unique = true)
+	@Column(name = "fachrichtung_id", nullable = false, unique = true)
 	@GeneratedValue
 	private int fachrichtung_id;
 
@@ -29,16 +29,16 @@ public class Fachrichtung {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
 	private Set<Aufgabe> aufgaben;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
 	private Set<Teilaufgabe> teilaufgaben;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "fachrichtung")
-	private Set<Gruppe>gruppen;
-	
-	public Fachrichtung(){
-		aufgaben= new HashSet<Aufgabe>();
-		gruppen= new HashSet<Gruppe>();
+	private Set<Gruppe> gruppen;
+
+	public Fachrichtung() {
+		aufgaben = new HashSet<Aufgabe>();
+		gruppen = new HashSet<Gruppe>();
 	}
 
 	public String getName() {

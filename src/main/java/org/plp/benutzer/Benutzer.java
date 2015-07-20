@@ -104,8 +104,9 @@ public class Benutzer {
 	@Column(name = "geschlecht")
 	private char geschlecht;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Column(name = "studiengang")
-	private String studiengang;
+	private Studiengang studiengang;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "badge_id")
@@ -391,11 +392,11 @@ public class Benutzer {
 		this.freunde = freunde;
 	}
 
-	public String getStudiengang() {
+	public Studiengang getStudiengang() {
 		return studiengang;
 	}
 
-	public void setStudiengang(String studiengang) {
+	public void setStudiengang(Studiengang studiengang) {
 		this.studiengang = studiengang;
 	}
 
