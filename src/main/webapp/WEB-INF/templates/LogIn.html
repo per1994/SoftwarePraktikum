@@ -109,9 +109,9 @@
 										placeholder="Benutzername" class="form-control" />
 								</div>
 								<div class="form-group">
-									<select th:field="*{studiengang.name}">
+									<select name = th:field="*{name}">
 										<option th:each="studiengang: ${studiengänge}" th:value="${studiengang.name}"
-											th:text="#{${'studiengang.name' + type}}">Wireframe</option>
+											th:text="#{${studiengang.name }}">Wireframe</option>
 									</select>
 								</div>
 								<div class="row">
@@ -126,7 +126,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<input type="password" placeholder="Passwort"
+									<input th:field="*{benutzer.passwort}" type="password" placeholder="Passwort"
 										class="form-control" />
 								</div>
 								<div>

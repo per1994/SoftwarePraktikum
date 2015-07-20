@@ -3,7 +3,9 @@ package org.hohenheim;
 import java.util.List;
 
 import org.plp.benutzer.Benutzer;
+import org.plp.benutzer.Studiengang;
 import org.plp.dao.BenutzerService;
+import org.plp.dao.StudiengangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +25,27 @@ public class MasterController {
 	@Autowired
 	BenutzerService benutzerservice;
 	
+	@Autowired
+	StudiengangService studiengangservice;
+	
 	
 	
 	@RequestMapping(value="/")
 	public String begin (Model model){
 		
+//		Studiengang s= new Studiengang();
+//		s.setName("Wirtschaftsinformatik");
+//		studiengangservice.addNewStudiengang(s);
+//		
+//		Studiengang s1= new Studiengang();
+//		s1.setName("Informatik");
+//		studiengangservice.addNewStudiengang(s1);
+		
 		model.addAttribute("benutzer", new Benutzer());
 		model.addAttribute("message", "Willkommen bei PLP, deiner Social-Learning-Platform");
+		
+		List<Studiengang> studiengänge=studiengangservice.listAllStudiengang();
+		model.addAttribute("studiengänge", studiengänge);
 		
 		return "LogIn";
 		
@@ -39,12 +55,12 @@ public class MasterController {
 		
 	}
 	
-	@RequestMapping(value="/registrieren", method=RequestMethod.POST)
-	public String registrieren(@ModelAttribute Benutzer benutzer, Model model){
-		
-		
-		
-	}
+//	@RequestMapping(value="/registrieren", method=RequestMethod.POST)
+//	public String registrieren(@ModelAttribute Benutzer benutzer, Model model){
+//		
+//		
+//		
+//	}
 	
 	
 	

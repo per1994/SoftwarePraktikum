@@ -105,7 +105,7 @@ public class Benutzer {
 	private char geschlecht;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "studiengang")
+	@JoinColumn(name = "studiengang_id")
 	private Studiengang studiengang;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
