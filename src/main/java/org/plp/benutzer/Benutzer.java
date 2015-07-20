@@ -58,9 +58,6 @@ public class Benutzer {
 	@Column(name = "passwort")
 	private String passwort;
 
-	@Column(name = "email")
-	private String email;
-
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "mitgliederListe")
 	private Set<Gruppe> gruppenListe;
 
@@ -102,7 +99,7 @@ public class Benutzer {
 	private Pinnwand pinnwand;
 
 	@Column(name = "gebDatum")
-	private Date gebDatum;
+	private String gebDatum;
 
 	@Column(name = "geschlecht")
 	private char geschlecht;
@@ -172,14 +169,6 @@ public class Benutzer {
 	public void HinzufügenZuModel(Model model) {
 		model.addAttribute("userName", this.getVorname());
 		model.addAttribute("userPassword", passwort);
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Set<Gruppe> getGruppenListe() {
@@ -282,11 +271,11 @@ public class Benutzer {
 		this.pinnwand = pinnwand;
 	}
 
-	public Date getGebDatum() {
+	public String getGebDatum() {
 		return gebDatum;
 	}
 
-	public void setGebDatum(Date gebDatum) {
+	public void setGebDatum(String gebDatum) {
 		this.gebDatum = gebDatum;
 	}
 

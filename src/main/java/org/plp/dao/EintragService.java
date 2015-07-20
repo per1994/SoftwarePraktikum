@@ -1,10 +1,12 @@
 package org.plp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.plp.benutzer.Eintrag;
+import org.plp.benutzer.Kommentar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class EintragService {
 
 	@Autowired
 	private EintragDAO eintragDAO;
+
+	@Autowired
+	private KommentarService kommentarService;
 
 	@Transactional
 	public void addNewEintrag(Eintrag b) {
@@ -44,5 +49,27 @@ public class EintragService {
 	@Transactional
 	public boolean vorhanden(int eintrag_id) {
 		return eintragDAO.vorhanden(eintrag_id);
+	}
+
+	public void kommentareSortieren(int einrag) {
+		ArrayList<Kommentar> hilfsListe = new ArrayList<Kommentar>();
+
+		for (Kommentar kommentar : kommentarService.listAllKommentar()) {
+			if (kommentar.getEintrag().getEintrag_id() == this.getEintrag(
+					einrag).getEintrag_id()) {
+				hilfsListe.add(kommentar);
+			}
+		}
+		Kommentar temp;
+		for (int i = 1; i < hilfsListe.size(); i++) {
+			for (int j = 0; j < hilfsListe.size() - i; j++) {
+				if (hilfsListe.get(j).getKommentar_id() < hilfsListe.get(j + 1)
+						.getKommentar_id()) {
+					temp = hilfsListe.get(j);
+					hilfsListe.set(i, hilfsListe.get(j + 1));
+					hilfsListe.set(j + 1, temp);
+				}
+			}
+		}
 	}
 }

@@ -10,6 +10,7 @@ import org.plp.benutzer.Benutzer;
 import org.plp.benutzer.Eintrag;
 import org.plp.benutzer.Kommentar;
 import org.plp.benutzer.Mediathek;
+import org.plp.benutzer.Pinnwand;
 import org.plp.grundfunktionen.Nachricht;
 import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.plp.gruppenfunktionen.Fachrichtung;
@@ -50,14 +51,13 @@ public class BenutzerService {
 	@Autowired
 	private BadgeService badgeService;
 
-	@Transactional
-	public void addNewBenutzer(String benutzerName, String vorname,
-			String nachname) {
+	@Autowired
+	private NachrichtService nachrichtService;
 
-		Benutzer b = new Benutzer(benutzerName);
-		b.setVorname(vorname);
-		b.setNachname(nachname);
-		benutzerDAO.add(b);
+	@Transactional
+	public void addNewBenutzer(Benutzer benutzer) {
+
+		benutzerDAO.add(benutzer);
 
 	}
 
@@ -94,17 +94,28 @@ public class BenutzerService {
 	}
 
 	@Transactional
-	public void frendschaftsAnfrageAnnehmen(Nachricht freundschaftsanfrage) {
-		this.getBenutzer(freundschaftsanfrage.getAnhang()).getFreundesListe()
-				.add(this.getBenutzer(freundschaftsanfrage.getEmpfänger()));
-		this.getBenutzer(freundschaftsanfrage.getEmpfänger())
+	public void frendschaftsAnfrageAnnehmen(int freundschaftsanfrageNachricht) {
+		this.getBenutzer(
+				nachrichtService.getNachricht(freundschaftsanfrageNachricht)
+						.getAnhang())
 				.getFreundesListe()
-				.add(this.getBenutzer(freundschaftsanfrage.getAnhang()));
+				.add(this.getBenutzer(nachrichtService.getNachricht(
+						freundschaftsanfrageNachricht).getEmpfänger()));
+		this.getBenutzer(
+				nachrichtService.getNachricht(freundschaftsanfrageNachricht)
+						.getEmpfänger())
+				.getFreundesListe()
+				.add(this.getBenutzer(nachrichtService.getNachricht(
+						freundschaftsanfrageNachricht).getAnhang()));
 		nachrichtengenerator.freundschaftsanfrageAngenommenErstllen(
-				freundschaftsanfrage.getEmpfänger(),
-				freundschaftsanfrage.getSender(),
-				freundschaftsanfrage.getEmpfänger(), false, true);
-		freundschaftsanfrage.setBearbeitet(true);
+				nachrichtService.getNachricht(freundschaftsanfrageNachricht)
+						.getEmpfänger(),
+				nachrichtService.getNachricht(freundschaftsanfrageNachricht)
+						.getSender(),
+				nachrichtService.getNachricht(freundschaftsanfrageNachricht)
+						.getEmpfänger(), false, true);
+		nachrichtService.getNachricht(freundschaftsanfrageNachricht)
+				.setBearbeitet(true);
 
 	}
 
@@ -135,8 +146,16 @@ public class BenutzerService {
 	}
 
 	@Transactional
-	public void gruppeErstellen(String gruppenName, int fachrichtung_id,
+	public void gruppeErstellen(String gruppenName, String fachrichtungName,
 			int ersteller) {
+		int fachrichtung_id = 0;
+		for (Fachrichtung fachrichtung : fachrichtungService
+				.listAllFachrichtung()) {
+			if (fachrichtung.getName().equals(fachrichtungName)) {
+				fachrichtung_id = fachrichtung.getFachrichtung_id();
+			}
+		}
+
 		Mediathek mediathek = new Mediathek();
 		mediathekService.addNewMediathek(mediathek);
 		Gruppe gruppe = new Gruppe();
@@ -167,6 +186,7 @@ public class BenutzerService {
 					gruppenEinladung.getAnhang(), false, false);
 		}
 
+		gruppenEinladung.setBearbeitet(true);
 	}
 
 	@Transactional
@@ -181,22 +201,63 @@ public class BenutzerService {
 	@Transactional
 	public void aufBadgeÜberprüfen(int benutzer) {
 
-		List<Badge> badgeListe = badgeService.listAllBadge();
-		List benutzerListe = this.listAllBenutzer();
+		ArrayList<Badge> hilfsListe = new ArrayList<Badge>();
+		badgeService.listAllBadge();
+
+		for (Badge badge : badgeService.listAllBadge()) {
+			hilfsListe.add(badge);
+		}
 
 		Badge temp;
-		for (int i = 1; i < badgeListe.size(); i++) {
-			for (int j = 0; j < badgeListe.size() - i; j++) {
-				if (badgeListe.get(j).getBenötigtePunkte() > badgeListe.get(
+		for (int i = 1; i < hilfsListe.size(); i++) {
+			for (int j = 0; j < hilfsListe.size() - i; j++) {
+				if (hilfsListe.get(j).getBenötigtePunkte() > hilfsListe.get(
 						j + 1).getBenötigtePunkte()) {
-					temp = badgeListe.get(j);
-					badgeListe.set(i, badgeListe.get(j + 1));
-					badgeListe.set(j + 1, temp);
-
+					temp = hilfsListe.get(j);
+					hilfsListe.set(i, hilfsListe.get(j + 1));
+					hilfsListe.set(j + 1, temp);
 				}
 
 			}
 		}
-
+		int zähler = 0;
+		while ((hilfsListe.get(zähler).getBenötigtePunkte() < this.getBenutzer(
+				benutzer).getPunktzahl())
+				|| (hilfsListe.get(hilfsListe.size() - 1).getBenötigtePunkte() < this
+						.getBenutzer(benutzer).getPunktzahl())) {
+			zähler = zähler + 1;
+		}
+		if ((!hilfsListe.get(zähler).equals(
+				this.getBenutzer(benutzer).getBadge()))
+				&& (!hilfsListe.get(hilfsListe.size() - 1).equals(
+						this.getBenutzer(benutzer).getBadge())))
+			this.getBenutzer(benutzer).setBadge(hilfsListe.get(zähler));
 	}
+
+	@Transactional
+	public void registrieren(String vorname, String nachname,
+			String studiengang, String tag, String monat, String jahr,
+			String passwort, String geschlecht) {
+		Pinnwand pinnwand = new Pinnwand();
+		pinnwandService.addNewPinnwand(pinnwand);
+		Benutzer benutzer = new Benutzer();
+		benutzer.setVorname(vorname);
+		benutzer.setNachname(nachname);
+		benutzer.setStudiengang(studiengang);
+		benutzer.setGebDatum(tag + "." + monat + "." + jahr);
+		benutzer.setPasswort(passwort);
+		if (geschlecht.equals("männlich")) {
+			benutzer.setGeschlecht('m');
+		} else {
+			benutzer.setGeschlecht('w');
+		}
+		pinnwand.setBesitzer(benutzer);
+		this.addNewBenutzer(benutzer);
+	}
+
+	@Transactional
+	public void nachrichtGelesen(int nachricht) {
+		nachrichtService.getNachricht(nachricht).setBearbeitet(true);
+	}
+
 }
