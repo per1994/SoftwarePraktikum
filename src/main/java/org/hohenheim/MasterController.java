@@ -29,6 +29,7 @@ public class MasterController {
 	public String begin (Model model){
 		
 		model.addAttribute("benutzer", new Benutzer());
+		model.addAttribute("message", "Willkommen bei PLP, deiner Social-Learning-Platform");
 		
 		return "LogIn";
 		
@@ -37,6 +38,15 @@ public class MasterController {
 		
 		
 	}
+	
+	@RequestMapping(value="/registrieren", method=RequestMethod.POST)
+	public String registrieren(@ModelAttribute Benutzer benutzer, Model model){
+		
+		
+		
+	}
+	
+	
 	
 	@RequestMapping(value="/anmelden", method=RequestMethod.POST)
 	public String anmelden(@ModelAttribute Benutzer benutzer, Model model){
@@ -62,6 +72,7 @@ public class MasterController {
 			if(benutzer.getPasswort().equals(benutzerservice.getBenutzer(benutzerid).getPasswort())){
 				
 				aktiverBenutzer=benutzerservice.getBenutzer(benutzerid);
+				model.addAttribute("aktiverBenutzer", aktiverBenutzer);
 				return "home";
 				
 			}else{
