@@ -231,6 +231,89 @@ img {
 	}
 }
 
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+/* Content */
+.content {
+	padding-top: 30px;
+}
+
+/* Testimonials */
+.testimonials blockquote {
+	background: #f8f8f8 none repeat scroll 0 0;
+	border: medium none;
+	color: #666;
+	display: block;
+	font-size: 14px;
+	line-height: 20px;
+	padding: 15px;
+	position: relative;
+}
+
+.testimonials blockquote::before {
+	width: 0;
+	height: 0;
+	right: 0;
+	bottom: 0;
+	content: " ";
+	display: block;
+	position: absolute;
+	border-bottom: 20px solid #fff;
+	border-right: 0 solid transparent;
+	border-left: 15px solid transparent;
+	border-left-style: inset; /*FF fixes*/
+	border-bottom-style: inset; /*FF fixes*/
+}
+
+.testimonials blockquote::after {
+	width: 0;
+	height: 0;
+	right: 0;
+	bottom: 0;
+	content: " ";
+	display: block;
+	position: absolute;
+	border-style: solid;
+	border-width: 20px 20px 0 0;
+	border-color: transparent transparent transparent;
+}
+
+.testimonials .carousel-info img {
+	border: 1px solid #f5f5f5;
+	border-radius: 150px !important;
+	height: 75px;
+	padding: 3px;
+	width: 75px;
+}
+
+.testimonials .carousel-info {
+	overflow: hidden;
+}
+
+.testimonials .carousel-info img {
+	margin-right: 15px;
+}
+
+.testimonials .carousel-info span {
+	display: block;
+}
+
+.testimonials span.testimonials-name {
+	color: black;
+	font-size: 16px;
+	font-weight: 300;
+	margin: 23px 0 7px;
+}
+
+.testimonials span.testimonials-post {
+	color: #656565;
+	font-size: 12px;
+}
+
 .LogIn-Position {
 	margin: 0px 500px 0px -500px;
 }
@@ -264,6 +347,10 @@ img {
 	height: 50px;
 }
 
+.up-bar-color {
+	background-color: #f5f5f5;
+}
+
 .name-color {
 	margin-left: 30px;
 	color: #58ACFA;
@@ -276,7 +363,6 @@ img {
 .img-avatar {
 	border-radius: 50%;
 	width: 150px;
-	height: 150px;
 }
 
 .profile-left {
@@ -287,10 +373,6 @@ img {
 .profile-right {
 	text-align: right;
 	margin-right: 30px;
-}
-
-.profile-display {
-	display: inline-block;
 }
 
 .upbar-position {
@@ -304,7 +386,11 @@ img {
 
 .table-position1 {
 	width: 100%;
-	height: 500px;
+	margin-top: 70px;
+}
+
+.table-position2 {
+	width: 100%;
 	margin-top: 70px;
 }
 
@@ -325,4 +411,397 @@ img {
 .-new-container {
 	float: right;
 	margin-right: 30px;
+}
+
+.message-size {
+	width: 200px;
+	height: 500px;
+	border: 1px solid #999999;
+	padding: 5px;
+	margin-top: 50px;
+}
+
+#plp-color {
+	color: #58ACFA;
+}
+
+.container-color {
+	background-color: #f5f5f5;
+}
+
+.new-navbar-brand {
+	float: left;
+	height: 50px;
+	padding: 15px 15px;
+	font-size: 22px;
+	line-height: 20px;
+}
+
+#next-bound {
+	display: inline-block;
+}
+
+.new-left {
+	text-align: left;
+}
+
+.new-center {
+	text-align: center;
+}
+
+.new-right {
+	text-align: right;
+}
+
+.table-post {
+	position: relative;
+}
+
+.centerTable {
+	margin: 0px auto;
+}
+
+.jumbotron-flat {
+	background-color: solid #4DB8FFF;
+	height: 100%;
+	border: 1px solid #4DB8FF;
+	background: white;
+	width: 100%;
+	text-align: center;
+	overflow: auto;
+}
+
+.block-profile {
+	display: block;
+}
+
+.setting-position1 {
+	margin: 0px 250px 0px -250px;
+	position: fixed;
+}
+
+.setting-position2 {
+	position: relative;
+	margin: 0px -300px 0px 300px;
+}
+
+.table-width {
+	width: 200px;
+	border: none;
+}
+
+.profile-display {
+	display: inline-block;
+}
+
+.profile-width {
+	width: 600px;
+}
+
+.profile-position {
+	margin-left: -65.625em;
+	display: inline-block;
+}
+
+.pinnwand-position {
+	margin-top: 38px;
+}
+
+.comment-size {
+	width: 400px;
+	height: 600px;
+}
+
+.profileset-position {
+	margin-top: -30px;
+}
+
+.setting-position3 {
+	margin: -30px 200px 0px -200px;
+	width: 800px;
+}
+
+.setting-position4 {
+	margin: -30px -700px 0px 500px;
+	width: 800px;
+}
+
+.new {
+	overflow: hidden;
+}
+
+.group-panel-size {
+	position: fixed;
+	margin-left: -220px;
+	width: 670px;
+	height: 640px;
+	background-color: #f5f5f5;
+	margin-top: 150px;
+}
+
+.setting-panel {
+	position: relative;
+	margin-top: 90px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+}
+
+.table a {
+	display: block;
+	text-decoration: none;
+}
+
+.new-progress {
+	display: inline-block;
+	position: relative;
+	width: 600px;
+	height: 20px;
+	margin-top: 0px;
+	margin-left: 25px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.bar-position {
+	margin-top: 10px;
+	margin-left: 1200px;
+	margin-right: -600px;
+}
+
+.bar-top {
+	margin-top: 20px;
+}
+
+.new-innner-bg {
+	padding: 0px 0 170px 0;
+}
+
+.group-pinn-position {
+	position: relative;
+	margin: 150px -420px 0px 420px;
+}
+
+.hor-body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+.input-size {
+	width: 463px;
+}
+
+.button-pos {
+	position: relative;
+	margin-left: 17px;
+	margin-top: 0px;
+	border-collapse: collapse;
+}
+
+#delete-but {
+	position: relative;
+	margin-left: 25px;
+	margin-top: 150px;
+}
+
+.pinnwand-space {
+	margin-top: 20px;
+}
+
+.comment-space {
+	margin-top: 10px;
+}
+
+.fort-pos {
+	position: relative;
+	margin-top: 20px;
+	margin-left: 25px;
+}
+
+.name-pos {
+	position: relative;
+	margin-left: 25px;
+}
+
+.challenge-bar {
+	height: 500px;
+	min-height: 20px;
+	padding: 19px;
+	margin-top: 90px;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.challenge-but {
+	positon: relative;
+	margin-top: 120px;
+}
+
+.challenge-lb1 {
+	position: relative;
+	margin-left: -30px;
+}
+
+.challenge-lb2 {
+	position: relative;
+	margin-right: -30px;
+}
+
+.challenge-txt {
+	position: relative;
+	margin-top: 50px;
+}
+
+.subject-pos {
+	position: relative;
+	margin-top: 15px;
+	font-size: 25px;
+	font-weight: lighter;
+	color: #000000;
+	margin-left: 25px;
+}
+
+.new-group {
+	text-align: left;
+}
+
+.form-pos {
+	margin: 0px -290px 0px 290px;
+}
+
+.container-quiz {
+	padding-right: 600px;
+	padding-left: 600px;
+	margin-top: 100px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.sub-pos {
+	margin-top: 30px;
+}
+
+.comment-size {
+	margin-left: 100px;
+}
+
+.img-size {
+	width: 50px;
+}
+
+.container-com {
+	margin-top: 10px;
+	margin-left: 173px;
+	margin-right: -410px;
+}
+
+.challenge-bar1 {
+	height: 420px;
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.right-pos {
+	margin-top: 10px;
+}
+
+.title-pos {
+	margin-bottom: 20px;
+}
+
+.carousel-control1-right {
+	top: 120px;
+	right: 20px;
+}
+
+.carousel-control1-left {
+	top: 120px;
+	left: 20px;
+}
+
+.ert-pos {
+	right: 10px;
+}
+
+.container-ert {
+	padding-right: 650px;
+	padding-left: 650px;
+	margin-top: 100px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.challenge-bar2 {
+	height: 250px;
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.container-mit {
+	padding-right: 800px;
+	padding-left: 800px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.challenge-bar3 {
+	height: 670px;
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.container-gest {
+	padding-right: 300px;
+	padding-left: 300px;
+	margin-top: 85px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.container-mitliste {
+	padding-right: 800px;
+	padding-left: 800px;
+	margin-top: 85px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.challenge-bar4 {
+	height: 700px;
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
 }

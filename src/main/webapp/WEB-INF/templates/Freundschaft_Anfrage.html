@@ -57,7 +57,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Profil <span class="badge">2</span></a></li>
+				<li><a href="#">Profil <span class="badge">2</span></a></li>
 					<li><a href="Freundesliste">Freunde</a></li>
 					<li><a href="Gruppenliste">Gruppen</a></li>
 					<li><a href="Benutzerliste">Benutzerliste</a></li>
@@ -75,83 +75,26 @@
 		<!-- /.container-fluid -->
 	</nav>
 
+
 	<div class="top-content">
-		<div class="inner-bg">
-			<div class="container">
-				<div class="setting-position1">
-					<div class="col-sm-6 col-sm-offset-3 form-box">
-						<div class="profile-bar profile-display">
-							<div class="row-fluid">
-								<div class="span2">
-									<img
-										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-										class="img-avatar" />
-									<h3>Patrick Schmelzle</h3>
-									<h4 th:text="${benutzer.benutzerName}"></h4>
-								</div>
-								<div class=" col-md-9 col-lg-9">
-									<table class="table table-width">
-										<tbody>
-											<tr>
-												<td class="new-left"><strong>Studiengang:</strong></td>
-												<td class="new-right"><p>Wirtschaftsinformatik</p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Punkte:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Badges:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Achievements:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="setting-position2 pinnwand-position">
-					<form>
-						<input type="text" placeholder="Nachricht" class="input-size"
-							maxlength="500" />
-						<button class='btn btn-primary submit-button' type='button'>Posten</button>
+		<div class="container">
+			<div class="col-sm-6 col-sm-offset-3 form-box">
+				<div class="challenge-bar">
+					<h2 class="challenge-txt ">KingLeo hat dir eine Freudschaftsanfrage geschickt</h2>
+					<form class="challenge-but">
+						<label class="btn btn-lg btn-success">Annehmen</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label class="btn btn-lg btn-danger">Ablehnen</label>
 					</form>
-					<div class="row pinnwand-space">
-						<div class="col-md-6 col-md-offset-3">
-							<div class="testimonials">
-								<div class="active item">
-									<div class="carousel-info">
-										<img alt=""
-											src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-											class="pull-left" />
-										<div class="pull-left">
-											<span class="testimonials-name">BenjoMahenjo</span>
-										</div>
-									</div>
-									<blockquote class="comment-space">
-										<p>Hey, dein Profil gef&auml;llt mir. Find ich super
-											gemacht.</p>
-									</blockquote>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 
-
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resource/assets/bootstrap/js/bootstrap.js"></script>
 	<script src="resource/assets/js/jquery.backstretch.min.js"></script>
 	<script src="resource/assets/js/scripts.js"></script>
 

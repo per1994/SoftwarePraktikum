@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PLP-LogIn/Register</title>
+<title>PLP</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -50,7 +50,8 @@
 						<h1>
 							<strong>Play, Learn, Pass</strong>
 						</h1>
-						<h3 id="h3-color-1stpage" th:text=" ${message.inhalt} + '!'"></h3>
+						<h3 id="h3-color-1stpage">Willkommen bei PLP, deiner
+							SocialLearningPlattform</h3>
 					</div>
 				</div>
 				<div class="LogIn-Position">
@@ -67,16 +68,15 @@
 							<form role="form" action="#" th:action="@{/home}"
 								th:object="${benutzer}" method="post" class="login-form">
 								<div class="form-group">
-									<label class="sr-only" for="form-username">Benutzername</label>
+
 									<input th:field="*{benutzerName}" type="text"
-										name="form-username" placeholder="Benutzername"
-										class="form-username form-control" id="form-username" />
+										 placeholder="Benutzername"
+										class="form-control" id="form-username" />
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="form-password">Passwort</label> <input
-										th:field="*{passwort}" type="password" name="form-password"
-										placeholder="Passwort" class="form-password form-control"
-										id="form-password" />
+									<input th:field="*{passwort}" type="password"
+										 placeholder="Passwort"
+										class="form-control"  />
 								</div>
 								<button name="action" type="submit" value="Einloggen"
 									class="btn">Anmelden</button>
@@ -93,38 +93,53 @@
 						</div>
 						<div class="form-bottom">
 							<form role="form" action="" method="get" class="login-form">
-								<div class="form-group">
-									<label class="sr-only" for="form-username">Benutzername</label>
-									<input type="text" name="form-username"
-										placeholder="Benutzername" class="form-username form-control"
-										id="form-username" />
+								<div class="row">
+									<div class="form-group col-xs-6">
+										<input type="text"  placeholder="Vorname"
+											class="form-username form-control" id="form-username" />
+									</div>
+									<div class="form-group col-xs-6">
+										<input type="text"  placeholder="Nachname"
+											class="form-control"  />
+									</div>
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="form-password">Vorname</label> <input
-										type="password" name="form-password" placeholder="Vorname"
-										class="form-password form-control" id="form-password" />
+									<input type="text" 
+										placeholder="Benutzername" class="form-control"
+										 />
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="form-password">Nachname</label> <input
-										type="password" name="form-password" placeholder="Nachname"
-										class="form-password form-control" id="form-password" />
+									<select class="form-control"   style="height:50px;">
+										<option>Studiengang</option>
+										<option>Wirtschaftsinfromatik</option>
+										<option>Wirtschaftswissenschaften</option>
+										<option>Informatik</option>
+										<option>Maschinenbau</option>
+									</select>
+								</div>
+								<div class="row">
+									<div class="form-group col-xs-4">
+										<input type="text" class="form-control"
+											placeholder="Tag"  />
+									</div>
+									<div class="form-group col-xs-4">
+										<input type="text" class="form-control"
+											placeholder="Monat"  />
+									</div>
+									<div class="form-group col-xs-4">
+										<input type="text" class="form-control"
+											placeholder="Jahr"  />
+									</div>
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="form-password">Studiengang</label>
-									<input type="password" name="form-password"
-										placeholder="Studiengang" class="form-password form-control"
-										id="form-password" />
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="form-password">Passwort</label> <input
-										type="password" name="form-password" placeholder="Passwort"
-										class="form-password form-control" id="form-password" />
+									<input type="password" 
+										placeholder="Passwort" class="form-control"
+										 />
 								</div>
 								<div>
 									<label id="sex-color" class="radio-inline"><input
-										type="radio" name="sex" />m&auml;nnlich</label> <label
-										id="sex-color" class="radio-inline"><input
-										type="radio" name="sex" />weiblich</label>
+										type="radio" name="sex" />m&auml;nnlich</label> <label id="sex-color"
+										class="radio-inline"><input type="radio" name="sex" />weiblich</label>
 								</div>
 								<button name="action" type="submit" value="Registrieren"
 									class="btn">Registrieren</button>

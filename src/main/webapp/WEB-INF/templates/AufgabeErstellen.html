@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Profil</title>
+<title>Gruppenliste</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -17,6 +17,8 @@
 	href="resource/assets/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="resource/assets/css/form-elements.css" />
 <link rel="stylesheet" href="resource/assets/css/style.css" />
+<link rel="stylesheet" href="resource/assets/css/quiz.css" />
+<link rel="stylesheet" href="resource/assets/css/ertcarousel.css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,7 +41,7 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-default up-bar-color navbar-fixed-top">
+	<nav class="navbar navbar-default up-bar-color navbar-static-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -75,85 +77,65 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="top-content">
-		<div class="inner-bg">
-			<div class="container">
-				<div class="setting-position1">
-					<div class="col-sm-6 col-sm-offset-3 form-box">
-						<div class="profile-bar profile-display">
-							<div class="row-fluid">
-								<div class="span2">
-									<img
-										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-										class="img-avatar" />
-									<h3>Patrick Schmelzle</h3>
-									<h4 th:text="${benutzer.benutzerName}"></h4>
-								</div>
-								<div class=" col-md-9 col-lg-9">
-									<table class="table table-width">
-										<tbody>
-											<tr>
-												<td class="new-left"><strong>Studiengang:</strong></td>
-												<td class="new-right"><p>Wirtschaftsinformatik</p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Punkte:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Badges:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Achievements:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-										</tbody>
-									</table>
+	<div class="container-quiz">
+		<form>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="top-content">
+						<div class="challenge-bar1">
+							<h3 class="title-pos">Hier kannst du deine Teilaufgabe
+								erstellen</h3>
+							<div class="row">
+								<div class="form-group">
+									<input type="text" name="form-username"
+										placeholder="Frage" class="form-username form-control"
+										id="form-username" />
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="setting-position2 pinnwand-position">
-					<form>
-						<input type="text" placeholder="Nachricht" class="input-size"
-							maxlength="500" />
-						<button class='btn btn-primary submit-button' type='button'>Posten</button>
-					</form>
-					<div class="row pinnwand-space">
-						<div class="col-md-6 col-md-offset-3">
-							<div class="testimonials">
-								<div class="active item">
-									<div class="carousel-info">
-										<img alt=""
-											src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-											class="pull-left" />
-										<div class="pull-left">
-											<span class="testimonials-name">BenjoMahenjo</span>
-										</div>
-									</div>
-									<blockquote class="comment-space">
-										<p>Hey, dein Profil gef&auml;llt mir. Find ich super
-											gemacht.</p>
-									</blockquote>
+							<div class="row right-pos">
+								<div class="form-group">
+									<input type="text" name="form-username"
+										placeholder="1. Antwort" class="form-username form-control"
+										id="form-username" />
 								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<input type="text" name="form-username"
+										placeholder="2. Antwort" class="form-username form-control"
+										id="form-username" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<input type="text" name="form-username"
+										placeholder="3. Antwort" class="form-username form-control"
+										id="form-username" />
+								</div>
+							</div>
+							<div class="right-pos">
+								<label>Richtige Antwort:</label> <select class="selectpicker">
+									<option value="1">1. Antwort</option>
+									<option value="2">2. Antwort</option>
+									<option value="3">3. Antwort</option>
+								</select>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<label class="btn btn-lg btn-success sub-pos">Erstellen</label>
+		</form>
 	</div>
-
 
 
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="resource/assets/bootstrap/js/bootstrap.js"></script>
 	<script src="resource/assets/js/jquery.backstretch.min.js"></script>
 	<script src="resource/assets/js/scripts.js"></script>
+	<script src="resource/assets/js/aufgabeer.js"></script>
+
 
 	<!--[if lt IE 10]>
             <script src="resource/assets/js/placeholder.js"></script>

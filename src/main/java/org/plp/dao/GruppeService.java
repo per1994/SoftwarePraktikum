@@ -11,6 +11,7 @@ import org.plp.gamification.Aufgabe;
 import org.plp.gamification.Combat;
 import org.plp.gamification.Team;
 import org.plp.gamification.Teamcombat;
+import org.plp.grundfunktionen.Nachricht;
 import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.plp.gruppenfunktionen.Lernziel;
@@ -19,173 +20,163 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GruppeService {
-	
-	
+
 	@Autowired
 	private TeamcombatService teamcombatservice;
-	
+
 	@Autowired
 	private TeamService teamservice;
-	
+
 	@Autowired
 	private LernzielService lernzielservice;
 
 	@Autowired
 	private BenutzerService benutzerservice;
-	
+
 	@Autowired
 	private AufgabeService aufgabenservice;
-	
+
 	@Autowired
 	private CombatService combatservice;
-	
+
 	@Autowired
 	private Nachrichtengenerator nachrichtengenerator;
-	
+
 	@Autowired
 	private GruppeDAO gruppeDAO;
 
-	
 	@Transactional
-	public void combatanfrageErstellen(int sender, int empfänger, int gruppe){
+	public void combatanfrageErstellen(int sender, int empfänger, int gruppe) {
 		Combat c = new Combat();
-		
-		
+
 		c.setAufgabe(this.zufallsaufgabeAusGruppenFachgebietErstellen(gruppe));
-		Benutzer b1= benutzerservice.getBenutzer(sender);
-		Benutzer b2= benutzerservice.getBenutzer(empfänger);
-		
+		Benutzer b1 = benutzerservice.getBenutzer(sender);
+		Benutzer b2 = benutzerservice.getBenutzer(empfänger);
+
 		c.getTeilnehmer().add(b1);
 		c.getTeilnehmer().add(b2);
 		b1.getCombats().add(c);
 		b2.getCombats().add(c);
-		
-		
-		
+
 		combatservice.addNewCombat(c);
-		
-		
-		nachrichtengenerator.combatanfrageErstellen(sender, empfänger, c.getCombat_id(), false, false);
-		
-		
-		
-		
+
+		nachrichtengenerator.combatanfrageErstellen(sender, empfänger,
+				c.getCombat_id(), false, false);
+
 	}
-	
-	
-	
+
 	@Transactional
-	public void benutzerZuGruppeEinladen(int sender, int empfänger, int gruppe){
-		
-		nachrichtengenerator.gruppeneinladungErstellen(sender, empfänger, gruppe, false, false);
-		
-		
+	public void benutzerZuGruppeEinladen(int sender, int empfänger, int gruppe) {
+
+		nachrichtengenerator.gruppeneinladungErstellen(sender, empfänger,
+				gruppe, false, false);
+
 	}
-	
-	
+
 	@Transactional
-	public void mitgliedAusGruppeEntfernen(int sender, int empfänger, int gruppe){
-		Benutzer sender1= benutzerservice.getBenutzer(sender);
-		Benutzer empfänger1= benutzerservice.getBenutzer(empfänger);
-		Gruppe gruppe1= this.getGruppe(gruppe);
-		
-		if(gruppe1.getModeratorenListe().contains(sender1)){
+	public void mitgliedAusGruppeEntfernen(int sender, int empfänger, int gruppe) {
+		Benutzer sender1 = benutzerservice.getBenutzer(sender);
+		Benutzer empfänger1 = benutzerservice.getBenutzer(empfänger);
+		Gruppe gruppe1 = this.getGruppe(gruppe);
+
+		if (gruppe1.getModeratorenListe().contains(sender1)) {
 			gruppe1.getMitgliederListe().remove(empfänger1);
-			empfänger1.getGruppenListe().remove(gruppe1); 
+			empfänger1.getGruppenListe().remove(gruppe1);
 		}
-		
+
 	}
-	
-	
+
 	@Transactional
-	public void lernzielFormulieren(int moderator, int gruppe, String inhalt){
-		Benutzer moderator1= benutzerservice.getBenutzer(moderator);
-		Gruppe gruppe1=this.getGruppe(gruppe);
-		
-		if(gruppe1.getModeratorenListe().contains(moderator1)){
-			Lernziel lernziel= new Lernziel();
+	public void lernzielFormulieren(int moderator, int gruppe, String inhalt) {
+		Benutzer moderator1 = benutzerservice.getBenutzer(moderator);
+		Gruppe gruppe1 = this.getGruppe(gruppe);
+
+		if (gruppe1.getModeratorenListe().contains(moderator1)) {
+			Lernziel lernziel = new Lernziel();
 			lernziel.setInhalt(inhalt);
 			lernziel.setErreicht(false);
-			
+
 			lernzielservice.addNewLernziel(lernziel);
 			gruppe1.getLernziele().add(lernziel);
 			lernziel.setGruppe(gruppe1);
-			
-			
-			
+
 		}
-		
-		
-		
-		
-		
-		
-		
+
 	}
-	
-	
+
 	@Transactional
-	public void teamcombatAnfrageErstellen(int sender, int empfänger){
-		Gruppe herausfordererGruppe= this.getGruppe(sender);
-		Gruppe gegnerGruppe=this.getGruppe(empfänger);
-		
-		Teamcombat c= new Teamcombat();
-		
-		
-		
+	public void teamcombatAnfrageErstellen(int sender, int empfänger) {
+		Gruppe herausfordererGruppe = this.getGruppe(sender);
+		Gruppe gegnerGruppe = this.getGruppe(empfänger);
+
+		Teamcombat c = new Teamcombat();
+
 		// Team 1 befüllen
-		Team herausforderer= new Team();
-		for (int i=0; i<3;i++){
-			Benutzer b=herausfordererGruppe.getMitgliederListe().iterator().next();
-			if(!herausforderer.getTeamMitglieder().contains(b)){
+		Team herausforderer = new Team();
+		for (int i = 0; i < 3; i++) {
+			Benutzer b = herausfordererGruppe.getMitgliederListe().iterator()
+					.next();
+			if (!herausforderer.getTeamMitglieder().contains(b)) {
 				herausforderer.getTeamMitglieder().add(b);
 				b.getTeams().add(herausforderer);
 			}
-			
+
 		}
-		
-		
+
 		// Team 2 befüllen
-		Team gegner= new Team();
-		for (int i=0; i<3;i++){
-			Benutzer b=gegnerGruppe.getMitgliederListe().iterator().next();
-			if(!gegner.getTeamMitglieder().contains(b)){
+		Team gegner = new Team();
+		for (int i = 0; i < 3; i++) {
+			Benutzer b = gegnerGruppe.getMitgliederListe().iterator().next();
+			if (!gegner.getTeamMitglieder().contains(b)) {
 				gegner.getTeamMitglieder().add(b);
 				b.getTeams().add(gegner);
 			}
-			
+
 		}
 		// Teams in DB speichern
 		teamservice.addNewTeam(herausforderer);
 		teamservice.addNewTeam(gegner);
-		
+
 		// Aufgabenliste befüllen
-		while (c.getAufgabeliste().size()<3){
-			Aufgabe a=this.zufallsaufgabeAusGruppenFachgebietErstellen(sender);
-			if(!c.getAufgabeliste().contains(a))
-			c.getAufgabeliste().add(a);
-			
+		while (c.getAufgabeliste().size() < 3) {
+			Aufgabe a = this
+					.zufallsaufgabeAusGruppenFachgebietErstellen(sender);
+			if (!c.getAufgabeliste().contains(a))
+				c.getAufgabeliste().add(a);
+
 		}
-		
+
 		teamcombatservice.addNewTeamcombat(c);
-		
-		for (Benutzer b: gegner.getTeamMitglieder()){
-			nachrichtengenerator.teamcombatanfrageErstellen(sender, b.getBenutzer_id(), c.getTeamcombat_id(), false, false);
-			
+
+		for (Benutzer b : gegner.getTeamMitglieder()) {
+			nachrichtengenerator.teamcombatanfrageErstellen(sender,
+					b.getBenutzer_id(), c.getTeamcombat_id(), false, false);
+
 		}
-		
-		
-		
+
 	}
-	
-	public Aufgabe zufallsaufgabeAusGruppenFachgebietErstellen(int gruppe){
-		
-		Aufgabe aufgabe=aufgabenservice.aufgabeAusFachrichtungErstellen(this.getGruppe(gruppe).getFachrichtung().getFachrichtung_id());
-		
+
+	@Transactional
+	public Aufgabe zufallsaufgabeAusGruppenFachgebietErstellen(int gruppe) {
+
+		Aufgabe aufgabe = aufgabenservice.aufgabeAusFachrichtungErstellen(this
+				.getGruppe(gruppe).getFachrichtung().getFachrichtung_id());
+
 		return aufgabe;
-		
+
 	}
 	
+	
+	@Transactional
+	public void teamcombatAnfrageAngenommenErstellen(Nachricht teamcombatanfrage){
+		
+		
+		
+		
+		nachrichtengenerator.teamCombatAnfrageAngenommenErstellen(teamcombatanfrage.getEmpfänger(), teamcombatanfrage.getSender(), teamcombatanfrage.getAnhang(), false, true);
+		
+	}
+
 	@Transactional
 	public void addNewGruppe(Gruppe b) {
 
