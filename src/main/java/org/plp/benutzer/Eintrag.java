@@ -52,7 +52,13 @@ public class Eintrag {
 	}
 
 	public Set<Kommentar> getKommentare() {
-		return kommentare;
+		if (kommentare == null) {
+			Set<Kommentar> kommentare = new HashSet<Kommentar>();
+			return kommentare;
+		} else {
+
+			return kommentare;
+		}
 	}
 
 	public void setKommentare(Set<Kommentar> kommentare) {

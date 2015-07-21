@@ -35,7 +35,13 @@ public class Pinnwand {
 	}
 
 	public Set<Eintrag> getEintraege() {
-		return eintraege;
+		if(eintraege == null){
+			Set<Eintrag> eintraege = new HashSet<Eintrag>();
+			return eintraege;
+		} else {
+			return eintraege;	
+		}
+		
 	}
 
 	public void setEintraege(Set<Eintrag> einträge) {
