@@ -40,7 +40,7 @@ import org.springframework.ui.Model;
 @Entity
 @Table(name = "BENUTZER")
 public class Benutzer {
-  
+
 	@Id
 	@Column(name = "benutzer_id", nullable = false, unique = true)
 	@GeneratedValue
@@ -345,7 +345,14 @@ public class Benutzer {
 	}
 
 	public Set<Eintrag> getEinträge() {
-		return einträge;
+		if (einträge == null) {
+			Set<Eintrag> eintraege = new HashSet<Eintrag>();
+			return eintraege;
+		} else {
+
+			return einträge;
+		}
+
 	}
 
 	public void setEinträge(Set<Eintrag> einträge) {
