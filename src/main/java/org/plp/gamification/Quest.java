@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.plp.benutzer.Benutzer;
@@ -25,8 +26,8 @@ public class Quest {
 	@GeneratedValue
 	private int quest_id;
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "quests")
-	private Set<Aufgabe> aufgaben;
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "quest")
+	private Aufgabe aufgabe;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "benutzer_id")
@@ -36,15 +37,14 @@ public class Quest {
 	private int bearbeitungsZeit;
 	
 	public Quest(){
-		aufgaben= new HashSet<Aufgabe>();
 	}
 
-	public Set<Aufgabe> getAufgaben() {
-		return aufgaben;
+	public Aufgabe getAufgabe() {
+		return aufgabe;
 	}
 
-	public void setAufgaben(Set<Aufgabe> aufgaben) {
-		this.aufgaben = aufgaben;
+	public void setAufgabe(Aufgabe aufgabe) {
+		this.aufgabe = aufgabe;
 	}
 
 	public Benutzer getQuestAutor() {

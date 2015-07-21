@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -52,15 +53,14 @@ public class Aufgabe {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "aufgabe")
 	private Set<Combat> combats;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "AUFGABE_QUEST", joinColumns = @JoinColumn(name = "aufgabe_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
-	private Set<Quest> quests;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "quest_id")
+	private Quest quest;
 
 	public Aufgabe() {
 		teilAufgaben = new HashSet<Teilaufgabe>();
 		combats = new HashSet<Combat>();
 		teamCombats = new HashSet<Teamcombat>();
-		quests = new HashSet<Quest>();
 	}
 	
 	
@@ -150,12 +150,12 @@ public class Aufgabe {
 		this.combats = combats;
 	}
 
-	public Set<Quest> getQuests() {
-		return quests;
+	public Quest getQuest() {
+		return quest;
 	}
 
-	public void setQuests(Set<Quest> quests) {
-		this.quests = quests;
+	public void setQuest(Quest quest) {
+		this.quest = quest;
 	}
 
 	public void setTeilAufgaben(Set<Teilaufgabe> teilAufgaben) {

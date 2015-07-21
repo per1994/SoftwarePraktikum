@@ -7,6 +7,7 @@ import org.plp.dao.BenutzerService;
 import org.plp.dao.CombatService;
 import org.plp.dao.GruppeService;
 import org.plp.dao.NachrichtService;
+import org.plp.dao.QuestService;
 import org.plp.dao.TeamcombatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,6 +37,9 @@ public class Nachrichtengenerator {
 
 	@Autowired
 	AchievementService achievementservice;
+
+	@Autowired
+	QuestService questservice;
 
 	public Nachricht freundschaftsanfrageErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
@@ -78,8 +82,8 @@ public class Nachrichtengenerator {
 				+ " "
 				+ "will dich zu einem Combat im Fachgebiet"
 				+ " "
-				+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
-						 + " herausfordern");
+				+ combatservice.getCombat(anhang).getAufgabe()
+						.getFachrichtung().getName() + " herausfordern");
 		nachrichtservice.addNewNachricht(combatAnfrage);
 		return combatAnfrage;
 	}
@@ -209,9 +213,9 @@ public class Nachrichtengenerator {
 			}
 			combatErgebnisBenachrichtigung.setInhalt("Dein Combat gegen "
 					+ benutzer.getBenutzerName()
-					+ " Fachgebiet "
-					+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
-							
+					+ " im Fachgebiet "
+					+ combatservice.getCombat(anhang).getAufgabe()
+							.getFachrichtung().getName()
 					+ " hat keinen Sieger hevorgebracht! Dir werden "
 					+ combatservice.getCombat(anhang).getPunkteUnentschieden()
 					+ " gutgeschrieben");
@@ -223,8 +227,9 @@ public class Nachrichtengenerator {
 					+ combatservice.getCombat(anhang).getVerlierer()
 							.getBenutzerName()
 					+ " im Fachgebiet "
-					+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
-							+ " gewonnen! Dir werden "
+					+ combatservice.getCombat(anhang).getAufgabe()
+							.getFachrichtung().getName()
+					+ " gewonnen! Dir werden "
 					+ combatservice.getCombat(anhang).getPunkteGewinner()
 					+ " Punkte gutgeschrieben.");
 		}
@@ -234,11 +239,20 @@ public class Nachrichtengenerator {
 					+ combatservice.getCombat(anhang).getVerlierer()
 							.getBenutzerName()
 					+ " im Fachgebiet "
-					+ combatservice.getCombat(anhang).getAufgabe().getFachrichtung().getName()
-							 + " gewonnen! Dir werden "
+					+ combatservice.getCombat(anhang).getAufgabe()
+							.getFachrichtung().getName()
+					+ " gewonnen! Dir werden "
 					+ combatservice.getCombat(anhang).getPunkteGewinner()
 					+ " Punkte gutgeschrieben.");
 		}
 		return combatErgebnisBenachrichtigung;
+	}
+
+	public void questErgebnisBenachrichtungErstellen(int sender, int empfänger,
+			int anhang, boolean bearbeitet, boolean statisch) {
+
+		Nachricht questErgebnis = new Nachricht(sender, empfänger, anhang,
+				bearbeitet, statisch, 12);
+		questErgebnis.setInhalt("Deine Quest im Fachgebiet");
 	}
 }
