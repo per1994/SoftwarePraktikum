@@ -11,6 +11,7 @@ import org.plp.benutzer.Eintrag;
 import org.plp.benutzer.Kommentar;
 import org.plp.benutzer.Mediathek;
 import org.plp.benutzer.Pinnwand;
+import org.plp.benutzer.Studiengang;
 import org.plp.grundfunktionen.Nachricht;
 import org.plp.grundfunktionen.Nachrichtengenerator;
 import org.plp.gruppenfunktionen.Fachrichtung;
@@ -38,6 +39,9 @@ public class BenutzerService {
 
 	@Autowired
 	private KommentarService kommentarService;
+	
+	@Autowired
+	private StudiengangService studiengangservice;
 
 	@Autowired
 	private FachrichtungService fachrichtungService;
@@ -128,7 +132,7 @@ public class BenutzerService {
 		this.getBenutzer(sender).getEinträge().add(eintrag);
 		eintrag.setPinnwand(this.getBenutzer(empfänger).getPinnwand());
 		eintragService.addNewEintrag(eintrag);
-		this.getBenutzer(empfänger).getPinnwand().getEinträge().add(eintrag);
+		this.getBenutzer(empfänger).getPinnwand().getEintraege().add(eintrag);
 		nachrichtengenerator.pinnwandEintragErhaltenErstellen(sender,
 				empfänger, anhang, false, true);
 	}
@@ -235,26 +239,35 @@ public class BenutzerService {
 	}
 
 	@Transactional
-	public void registrieren(String vorname, String nachname,
+	public void registrieren(String benutzername,String vorname, String nachname,
 			String studiengang, String tag, String monat, String jahr,
 			String passwort, String geschlecht) {
 		
+		
+		List<Studiengang>alleStudiengänge=studiengangservice.listAllStudiengang();
+		
+		int studiengangid=0;
+		for(Studiengang s: alleStudiengänge){
+			if(s.getName().equals(studiengang)){
+				studiengangid=s.getStudiengang_id();
+			}
+			
+		}
 		
 		Pinnwand pinnwand = new Pinnwand();
 		pinnwandService.addNewPinnwand(pinnwand);
 		Benutzer benutzer = new Benutzer();
 		benutzer.setVorname(vorname);
 		benutzer.setNachname(nachname);
-		benutzer.setStudiengang(studiengang);
+		benutzer.setBenutzerName(benutzername);
+		benutzer.setStudiengang(studiengangservice.getStudiengang(studiengangid));
 		benutzer.setGebDatum(tag + "." + monat + "." + jahr);
 		benutzer.setPasswort(passwort);
-		if (geschlecht.equals("männlich")) {
-			benutzer.setGeschlecht('m');
-		} else {
-			benutzer.setGeschlecht('w');
-		}
+		benutzer.setGeschlecht(geschlecht);
+		
 		pinnwand.setBesitzer(benutzer);
-		this.addNewBenutzer(benutzer);
+		benutzer.setPinnwand(pinnwand);
+		this.addNewBenutzer(benutzer); 
 	}
 
 	@Transactional

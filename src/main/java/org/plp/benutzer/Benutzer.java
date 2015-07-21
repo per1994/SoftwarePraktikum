@@ -40,7 +40,7 @@ import org.springframework.ui.Model;
 @Entity
 @Table(name = "BENUTZER")
 public class Benutzer {
-
+  
 	@Id
 	@Column(name = "benutzer_id", nullable = false, unique = true)
 	@GeneratedValue
@@ -102,7 +102,7 @@ public class Benutzer {
 	private String gebDatum;
 
 	@Column(name = "geschlecht")
-	private char geschlecht;
+	private String geschlecht;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "studiengang_id")
@@ -280,11 +280,11 @@ public class Benutzer {
 		this.gebDatum = gebDatum;
 	}
 
-	public char getGeschlecht() {
+	public String getGeschlecht() {
 		return geschlecht;
 	}
 
-	public void setGeschlecht(char geschlecht) {
+	public void setGeschlecht(String geschlecht) {
 		this.geschlecht = geschlecht;
 	}
 

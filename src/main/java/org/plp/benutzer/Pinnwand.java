@@ -28,18 +28,18 @@ public class Pinnwand {
 	private Benutzer besitzer;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pinnwand")
-	private Set<Eintrag> einträge;
+	private Set<Eintrag> eintraege;
 
 	public Pinnwand() {
-		einträge = new HashSet<Eintrag>();
+		eintraege = new HashSet<Eintrag>();
 	}
 
-	public Set<Eintrag> getEinträge() {
-		return einträge;
+	public Set<Eintrag> getEintraege() {
+		return eintraege;
 	}
 
-	public void setEinträge(Set<Eintrag> einträge) {
-		this.einträge = einträge;
+	public void setEintraege(Set<Eintrag> einträge) {
+		this.eintraege = einträge;
 	}
 
 	public int getPinnwand_id() {

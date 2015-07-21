@@ -14,9 +14,12 @@
 <link rel="stylesheet"
 	href="resource/assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
+	href="resource/assets/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet"
 	href="resource/assets/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="resource/assets/css/form-elements.css" />
 <link rel="stylesheet" href="resource/assets/css/style.css" />
+<link rel="stylesheet" href="resource/assets/css/comment.css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,7 +41,7 @@
 
 
 </head>
-<body>
+<body class="hor-body">
 	<nav class="navbar navbar-default up-bar-color navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -63,7 +66,7 @@
 					<li><a href="Benutzerliste">Benutzerliste</a></li>
 					<li><a href="Profileinstellungen">Profileinstellungen</a></li>
 					<li><a href="GruppeErstellen">Gruppe erstellen</a></li>
-					<li><a href="Aufgabe">Quest machen</a></li>
+					<li><a href="Fachrichtung">Quest machen</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
@@ -86,27 +89,31 @@
 									<img
 										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
 										class="img-avatar" />
-									<h3>Patrick Schmelzle</h3>
-									<h4 th:text="${benutzer.benutzerName}"></h4>
+									<h3 th:text="${aktiverBenutzer.vorname} + ' ' + ${aktiverBenutzer.nachname}"></h3>
+									<h4 th:text="${aktiverBenutzer.benutzerName}"></h4>
 								</div>
 								<div class=" col-md-9 col-lg-9">
 									<table class="table table-width">
 										<tbody>
-											<tr>
+											<tr th:each="benutzer: ${selections}">
 												<td class="new-left"><strong>Studiengang:</strong></td>
-												<td class="new-right"><p>Wirtschaftsinformatik</p></td>
+												<td class="new-right"><p th:text="${aktiverBenutzer.studiengang.name}"></p></td>
+											</tr>
+											<tr>
+												<td class="new-left"><strong>Geschlecht:</strong></td>
+												<td class="new-right"><p th:text="${aktiverBenutzer.geschlecht}"></p></td>
+											</tr>
+											<tr>
+												<td class="new-left"><strong>Geburtsdatum:</strong></td>
+												<td class="new-right" ><p th:text="${aktiverBenutzer.gebDatum}"></p></td>
 											</tr>
 											<tr>
 												<td class="new-left"><strong>Punkte:</strong></td>
-												<td class="new-right"><p></p></td>
+												<td class="new-right" ><p th:text="${aktiverBenutzer.punktzahl}"></p></td>
 											</tr>
 											<tr>
-												<td class="new-left"><strong>Badges:</strong></td>
-												<td class="new-right"><p></p></td>
-											</tr>
-											<tr>
-												<td class="new-left"><strong>Achievements:</strong></td>
-												<td class="new-right"><p></p></td>
+												<td class="new-left"><strong>Rang:</strong></td>
+												<td class="new-right"><p>Chief</p></td>
 											</tr>
 										</tbody>
 									</table>
@@ -116,27 +123,47 @@
 					</div>
 				</div>
 				<div class="setting-position2 pinnwand-position">
-					<form>
-						<input type="text" placeholder="Nachricht" class="input-size"
+					<form role="form" action="#" th:action="@{/eintragSchreiben}"
+								 method="post" class="login-form">
+						<input th:field="*{eintragsText.string}" placeholder="Nachricht" class="input-size"
 							maxlength="500" />
-						<button class='btn btn-primary submit-button' type='button'>Posten</button>
+						<button class='btn btn-success submit-button' name="action" type="submit" value="Posten">Posten</button>
 					</form>
-					<div class="row pinnwand-space">
-						<div class="col-md-6 col-md-offset-3">
-							<div class="testimonials">
-								<div class="active item">
-									<div class="carousel-info">
-										<img alt=""
-											src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-											class="pull-left" />
-										<div class="pull-left">
-											<span class="testimonials-name">BenjoMahenjo</span>
-										</div>
+					<div class="row new-group pinnwand-space" th:each="eintrag : ${aktiverBenutzer.pinnwand.eintraege} ">
+						<div class="[ col-xs-12 col-sm-offset-1 col-sm-5 ]">
+							<div class="[ panel panel-default ] panel-google-plus">
+								<div class="panel-heading">
+									<img class="[ img-circle pull-left img-size2 ]"
+										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										alt="Mouse0270" />
+									<h3 th:text="${eintrag.autor.benutzerName}"></h3>
+								</div>
+								<div class="panel-body">
+									<p class="comment-fontsz" th:text = "${eintrag.eintragstext}"></p>
+								</div>
+								<hr class="hr-color"></hr>
+								<p>Kommentare</p>
+								<div class="panel-heading" th:each="kommentar : ${eintrag.kommentare}">
+									<img class="[ img-circle pull-left img-size1 ]"
+										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										alt="Mouse0270" />
+									<h3 th:text = "${kommentar.autor.benutzerName}"></h3>
+								</div>
+								<div class="panel-body">
+									<p>Hallo</p>
+								</div>
+								<div class="panel-footer">
+									<div class="input-placeholder">Kommentiere...</div>
+								</div>
+								<div class="panel-google-plus-comment">
+									<img class="img-circle img-size"
+										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										alt="User Image" />
+									<div class="panel-google-plus-textarea">
+										<textarea rows="4"></textarea>
+										<label class="[ btn btn-success ]">Posten</label>
 									</div>
-									<blockquote class="comment-space">
-										<p>Hey, dein Profil gef&auml;llt mir. Find ich super
-											gemacht.</p>
-									</blockquote>
+									<div class="clearfix"></div>
 								</div>
 							</div>
 						</div>
@@ -148,12 +175,14 @@
 
 
 
+
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.js"></script>
 	<script src="resource/assets/js/jquery.backstretch.min.js"></script>
 	<script src="resource/assets/js/scripts.js"></script>
+	<script src="resource/assets/js/comment.js"></script>
 
 	<!--[if lt IE 10]>
             <script src="resource/assets/js/placeholder.js"></script>

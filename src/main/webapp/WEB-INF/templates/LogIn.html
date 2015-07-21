@@ -59,7 +59,7 @@
 						<div class="form-top">
 							<div class="form-top-left">
 								<h3>Login</h3>
-								<p th:text=" ${message} + '!'" />
+								<p th:text=" ${message}" />
 							</div>
 							<div class="form-top-right">
 								<i class="fa fa-key"></i>
@@ -89,15 +89,16 @@
 						<div class="form-top">
 							<div class="form-top-left">
 								<h3>Registrieren</h3>
+								<p th:text=" ${message1}" />
 							</div>
 						</div>
 						<div class="form-bottom">
-							<form role="form" action="#" th:action="@{/anmelden}"
-								 method="post" class="login-form">
+							<form role="form" action="#" th:action="@{/registrieren}"
+								method="post" class="login-form">
 								<div class="row">
 									<div class="form-group col-xs-6">
-										<input th:field="*{benutzer.vorname}" type="text" placeholder="Vorname"
-											class="form-username form-control" />
+										<input th:field="*{benutzer.vorname}" type="text"
+											placeholder="Vorname" class="form-username form-control" />
 									</div>
 									<div class="form-group col-xs-6">
 										<input th:field="*{benutzer.nachname}" type="text"
@@ -108,32 +109,49 @@
 									<input th:field="*{benutzer.benutzerName}" type="text"
 										placeholder="Benutzername" class="form-control" />
 								</div>
-								<div class="form-group">
-									<select name = th:field="*{name}">
-										<option th:each="studiengang: ${studiengänge}" th:value="${studiengang.name}"
-											th:text="#{${studiengang.name }}">Wireframe</option>
+								<div>
+									<select name="selectStudiengang"
+										th:field="*{benutzer.studiengang}" class="form-control"
+										style="height: 50px" th:value="${studiengang}">
+										<option th:each="studiengang: ${studiengaenge}"
+											
+											th:text="${studiengang.name}"></option>
 									</select>
 								</div>
 								<div class="row">
 									<div class="form-group col-xs-4">
-										<input type="text" class="form-control" placeholder="Tag" />
+										<input th:field="*{geburtsdatum.tag}" type="text"
+											class="form-control" placeholder="Tag" />
 									</div>
 									<div class="form-group col-xs-4">
-										<input type="text" class="form-control" placeholder="Monat" />
+										<input th:field="*{geburtsdatum.monat}" type="text"
+											class="form-control" placeholder="Monat" />
 									</div>
 									<div class="form-group col-xs-4">
-										<input type="text" class="form-control" placeholder="Jahr" />
+										<input th:field="*{geburtsdatum.jahr}" type="text"
+											class="form-control" placeholder="Jahr" />
 									</div>
 								</div>
 								<div class="form-group">
-									<input th:field="*{benutzer.passwort}" type="password" placeholder="Passwort"
-										class="form-control" />
+									<input th:field="*{benutzer.passwort}" type="password"
+										placeholder="Passwort" class="form-control" />
 								</div>
+								<ul>
+									<li th:each="geschlecht : ${geschlechter}">
+									<input type="radio"
+										th:field="*{benutzer.geschlecht}" th:value="${geschlecht}" name="sex"/>
+										<label th:for="${geschlecht}"
+										th:text="${geschlecht}" id="sex-color" class="radio-inline">Wireframe</label>
+									</li>
+								</ul>
+
+<!--  
 								<div>
 									<label id="sex-color" class="radio-inline"><input
 										type="radio" name="sex" />m&auml;nnlich</label> <label id="sex-color"
 										class="radio-inline"><input type="radio" name="sex" />weiblich</label>
 								</div>
+								-->
 								<button name="action" type="submit" value="Registrieren"
 									class="btn">Registrieren</button>
 							</form>
