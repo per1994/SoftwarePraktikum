@@ -24,6 +24,7 @@ import org.plp.dao.EintragService;
 import org.plp.dao.GruppeService;
 import org.plp.dao.PinnwandService;
 import org.plp.dao.StudiengangService;
+import org.plp.gamification.Aufgabe;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -451,8 +452,9 @@ public class MasterController {
 		
 		
 		
+		Aufgabe questaufgabe=aufgabenservice.aufgabeFürQuestErstellen(aktiverBenutzerid);
 		
-		
+		model.addAttribute("aufgabe", questaufgabe);
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
 		return "Aufgabe";
@@ -590,6 +592,25 @@ public class MasterController {
 		
 		
 	}
+	
+	
+	@RequestMapping(value="/teilaufgabeErstellen", method=RequestMethod.GET)
+	public String teilaufgabeErstellen(Model model){
+		
+		model.addAttribute("container", new StringHilfsklasse());
+		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		
+		
+		return "AufgabeErstellen";
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
