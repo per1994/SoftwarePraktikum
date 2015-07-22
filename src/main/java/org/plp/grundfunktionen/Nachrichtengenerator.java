@@ -233,7 +233,7 @@ public class Nachrichtengenerator {
 					+ combatservice.getCombat(anhang).getPunkteGewinner()
 					+ " Punkte gutgeschrieben.");
 		}
-		if (empfänger == combatservice.getCombat(anhang).getGewinner()
+		if (empfänger == combatservice.getCombat(anhang).getVerlierer()
 				.getBenutzer_id()) {
 			combatErgebnisBenachrichtigung.setInhalt("Du hast da Combat gegen "
 					+ combatservice.getCombat(anhang).getVerlierer()
@@ -241,8 +241,8 @@ public class Nachrichtengenerator {
 					+ " im Fachgebiet "
 					+ combatservice.getCombat(anhang).getAufgabe()
 							.getFachrichtung().getName()
-					+ " gewonnen! Dir werden "
-					+ combatservice.getCombat(anhang).getPunkteGewinner()
+					+ " verloren! Dir werden "
+					+ combatservice.getCombat(anhang).getPunkteVerlierer()
 					+ " Punkte gutgeschrieben.");
 		}
 		return combatErgebnisBenachrichtigung;

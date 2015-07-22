@@ -109,4 +109,8 @@ public class AufgabeService {
 		
 	}
 	
+	public void aufgabeKorrigieren(){
+		
+	}
+	
 }
