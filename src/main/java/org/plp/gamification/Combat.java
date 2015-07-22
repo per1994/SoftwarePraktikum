@@ -40,7 +40,7 @@ public class Combat {
 	private Benutzer gewinner;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "benutzer_id")
+	@JoinColumn(name = "benutzer_id", insertable=false, updatable=false)
 	private Benutzer verlierer;
 
 	@Column(name = "ersterBenutzer_id")

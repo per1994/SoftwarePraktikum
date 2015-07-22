@@ -18,10 +18,13 @@ import org.plp.benutzer.Eintrag;
 import org.plp.benutzer.Geburtsdatum;
 import org.plp.benutzer.StringHilfsklasse;
 import org.plp.benutzer.Studiengang;
+import org.plp.dao.AufgabeService;
 import org.plp.dao.BenutzerService;
 import org.plp.dao.EintragService;
+import org.plp.dao.GruppeService;
 import org.plp.dao.PinnwandService;
 import org.plp.dao.StudiengangService;
+import org.plp.gruppenfunktionen.Gruppe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +50,11 @@ public class MasterController {
 	
 	Benutzer profilBenutzer;
 	
+	Gruppe aktiveGruppe;
+	
 	int aktiverBenutzerid;
 	int profilBenutzerid;
+	int aktiveGruppeid;
 	
 	@Autowired
 	FileValidator validator;
@@ -71,6 +77,14 @@ public class MasterController {
 	
 	@Autowired
 	PinnwandService pinnwandservice;
+	
+	@Autowired
+	GruppeService gruppenservice;
+	
+	@Autowired
+	AufgabeService aufgabenservice;
+	
+	
 	
 	
 	
@@ -119,7 +133,7 @@ public class MasterController {
 		geschlechter.add("weiblich");
 		
 		model.addAttribute("benutzer", new Benutzer());
-		model.addAttribute("message", "");
+		model.addAttribute("message", "Bitte einloggen");
 		model.addAttribute("geburtsdatum", new Geburtsdatum());
 		model.addAttribute("geschlechter", geschlechter);
 		
@@ -225,8 +239,11 @@ public class MasterController {
 	
 	@RequestMapping(value="/eintragSchreiben", method=RequestMethod.POST)
 	public String eintragSchreiben(@ModelAttribute String eintragsText, @ModelAttribute Benutzer aktiverBenutzer, Model model){
-		System.out.println(eintragsText);
-		System.out.println(aktiverBenutzer.getBenutzer_id());
+		
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
 		benutzerservice.eintragErstellen(eintragsText, aktiverBenutzerid, profilBenutzerid, aktiverBenutzer.getBenutzer_id());
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		model.addAttribute("eintragsText", new StringHilfsklasse());
@@ -239,9 +256,14 @@ public class MasterController {
 		
 		@RequestMapping(value="/eintragSchreibenEigenesProfil", method=RequestMethod.POST)
 		public String eintragSchreibenEigenesProfil(@ModelAttribute String eintragsText, @ModelAttribute Benutzer aktiverBenutzer, Model model){
-			System.out.println(eintragsText);
-			System.out.println(aktiverBenutzer.getBenutzer_id());
+			if(aktiverBenutzerid==0){
+				return "redirect:/";	
+			}
+			
+			
 			benutzerservice.eintragErstellen(eintragsText, aktiverBenutzerid, aktiverBenutzerid, aktiverBenutzer.getBenutzer_id());
+			
+			
 			model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 			model.addAttribute("eintragsText", new StringHilfsklasse());
 			ArrayList<Eintrag> sortierteEinträge = pinnwandservice.einträgeSortieren(benutzerservice.getBenutzer(aktiverBenutzerid).getPinnwand().getPinnwand_id());
@@ -255,7 +277,9 @@ public class MasterController {
 	
 	@RequestMapping(value="/profil/{benutzerName}", method=RequestMethod.GET)
 	public String profilAnzeigen(@ModelAttribute Benutzer aktiverBenutzer, @PathVariable String benutzerName, Model model){
-		
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
 		
 		
 		List<Benutzer>alleBenutzer=benutzerservice.listAllBenutzer();
@@ -291,6 +315,10 @@ public class MasterController {
 	
 	@RequestMapping(value="/freunde", method=RequestMethod.GET)
 	public String freundesliste(@ModelAttribute Benutzer aktiverBenutzer, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
 		
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
@@ -302,8 +330,22 @@ public class MasterController {
 	
 	@RequestMapping(value="/gruppen", method=RequestMethod.GET)
 	public String gruppenliste(@ModelAttribute Benutzer aktiverBenutzer, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
+		
+		List<Gruppe>alleGruppen=new ArrayList<Gruppe>();
+		
+		for(Gruppe g: gruppenservice.listAllGruppe()){
+			alleGruppen.add(g);
+			}
+		
+		model.addAttribute("alleGruppen", alleGruppen);
 		
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		model.addAttribute("eintragsText", new StringHilfsklasse());
+		model.addAttribute("profilBenutzer", benutzerservice.getBenutzer(profilBenutzerid));
 		
 		return "Gruppenliste";
 		
@@ -312,8 +354,12 @@ public class MasterController {
 	
 	@RequestMapping(value="/benutzer", method=RequestMethod.GET)
 	public String benutzerliste(@ModelAttribute Benutzer aktiverBenutzer, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
 		
-		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		
+		
 		List<Benutzer>alleBenutzer= new ArrayList<Benutzer>();
 		for (Benutzer b: benutzerservice.listAllBenutzer()){
 			alleBenutzer.add(b);
@@ -334,6 +380,10 @@ public class MasterController {
 	
 	@RequestMapping(value="/einstellungen", method=RequestMethod.GET)
 	public String einstellen(@ModelAttribute Benutzer aktiverBenutzer, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
 		
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
@@ -344,16 +394,64 @@ public class MasterController {
 	
 	@RequestMapping(value="/gruppeErstellen", method=RequestMethod.GET)
 	public String gruppeErstellen(@ModelAttribute Benutzer aktiverBenutzer, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
 		
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		model.addAttribute("gruppeErstellen", new StringHilfsklasse());
+		model.addAttribute("message", "");
 		
 		return "GruppeErstellen";
+		
+		
+		
+	}
+	
+	
+	@RequestMapping(value="gruppeErstellen", method=RequestMethod.POST)
+	public String gruppeErstellen1(@ModelAttribute StringHilfsklasse stringhilfsklasse, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
+		
+		List<Gruppe>alleGruppen=gruppenservice.listAllGruppe();
+		
+		for(Gruppe g: alleGruppen){
+			if(g.getGruppenName().equals(stringhilfsklasse.getString())){ 
+				model.addAttribute("gruppeErstellen", new StringHilfsklasse());
+				model.addAttribute("message", "Gruppenname bereits vergeben");
+				
+				return "GruppeErstellen";			
+			}
+		}
+			
+			benutzerservice.gruppeErstellen(stringhilfsklasse.getString(), stringhilfsklasse.getString2(), aktiverBenutzerid);
+			
+			model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+			model.addAttribute("eintragsText", new StringHilfsklasse());
+			ArrayList<Eintrag> sortierteEinträge = pinnwandservice.einträgeSortieren(benutzerservice.getBenutzer(aktiverBenutzerid).getPinnwand().getPinnwand_id());
+			model.addAttribute("sortierteEintraege", sortierteEinträge);
+			model.addAttribute("profilBenutzer", benutzerservice.getBenutzer(profilBenutzerid));
+			
+			return "home";
+			
+			
 		
 		
 	}
 	
 	@RequestMapping(value="/quest", method=RequestMethod.GET)
 	public String questStarten(@ModelAttribute Benutzer aktiverBenutzer, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
+		
+		
+		
 		
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
@@ -364,6 +462,9 @@ public class MasterController {
 	
 	@RequestMapping(value = "/file", method = RequestMethod.GET)
 	public String getForm(Model model) {
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
 		FileTest fileModel = new FileTest();
 		model.addAttribute("file", fileModel);
 		model.addAttribute("dateiname", new StringHilfsklasse());
@@ -374,6 +475,9 @@ public class MasterController {
 	@RequestMapping(value = "/file", method = RequestMethod.POST)
 	public String fileUploaded(Model model, @Validated FileTest file,
 			BindingResult result, HttpServletRequest request) {
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
 
 		String returnVal = "succesFile";
 		if (result.hasErrors()) {
@@ -405,6 +509,7 @@ public class MasterController {
 	@RequestMapping(value = "/filedownload", method = RequestMethod.POST)
 	public @ResponseBody void downloadFiles(HttpServletRequest request,
 			HttpServletResponse response,@ModelAttribute StringHilfsklasse dateiname) {
+		
 
 		ServletContext context = request.getServletContext();
 
@@ -446,6 +551,55 @@ public class MasterController {
 
 		}
 
+	}
+	
+	@RequestMapping(value="/gruppe/{gruppenName}", method=RequestMethod.GET)
+	public String gruppeAnzeigen(@ModelAttribute Benutzer aktiverBenutzer, @PathVariable String gruppenName, Model model){
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
+		
+		List<Gruppe>alleGruppen=gruppenservice.listAllGruppe();
+		
+		int gruppeid=0;
+		for(Gruppe g: alleGruppen){
+			
+			if(g.getGruppenName().equals(gruppenName)){
+				
+				gruppeid=g.getGruppe_id();
+				aktiveGruppeid=gruppeid;
+				
+			}
+			
+		}
+		
+		
+		
+		model.addAttribute("profilBenutzer", benutzerservice.getBenutzer(profilBenutzerid));
+		model.addAttribute("eintragsText", new StringHilfsklasse());
+		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		model.addAttribute("eintragsText", new StringHilfsklasse());
+		//ArrayList<Eintrag> sortierteEinträge = pinnwandservice.einträgeSortieren(benutzerservice.getBenutzer(profilBenutzerid).getPinnwand().getPinnwand_id());
+		ArrayList<Eintrag> sortierteEinträge = pinnwandservice.einträgeSortieren(gruppenservice.getGruppe(aktiveGruppeid).getPinnwand().getPinnwand_id());
+		model.addAttribute("sortierteEintraege", sortierteEinträge);
+		model.addAttribute("aktiveGruppe", gruppenservice.getGruppe(aktiveGruppeid));
+	
+		
+		return "Gruppenseite";
+		
+		
+	}
+	
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(Model model){
+		
+		 aktiverBenutzerid=0;
+		 profilBenutzerid=0;
+		 aktiveGruppeid=0;
+		
+		return "LogOut";
 	}
 	
 	

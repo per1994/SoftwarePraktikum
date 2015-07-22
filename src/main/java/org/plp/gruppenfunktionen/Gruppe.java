@@ -43,6 +43,10 @@ public class Gruppe {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "GRUPPE_MODERATOR", joinColumns = @JoinColumn(name = "gruppe_id"), inverseJoinColumns = @JoinColumn(name = "benutzer_id"))
 	private Set<Benutzer> moderatorenListe;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pinnwand_id")
+	private Pinnwand pinnwand;
 
 	@Column(name="anzahlMitglieder")
 	private int anzahlMitglieder;
@@ -72,6 +76,7 @@ public class Gruppe {
 		mitgliederListe = new HashSet<Benutzer>();
 		moderatorenListe = new HashSet<Benutzer>();
 		lernziele = new HashSet<Lernziel>();
+		
 	}
 	
 	public Gruppe(String gruppenName){
@@ -103,6 +108,7 @@ public class Gruppe {
 	}
 
 	public int getAnzahlMitglieder() {
+		
 		return anzahlMitglieder;
 	}
 
@@ -156,6 +162,14 @@ public class Gruppe {
 
 	public void setNachrichten(Set<Nachricht> nachrichten) {
 		this.nachrichten = nachrichten;
+	}
+
+	public Pinnwand getPinnwand() {
+		return pinnwand;
+	}
+
+	public void setPinnwand(Pinnwand pinnwand) {
+		this.pinnwand = pinnwand;
 	}
 
 	

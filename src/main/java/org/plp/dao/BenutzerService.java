@@ -159,15 +159,30 @@ public class BenutzerService {
 			if (fachrichtung.getName().equals(fachrichtungName)) {
 				fachrichtung_id = fachrichtung.getFachrichtung_id();
 			}
+				}
+		
+		if(fachrichtung_id==0){
+			Fachrichtung r= new Fachrichtung();
+			r.setName(fachrichtungName);
+			fachrichtungService.addNewFachrichtung(r);
+			fachrichtung_id=r.getFachrichtung_id();
 		}
 
+		System.out.println(fachrichtung_id);
 		Mediathek mediathek = new Mediathek();
 		mediathekService.addNewMediathek(mediathek);
+		
+		Pinnwand pinnwand= new Pinnwand();
+		pinnwandService.addNewPinnwand(pinnwand);
 		Gruppe gruppe = new Gruppe();
 		gruppe.setFachrichtung(fachrichtungService
 				.getFachrichtung(fachrichtung_id));
+		fachrichtungService.getFachrichtung(fachrichtung_id).getGruppen().add(gruppe);
 		gruppe.setMediathek(mediathek);
 		mediathek.setGruppe(gruppe);
+		gruppe.setPinnwand(pinnwand);
+		pinnwand.setGruppe(gruppe);
+		gruppe.setGruppenName(gruppenName);
 		gruppe.getMitgliederListe().add(this.getBenutzer(ersteller));
 		gruppe.getModeratorenListe().add(this.getBenutzer(ersteller));
 		gruppe.setAnzahlMitglieder(gruppe.getMitgliederListe().size());
@@ -192,6 +207,7 @@ public class BenutzerService {
 		}
 
 		gruppenEinladung.setBearbeitet(true);
+		gruppeService.getGruppe(gruppenEinladung.getAnhang()).setAnzahlMitglieder(gruppeService.getGruppe(gruppenEinladung.getAnhang()).getAnzahlMitglieder()+1);
 	}
 
 	@Transactional

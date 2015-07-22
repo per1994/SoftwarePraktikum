@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.plp.gruppenfunktionen.Gruppe;
+
 @Entity
 @Table(name = "PINNWAND")
 public class Pinnwand {
@@ -26,6 +28,10 @@ public class Pinnwand {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
 	mappedBy="pinnwand")
 	private Benutzer besitzer;
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+			mappedBy="pinnwand")
+	private Gruppe gruppe;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pinnwand")
 	private Set<Eintrag> eintraege;
@@ -62,6 +68,14 @@ public class Pinnwand {
 
 	public void setBesitzer(Benutzer besitzer) {
 		this.besitzer = besitzer;
+	}
+
+	public Gruppe getGruppe() {
+		return gruppe;
+	}
+
+	public void setGruppe(Gruppe gruppe) {
+		this.gruppe = gruppe;
 	}
 
 	

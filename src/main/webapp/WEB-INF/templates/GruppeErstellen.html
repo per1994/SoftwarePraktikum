@@ -70,7 +70,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
-					<li><a th:href="@{/}">Abmelden</a></li>
+					<li><a th:href="@{/logout}">Abmelden</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -78,30 +78,27 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<form>
+	<form role="form" action="#" th:action="@{/gruppeErstellen}"
+		th:object="${gruppeErstellen}" method="post" class="login-form">
 		<div class="container-ert">
 			<div class="challenge-bar2">
 				<h2>Gruppe erstellen</h2>
+				<p th:text=" ${message}" />
 				<div class="row">
 					<div class="form-group col-md-12">
-						<input type="text" placeholder="Gruppenname"
-							class="form-control"  />
+						<input th:field="*{string}" type="text" placeholder="Gruppenname"
+							class="form-control" />
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-12">
-						<select class="form-control" style="height: 50px;">
-							<option>Fachrichtung</option>
-							<option>DSA</option>
-							<option>PSE</option>
-							<option>EWI</option>
-							<option>B&uuml;rgerliches Recht</option>
-						</select>
+						<input th:field="*{string2}" type="text"
+							placeholder="Fachrichtung" class="form-control" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<label class="btn btn-success btn-lg">Erstellen</label>
+		<button name="action" type="submit" value="Einloggen" class="btn">Erstellen</button>
 	</form>
 
 

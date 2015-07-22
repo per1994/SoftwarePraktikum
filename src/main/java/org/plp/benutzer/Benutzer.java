@@ -101,7 +101,7 @@ public class Benutzer {
 	@Column(name = "gebDatum")
 	private String gebDatum;
 
-	@Column(name = "geschlecht")
+	@Column(name = "geschlecht") 
 	private String geschlecht;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

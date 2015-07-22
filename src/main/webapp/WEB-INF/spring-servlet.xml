@@ -13,6 +13,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resource/**" location="/resource/" />
 	<mvc:resources mapping="/profil/resource/**" location="/resource/" />
+	<mvc:resources mapping="/gruppe/resource/**" location="/resource/" />
 	<tx:annotation-driven />
 	<!--enablethethymeleafframework -->
 	<bean id="templateResolver"
