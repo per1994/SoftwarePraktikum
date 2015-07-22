@@ -12,6 +12,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:component-scan base-package="org.plp" />
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resource/**" location="/resource/" />
+	<mvc:resources mapping="/profil/resource/**" location="/resource/" />
 	<tx:annotation-driven />
 	<!--enablethethymeleafframework -->
 	<bean id="templateResolver"

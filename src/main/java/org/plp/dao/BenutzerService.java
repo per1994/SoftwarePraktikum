@@ -127,6 +127,7 @@ public class BenutzerService {
 	public void eintragErstellen(String eintragsText, int sender,
 			int empfänger, int anhang) {
 		Eintrag eintrag = new Eintrag();
+		System.out.println(this.getBenutzer(sender).getBenutzerName());
 		eintrag.setEintragstext(eintragsText);
 		eintrag.setAutor(this.getBenutzer(sender));
 		this.getBenutzer(sender).getEinträge().add(eintrag);

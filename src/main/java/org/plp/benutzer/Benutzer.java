@@ -216,13 +216,7 @@ public class Benutzer {
 		this.anzahlQuest = anzahlQuest;
 	}
 
-	public int getId() {
-		return benutzer_id;
-	}
-
-	public void setId(int benutzer_id) {
-		this.benutzer_id = benutzer_id;
-	}
+	
 
 	public String getBenutzerName() {
 		return benutzerName;

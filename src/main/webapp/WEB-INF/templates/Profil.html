@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PLP-LogIn/Register</title>
+<title>Profil</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -14,9 +14,12 @@
 <link rel="stylesheet"
 	href="resource/assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
+	href="resource/assets/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet"
 	href="resource/assets/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="resource/assets/css/form-elements.css" />
 <link rel="stylesheet" href="resource/assets/css/style.css" />
+<link rel="stylesheet" href="resource/assets/css/comment.css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,28 +41,148 @@
 
 
 </head>
-<body>
-	<div class="container-fluid well span6">
-		<div class="row-fluid">
-			<div class="span2">
-				<img
-					src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
-					class="img-circle" />
+<body class="hor-body">
+	<nav class="navbar navbar-default up-bar-color navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="new-navbar-brand" id="plp-color" th:href="@{/home}">PLP</a>
 			</div>
 
-			<div class="span8">
-				<h3 th:text="${benutzer.benutzerName}"></h3>
-				<h6>Wirtschaftsinformatik</h6>
-				<a href="file" class="button">Dateiupload</a>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/home}">Profil <span class="badge">2</span></a></li>
+					<li><a th:href="@{/freunde}">Freunde</a></li>
+					<li><a th:href="@{/gruppen}">Gruppen</a></li>
+					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
+					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
+					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
+					<li><a th:href="@{/quest}">Quest machen</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
+					<li><a th:href="@{/}">Abmelden</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<div class="top-content">
+		<div class="inner-bg">
+			<div class="container">
+				<div class="setting-position1">
+					<div class="col-sm-6 col-sm-offset-3 form-box">
+						<div class="profile-bar profile-display">
+							<div class="row-fluid">
+								<div class="span2">
+									<img
+										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										class="img-avatar" />
+									<h3 th:text="${profilBenutzer.vorname} + ' ' + ${profilBenutzer.nachname}"></h3>
+									<h4 th:text="${profilBenutzer.benutzerName}"></h4>
+								</div>
+								<div class=" col-md-9 col-lg-9">
+									<table class="table table-width">
+										<tbody>
+											<tr th:each="benutzer: ${selections}">
+												<td class="new-left"><strong>Studiengang:</strong></td>
+												<td class="new-right"><p th:text="${profilBenutzer.studiengang.name}"></p></td>
+											</tr>
+											<tr>
+												<td class="new-left"><strong>Geschlecht:</strong></td>
+												<td class="new-right"><p th:text="${profilBenutzer.geschlecht}"></p></td>
+											</tr>
+											<tr>
+												<td class="new-left"><strong>Geburtsdatum:</strong></td>
+												<td class="new-right" ><p th:text="${profilBenutzer.gebDatum}"></p></td>
+											</tr>
+											<tr>
+												<td class="new-left"><strong>Punkte:</strong></td>
+												<td class="new-right" ><p th:text="${profilBenutzer.punktzahl}"></p></td>
+											</tr>
+											<tr>
+												<td class="new-left"><strong>Rang:</strong></td>
+												<td class="new-right"><p>Chief</p></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="setting-position2 pinnwand-position">
+					<form role="form" action="#" th:action="@{/eintragSchreiben}"
+								 method="post" class="login-form">
+						<input th:field="*{eintragsText.string}" placeholder="Nachricht" class="input-size"
+							maxlength="500" />
+						<button class='btn btn-success submit-button' name="action" type="submit" value="Posten">Posten</button>
+					</form>
+					<div class="row new-group pinnwand-space" th:each="eintrag : ${profilBenutzer.pinnwand.eintraege} ">
+						<div class="[ col-xs-12 col-sm-offset-1 col-sm-5 ]">
+							<div class="[ panel panel-default ] panel-google-plus">
+								<div class="panel-heading">
+									<img class="[ img-circle pull-left img-size2 ]"
+							 			src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										alt="Mouse0270" />
+									<h3 th:text="${eintrag.autor.benutzerName}"></h3>
+								</div>
+								<div class="panel-body">
+									<p class="comment-fontsz" th:text = "${eintrag.eintragstext}"></p>
+								</div>
+								<hr class="hr-color"></hr>
+								<p>Kommentare</p>
+								<div class="panel-heading" th:each="kommentar : ${eintrag.kommentare}">
+									<img class="[ img-circle pull-left img-size1 ]"
+										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										alt="Mouse0270" />
+									<h3 th:text = "${kommentar.autor.benutzerName}"></h3>
+								</div>
+								<div class="panel-body"> 
+									<p>Hallo</p>
+								</div>
+								<div class="panel-footer">
+									<div class="input-placeholder">Kommentiere...</div>
+								</div>
+								<div class="panel-google-plus-comment">
+									<img class="img-circle img-size"
+										src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
+										alt="User Image" />
+									<div class="panel-google-plus-textarea">
+										<textarea rows="4"></textarea>
+										<label class="[ btn btn-success ]">Posten</label>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
+
+
+
 	<!-- Javascript -->
 	<script src="resource/assets/js/jquery-1.11.1.min.js"></script>
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resource/assets/bootstrap/js/bootstrap.js"></script>
 	<script src="resource/assets/js/jquery.backstretch.min.js"></script>
 	<script src="resource/assets/js/scripts.js"></script>
+	<script src="resource/assets/js/comment.js"></script>
 
 	<!--[if lt IE 10]>
             <script src="resource/assets/js/placeholder.js"></script>

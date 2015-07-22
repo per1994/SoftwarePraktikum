@@ -51,24 +51,24 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="new-navbar-brand" id="plp-color" href="home">PLP</a>
+				<a class="new-navbar-brand" id="plp-color" th:href="@{/home}">PLP</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Profil <span class="badge">2</span></a></li>
-					<li><a href="Freundesliste">Freunde</a></li>
-					<li><a href="Gruppenliste">Gruppen</a></li>
-					<li><a href="Benutzerliste">Benutzerliste</a></li>
-					<li><a href="Profileinstellungen">Profileinstellungen</a></li>
-					<li><a href="GruppeErstellen">Gruppe erstellen</a></li>
-					<li><a href="Aufgabe">Quest machen</a></li>
+					<li><a th:href="@{/home}">Profil <span class="badge">2</span></a></li>
+					<li><a th:href="@{/freunde}">Freunde</a></li>
+					<li><a th:href="@{/gruppen}">Gruppen</a></li>
+					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
+					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
+					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
+					<li><a th:href="@{/quest}">Quest machen</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
-					<li><a href="LogOut">Abmelden</a></li>
+					<li><a th:href="@{/}">Abmelden</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -78,49 +78,33 @@
 	<div class="table-position1 ">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-lg-offset-4">
+				<div class="col-md-4 col-md-offset-4">
 					<input type="search" id="search" value="" class="form-control"
 						placeholder="Suchen" />
 				</div>
 			</div>
 			<div class="row table-itself">
-				<div class="col-lg-12">
+				<div class="col-md-8 col-md-offset-2">
 					<table class="table" id="table">
 						<thead>
 							<tr>
+								<th class="thead-color font-weight1">Benutzername</th>
 								<th class="thead-color font-weight1">Vorname</th>
 								<th class="thead-color font-weight1">Nachname</th>
-								<th class="thead-color font-weight1">Benutzername</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Benjamin</td>
-								<td>Schmid</td>
-								<td>BenjoMahenjo <label class="btn btn-sm btn-success">
-										 <span class="glyphicon glyphicon-plus"></span>
-								</label> </td>
+							<tr th:each="benutzer : ${alleBenutzer}">
+								<td><a th:href="@{|/profil/${benutzer.benutzerName}|}"
+									th:text="|${benutzer.benutzerName} |"> </a></td>
+								<td th:text="|${benutzer.vorname} |"></td>
+								<td th:text=" |${benutzer.nachname}|"><label
+									class="btn btn-sm btn-success"> <span
+										class="glyphicon glyphicon-plus"></span>
+								</label></td>
+
 							</tr>
-							<tr>
-								<td>Patrick</td>
-								<td>Schmelzle</td>
-								<td>per1994</td>
-							</tr>
-							<tr>
-								<td>Pascal</td>
-								<td>Maichl</td>
-								<td>TennisGigant</td>
-							</tr>
-							<tr>
-								<td>Leo</td>
-								<td>Grad</td>
-								<td>KingLeo</td>
-							</tr>
-							<tr>
-								<td>S&uuml;kr&uuml;</td>
-								<td>Sever</td>
-								<td>AliasGod</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>

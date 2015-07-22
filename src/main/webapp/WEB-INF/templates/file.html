@@ -28,6 +28,21 @@
 		<b>fileuploadtest.pdf</b>&nbsp;
 		<a href="filedownload" class="button">Download</a>
 		
+		<form role="form" action="#" th:action="@{/filedownload}"
+								th:object="${dateiname}" method="post" class="login-form">
+								<div class="form-group">
+
+									<input th:field="*{string}" type="text"
+										placeholder="Dateiname" class="form-control"
+										id="form-username" />
+								</div>
+								<div class="form-group">
+									>
+								</div>
+								<button name="action" type="submit" value="Einloggen"
+									class="btn">Download</button>
+							</form>
+		
 
 
 		

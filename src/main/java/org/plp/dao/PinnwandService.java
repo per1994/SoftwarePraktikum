@@ -52,6 +52,7 @@ public class PinnwandService {
 		return pinnwandDAO.vorhanden(pinnwand_id);
 	}
 
+	@Transactional
 	public ArrayList einträgeSortieren(int pinnwand) {
 		ArrayList<Eintrag> hilfsListe = new ArrayList<Eintrag>();
 
@@ -67,7 +68,7 @@ public class PinnwandService {
 				if (hilfsListe.get(j).getEintrag_id() < hilfsListe.get(j + 1)
 						.getEintrag_id()) {
 					temp = hilfsListe.get(j);
-					hilfsListe.set(i, hilfsListe.get(j + 1));
+					hilfsListe.set(j, hilfsListe.get(j + 1));
 					hilfsListe.set(j + 1, temp);
 				}
 			}
