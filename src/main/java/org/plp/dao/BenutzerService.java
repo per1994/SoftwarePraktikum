@@ -39,7 +39,7 @@ public class BenutzerService {
 
 	@Autowired
 	private KommentarService kommentarService;
-	
+
 	@Autowired
 	private StudiengangService studiengangservice;
 
@@ -159,25 +159,26 @@ public class BenutzerService {
 			if (fachrichtung.getName().equals(fachrichtungName)) {
 				fachrichtung_id = fachrichtung.getFachrichtung_id();
 			}
-				}
-		
-		if(fachrichtung_id==0){
-			Fachrichtung r= new Fachrichtung();
+		}
+
+		if (fachrichtung_id == 0) {
+			Fachrichtung r = new Fachrichtung();
 			r.setName(fachrichtungName);
 			fachrichtungService.addNewFachrichtung(r);
-			fachrichtung_id=r.getFachrichtung_id();
+			fachrichtung_id = r.getFachrichtung_id();
 		}
 
 		System.out.println(fachrichtung_id);
 		Mediathek mediathek = new Mediathek();
 		mediathekService.addNewMediathek(mediathek);
-		
-		Pinnwand pinnwand= new Pinnwand();
+
+		Pinnwand pinnwand = new Pinnwand();
 		pinnwandService.addNewPinnwand(pinnwand);
 		Gruppe gruppe = new Gruppe();
 		gruppe.setFachrichtung(fachrichtungService
 				.getFachrichtung(fachrichtung_id));
-		fachrichtungService.getFachrichtung(fachrichtung_id).getGruppen().add(gruppe);
+		fachrichtungService.getFachrichtung(fachrichtung_id).getGruppen()
+				.add(gruppe);
 		gruppe.setMediathek(mediathek);
 		mediathek.setGruppe(gruppe);
 		gruppe.setPinnwand(pinnwand);
@@ -207,7 +208,10 @@ public class BenutzerService {
 		}
 
 		gruppenEinladung.setBearbeitet(true);
-		gruppeService.getGruppe(gruppenEinladung.getAnhang()).setAnzahlMitglieder(gruppeService.getGruppe(gruppenEinladung.getAnhang()).getAnzahlMitglieder()+1);
+		gruppeService.getGruppe(gruppenEinladung.getAnhang())
+				.setAnzahlMitglieder(
+						gruppeService.getGruppe(gruppenEinladung.getAnhang())
+								.getAnzahlMitglieder() + 1);
 	}
 
 	@Transactional
@@ -253,38 +257,40 @@ public class BenutzerService {
 				&& (!hilfsListe.get(hilfsListe.size() - 1).equals(
 						this.getBenutzer(benutzer).getBadge())))
 			this.getBenutzer(benutzer).setBadge(hilfsListe.get(zähler));
+		hilfsListe.get(zähler).getBesitzer().add(this.getBenutzer(benutzer));
 	}
 
 	@Transactional
-	public void registrieren(String benutzername,String vorname, String nachname,
-			String studiengang, String tag, String monat, String jahr,
-			String passwort, String geschlecht) {
-		
-		
-		List<Studiengang>alleStudiengänge=studiengangservice.listAllStudiengang();
-		
-		int studiengangid=0;
-		for(Studiengang s: alleStudiengänge){
-			if(s.getName().equals(studiengang)){
-				studiengangid=s.getStudiengang_id();
+	public void registrieren(String benutzername, String vorname,
+			String nachname, String studiengang, String tag, String monat,
+			String jahr, String passwort, String geschlecht) {
+
+		List<Studiengang> alleStudiengänge = studiengangservice
+				.listAllStudiengang();
+
+		int studiengangid = 0;
+		for (Studiengang s : alleStudiengänge) {
+			if (s.getName().equals(studiengang)) {
+				studiengangid = s.getStudiengang_id();
 			}
-			
+
 		}
-		
+
 		Pinnwand pinnwand = new Pinnwand();
 		pinnwandService.addNewPinnwand(pinnwand);
 		Benutzer benutzer = new Benutzer();
 		benutzer.setVorname(vorname);
 		benutzer.setNachname(nachname);
 		benutzer.setBenutzerName(benutzername);
-		benutzer.setStudiengang(studiengangservice.getStudiengang(studiengangid));
+		benutzer.setStudiengang(studiengangservice
+				.getStudiengang(studiengangid));
 		benutzer.setGebDatum(tag + "." + monat + "." + jahr);
 		benutzer.setPasswort(passwort);
 		benutzer.setGeschlecht(geschlecht);
-		
+
 		pinnwand.setBesitzer(benutzer);
 		benutzer.setPinnwand(pinnwand);
-		this.addNewBenutzer(benutzer); 
+		this.addNewBenutzer(benutzer);
 	}
 
 	@Transactional

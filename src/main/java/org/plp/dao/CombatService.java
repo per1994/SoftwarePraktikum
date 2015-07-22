@@ -64,93 +64,90 @@ public class CombatService {
 		for (Teilaufgabe teilaufgabe : this.getCombat(combat).getAufgabe()
 				.getTeilAufgaben()) {
 			teilaufgabe.teilaufgabeKorrigieren();
-			this.getCombat(combat).getAufgabe().korrigiere();
+		}
+		this.getCombat(combat).getAufgabe().korrigiere();
 
-			// Prüft ob bereits eine Lösung eingereicht wurde
-			if (!this.getCombat(combat).isEineLösungEingereicht()) {
-				this.getCombat(combat).setPunkteErsteAbgabe(
-						this.getCombat(combat).getAufgabe().getPunktzahl());
-				this.getCombat(combat).setEineLösungEingereicht(true);
-				this.getCombat(combat).setErsterBenutzer_id(aktiverBenutzer);
-			} else {
+		// Prüft ob bereits eine Lösung eingereicht wurde
+		if (!this.getCombat(combat).isEineLösungEingereicht()) {
+			this.getCombat(combat).setPunkteErsteAbgabe(
+					this.getCombat(combat).getAufgabe().getPunktzahl());
+			this.getCombat(combat).setEineLösungEingereicht(true);
+			this.getCombat(combat).setErsterBenutzer_id(aktiverBenutzer);
+		} else {
 
-				// Erhöht bei beiden Teilnehmern die Anzahl der bestrittenen
-				// Combats um 1
-				for (Benutzer b : this.getCombat(combat).getTeilnehmer()) {
-					b.setAnzahlCombats(b.getAnzahlCombats() + 1);
+			// Erhöht bei beiden Teilnehmern die Anzahl der bestrittenen
+			// Combats um 1
+			for (Benutzer b : this.getCombat(combat).getTeilnehmer()) {
+				b.setAnzahlCombats(b.getAnzahlCombats() + 1);
 
-					// Combat endet unentschieden
-					if (this.getCombat(combat).getPunkteErsteAbgabe() == this
-							.getCombat(combat).getAufgabe().getPunktzahl()) {
-						this.getCombat(combat).setUnentschieden(true);
-						this.getCombat(combat).setPunkteUnentschieden(
-								this.getCombat(combat).getPunkteErsteAbgabe());
-						for (Benutzer teilnehmer : this.getCombat(combat)
-								.getTeilnehmer()) {
-							teilnehmer.setPunktzahl(teilnehmer.getPunktzahl()
-									+ this.getCombat(combat)
-											.getPunkteUnentschieden());
+				// Combat endet unentschieden
+				if (this.getCombat(combat).getPunkteErsteAbgabe() == this
+						.getCombat(combat).getAufgabe().getPunktzahl()) {
+					this.getCombat(combat).setUnentschieden(true);
+					this.getCombat(combat).setPunkteUnentschieden(
+							this.getCombat(combat).getPunkteErsteAbgabe());
+					for (Benutzer teilnehmer : this.getCombat(combat)
+							.getTeilnehmer()) {
+						teilnehmer.setPunktzahl(teilnehmer.getPunktzahl()
+								+ this.getCombat(combat)
+										.getPunkteUnentschieden());
 
-							teilnehmer.setAnzahlUnentschieden(teilnehmer
-									.getAnzahlUnentschieden() + 1);
-							nachrichtengenerator
-									.combatErgebnisBenachrichtungErstellen(
-											combat,
-											teilnehmer.getBenutzer_id(),
-											combat, false, true);
-							benutzerservice.aufBadgeÜberprüfen(teilnehmer
-									.getBenutzer_id());
-
-						}
-					} else if (this.getCombat(combat).getPunkteErsteAbgabe() > this
-							.getCombat(combat).getAufgabe().getPunktzahl()) {
-						this.getCombat(combat).setPunkteGewinner(
-								this.getCombat(combat).getPunkteErsteAbgabe());
-						this.getCombat(combat).setPunkteVerlierer(
-								this.getCombat(combat).getAufgabe()
-										.getPunktzahl());
-						this.getCombat(combat).setGewinner(
-								benutzerservice.getBenutzer(this.getCombat(
-										combat).getErsterBenutzer_id()));
-						this.getCombat(combat).setVerlierer(
-								benutzerservice.getBenutzer(aktiverBenutzer));
-						this.getCombat(combat)
-								.updateBenutzerZahlenKeinUnentschieden();
-						for (Benutzer benutzer : this.getCombat(combat)
-								.getTeilnehmer()) {
-							nachrichtengenerator
-									.combatErgebnisBenachrichtungErstellen(
-											combat, benutzer.getBenutzer_id(),
-											combat, false, true);
-							benutzerservice.aufBadgeÜberprüfen(benutzer
-									.getBenutzer_id());
-
-						}
-
-					} else {
-						this.getCombat(combat).setPunkteVerlierer(
-								this.getCombat(combat).getPunkteErsteAbgabe());
-						this.getCombat(combat).setPunkteGewinner(
-								this.getCombat(combat).getAufgabe()
-										.getPunktzahl());
-						this.getCombat(combat).setVerlierer(
-								benutzerservice.getBenutzer(this.getCombat(
-										combat).getErsterBenutzer_id()));
-						this.getCombat(combat).setGewinner(
-								benutzerservice.getBenutzer(aktiverBenutzer));
-						this.getCombat(combat)
-								.updateBenutzerZahlenKeinUnentschieden();
-						for (Benutzer benutzer : this.getCombat(combat)
-								.getTeilnehmer()) {
-							nachrichtengenerator
-									.combatErgebnisBenachrichtungErstellen(
-											combat, benutzer.getBenutzer_id(),
-											combat, false, true);
-							benutzerservice.aufBadgeÜberprüfen(benutzer
-									.getBenutzer_id());
-						}
+						teilnehmer.setAnzahlUnentschieden(teilnehmer
+								.getAnzahlUnentschieden() + 1);
+						nachrichtengenerator
+								.combatErgebnisBenachrichtungErstellen(combat,
+										teilnehmer.getBenutzer_id(), combat,
+										false, true);
+						benutzerservice.aufBadgeÜberprüfen(teilnehmer
+								.getBenutzer_id());
 
 					}
+				} else if (this.getCombat(combat).getPunkteErsteAbgabe() > this
+						.getCombat(combat).getAufgabe().getPunktzahl()) {
+					this.getCombat(combat).setPunkteGewinner(
+							this.getCombat(combat).getPunkteErsteAbgabe());
+					this.getCombat(combat).setPunkteVerlierer(
+							this.getCombat(combat).getAufgabe().getPunktzahl());
+					this.getCombat(combat).setGewinner(
+							benutzerservice.getBenutzer(this.getCombat(combat)
+									.getErsterBenutzer_id()));
+					this.getCombat(combat).setVerlierer(
+							benutzerservice.getBenutzer(aktiverBenutzer));
+					this.getCombat(combat)
+							.updateBenutzerZahlenKeinUnentschieden();
+					for (Benutzer benutzer : this.getCombat(combat)
+							.getTeilnehmer()) {
+						nachrichtengenerator
+								.combatErgebnisBenachrichtungErstellen(combat,
+										benutzer.getBenutzer_id(), combat,
+										false, true);
+						benutzerservice.aufBadgeÜberprüfen(benutzer
+								.getBenutzer_id());
+
+					}
+
+				} else {
+					this.getCombat(combat).setPunkteVerlierer(
+							this.getCombat(combat).getPunkteErsteAbgabe());
+					this.getCombat(combat).setPunkteGewinner(
+							this.getCombat(combat).getAufgabe().getPunktzahl());
+					this.getCombat(combat).setVerlierer(
+							benutzerservice.getBenutzer(this.getCombat(combat)
+									.getErsterBenutzer_id()));
+					this.getCombat(combat).setGewinner(
+							benutzerservice.getBenutzer(aktiverBenutzer));
+					this.getCombat(combat)
+							.updateBenutzerZahlenKeinUnentschieden();
+					for (Benutzer benutzer : this.getCombat(combat)
+							.getTeilnehmer()) {
+						nachrichtengenerator
+								.combatErgebnisBenachrichtungErstellen(combat,
+										benutzer.getBenutzer_id(), combat,
+										false, true);
+						benutzerservice.aufBadgeÜberprüfen(benutzer
+								.getBenutzer_id());
+					}
+
 				}
 			}
 		}
