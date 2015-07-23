@@ -71,7 +71,7 @@
 					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox</a></li>
+					<li><a th:href="@{/inbox}">Inbox</a></li>
 					<li><a th:href="@{/logout}">Abmelden</a></li>
 				</ul>
 			</div>
@@ -96,7 +96,7 @@
 				<table class="table table-width button-pos">
 					<tbody>
 						<tr>
-							<td><a href="MitgliederListe" class="btn btn-lg btn-warning">Mitglieder</a></td>
+							<td><a th:href="@{/mitgliederliste}" class="btn btn-lg btn-warning">Mitglieder</a></td>
 							<td><a th:href="@{/teilaufgabeErstellen}" class="btn btn-lg btn-info">Teilaufgabe
 									erstellen</a></td>
 						</tr>
@@ -106,7 +106,6 @@
 							<td><a th:href="@{/lernziele}" class="btn btn-lg btn-warning">Lernziele</a></td>
 						</tr>
 						<tr>
-							<td><a th:href="@{/mitgliederCombat}" class="btn btn-lg btn-info">Combat</a></td>
 							<td><a th:href="@{/teamcombat}" class="btn btn-lg btn-primary">TeamCombat</a></td>
 						</tr>
 						<tr>

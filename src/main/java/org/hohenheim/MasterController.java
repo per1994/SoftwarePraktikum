@@ -746,6 +746,15 @@ public class MasterController {
 		
 	}
 	
+	@RequestMapping(value="/mitgliederliste")
+	public String mitgliederliste(Model model){
+		
+		return"MitgliederListe";
+		
+		
+		
+	}
+	
 	
 	@RequestMapping(value="/lernziele")
 	public String lernziele(Model model){
