@@ -8,7 +8,7 @@ public class StringHilfsklasse {
 	
 	String string3;
 	
-	String strin4;
+	String string4;
 	
 	String string5;
 
@@ -36,12 +36,12 @@ public class StringHilfsklasse {
 		this.string3 = string3;
 	}
 
-	public String getStrin4() {
-		return strin4;
+	public String getString4() {
+		return string4;
 	}
 
-	public void setStrin4(String strin4) {
-		this.strin4 = strin4;
+	public void setString4(String strin4) {
+		this.string4 = strin4;
 	}
 
 	public String getString5() {

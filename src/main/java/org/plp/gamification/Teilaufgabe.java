@@ -51,19 +51,19 @@ public class Teilaufgabe {
 
 	@ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "FRAGE_ANTWORTMOEGLICHKEITEN", joinColumns = @JoinColumn(name = "teilaufgabe_id"))
-	private Set<String> antwortmöglichkeiten;
+	private Set<String> antwortmoeglichkeiten;
 
 	@Column(name = "lösung")
-	private String lösung;
+	private String loesung;
 
 	@Column(name = "gewählteLösung")
-	private String gewählteLösung;
+	private String gewaehlteLoesung;
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teilAufgaben")
 	private Set<Aufgabe> aufgaben;
 
 	public void teilaufgabeKorrigieren() {
-		if (gewählteLösung.equals(lösung)) {
+		if (gewaehlteLoesung.equals(loesung)) {
 			richtig = true;
 		} else {
 			richtig = false;
@@ -71,7 +71,7 @@ public class Teilaufgabe {
 	}
 
 	public Teilaufgabe() {
-		antwortmöglichkeiten = new HashSet<String>();
+		antwortmoeglichkeiten = new HashSet<String>();
 	}
 
 	public String getFrage() {
@@ -114,28 +114,28 @@ public class Teilaufgabe {
 		this.themengebiet = themengebiet;
 	}
 
-	public Set<String> getAntwortmöglichkeiten() {
-		return antwortmöglichkeiten;
+	public Set<String> getAntwortmoeglichkeiten() {
+		return antwortmoeglichkeiten;
 	}
 
-	public void setAntwortmöglichkeiten(Set<String> antwortmöglichkeiten) {
-		this.antwortmöglichkeiten = antwortmöglichkeiten;
+	public void setAntwortmoeglichkeiten(Set<String> antwortmöglichkeiten) {
+		this.antwortmoeglichkeiten = antwortmöglichkeiten;
 	}
 
-	public String getLösung() {
-		return lösung;
+	public String getLoesung() {
+		return loesung;
 	}
 
-	public void setLösung(String lösung) {
-		this.lösung = lösung;
+	public void setLoesung(String lösung) {
+		this.loesung = lösung;
 	}
 
-	public String getGewählteLösung() {
-		return gewählteLösung;
+	public String getGewaehlteLoesung() {
+		return gewaehlteLoesung;
 	}
 
-	public void setGewählteLösung(String gewählteLösung) {
-		this.gewählteLösung = gewählteLösung;
+	public void setGewaehlteLoesung(String gewählteLösung) {
+		this.gewaehlteLoesung = gewählteLösung;
 	}
 
 	public Set<Aufgabe> getAufgaben() {

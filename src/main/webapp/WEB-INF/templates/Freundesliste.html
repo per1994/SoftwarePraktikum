@@ -58,16 +58,19 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a th:href="@{/home}">Profil <span class="badge">2</span></a></li>
+					<li><a th:href="@{/home}">Profil</a></li>
 					<li><a th:href="@{/freunde}">Freunde</a></li>
 					<li><a th:href="@{/gruppen}">Gruppen</a></li>
 					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
 					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
 					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
 					<li><a th:href="@{/quest}">Quest machen</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="Leaderboard">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
+					<li><a href="Inbox">Inbox</a></li>
 					<li><a th:href="@{/}">Abmelden</a></li>
 				</ul>
 			</div>
@@ -78,13 +81,13 @@
 	<div class="table-position1 ">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-lg-offset-4">
+				<div class="col-md-8 col-md-offset-2">
 					<input type="search" id="search" value="" class="form-control"
 						placeholder="Suchen" />
 				</div>
 			</div>
 			<div class="row table-itself">
-				<div class="col-lg-12">
+				<div class="col-md-8 col-md-offset-2">
 					<table class="table" id="table">
 						<thead>
 							<tr>
@@ -94,33 +97,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr >
-								<td>Benjamin</td>
-								<td>Schmid</td>
-								<td>BenjoMahenjo <label class="btn btn-sm btn-danger">
-										 <span class="glyphicon glyphicon-minus"></span>
-								</label> </td>
+							<tr th:each="freund : ${alleFreunde}">
+								<td><a th:href="@{|/profil/${freund.benutzerName}|}"
+									th:text="|${freund.benutzerName} |"> </a></td>
+								<td th:text="|${freund.vorname} |"></td>
+								<td th:text=" |${freund.nachname}|"><label
+									class="btn btn-sm btn-success"> <span
+										class="glyphicon glyphicon-plus"></span>
+								</label></td>
+
 							</tr>
-							<tr>
-								<td>Patrick</td>
-								<td>Schmelzle</td>
-								<td>per1994</td>
-							</tr>
-							<tr>
-								<td>Pascal</td>
-								<td>Maichl</td>
-								<td>TennisGigant</td>
-							</tr>
-							<tr>
-								<td>Leo</td>
-								<td>Grad</td>
-								<td>KingLeo</td>
-							</tr>
-							<tr>
-								<td>S&uuml;kr&uuml;</td>
-								<td>Sever</td>
-								<td>AliasGod</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>

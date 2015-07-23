@@ -59,17 +59,19 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a th:href="@{/home}">Profil <span class="badge">2</span></a></li>
+					<li><a th:href="@{/home}">Profil</a></li>
 					<li><a th:href="@{/freunde}">Freunde</a></li>
 					<li><a th:href="@{/gruppen}">Gruppen</a></li>
 					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
 					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
 					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
 					<li><a th:href="@{/quest}">Quest machen</a></li>
-					<li><a th:href="Leaderboard">Rangliste</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="@{/leaderboard}">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
+					<li><a href="Inbox">Inbox</a></li>
 					<li><a th:href="@{/logout}">Abmelden</a></li>
 				</ul>
 			</div>
@@ -95,20 +97,20 @@
 					<tbody>
 						<tr>
 							<td><a href="MitgliederListe" class="btn btn-lg btn-warning">Mitglieder</a></td>
-							<td><a href="AufgabeErstellen" class="btn btn-lg btn-info">Teilaufgabe
+							<td><a th:href="@{/teilaufgabeErstellen}" class="btn btn-lg btn-info">Teilaufgabe
 									erstellen</a></td>
 						</tr>
 						<tr>
-							<td><a href="Einladung" class="btn btn-lg btn-primary">Freunde
+							<td><a th:href="@{/freunde}" class="btn btn-lg btn-primary">Freunde
 									einladen</a></td>
-							<td><a href="Lernziele" class="btn btn-lg btn-warning">Lernziele</a></td>
+							<td><a th:href="@{/lernziele}" class="btn btn-lg btn-warning">Lernziele</a></td>
 						</tr>
 						<tr>
-							<td><a href="Aufgabe" class="btn btn-lg btn-info">Quest</a></td>
-							<td><a href="TeamCombat" class="btn btn-lg btn-primary">TeamCombat</a></td>
+							<td><a th:href="@{/mitgliederCombat}" class="btn btn-lg btn-info">Combat</a></td>
+							<td><a th:href="@{/teamcombat}" class="btn btn-lg btn-primary">TeamCombat</a></td>
 						</tr>
 						<tr>
-							<td><a href="Mediathek" class="btn btn-lg btn-warning">Mediathek</a></td>
+							<td><a th:href="@{/file}" class="btn btn-lg btn-warning">Mediathek</a></td> 
 						</tr>
 					</tbody>
 				</table>
@@ -122,37 +124,34 @@
 				</div>
 			</div>
 			<div class="group-pinn-position">
-				<form class="form-pos">
-					<input type="text" placeholder="Nachricht" class="input-size"
+				<form class="form-pos" role="form" action="#" th:action="@{/eintragSchreibenGruppe}"
+								 method="post">
+					<input th:field="*{eintragsText.string}" type="text" placeholder="Nachricht" class="input-size"
 						maxlength="500" />
-					<button class='btn btn-primary submit-button' type='button'>Posten</button>
+					<button class='btn btn-primary submit-button' type='submit'>Posten</button>
 				</form>
-				<div class="row new-group pinnwand-space">
+				<div class="row new-group pinnwand-space" th:each="eintrag : ${sortierteEintraege} ">
 					<div class="[ col-xs-12 col-sm-offset-1 col-sm-5 ]">
 						<div class="[ panel panel-default ] panel-google-plus">
 							<div class="panel-heading">
 								<img class="[ img-circle pull-left img-size2 ]"
 									src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
 									alt="Mouse0270" />
-								<h3>BenjoMahenjo</h3>
+								<h3 th:text="${eintrag.autor.benutzerName}"></h3>
 							</div>
 							<div class="panel-body">
-								<p class="comment-fontsz">Do people born in 2000 get to
-									choose if they are Generation Y or Generation Z? How do you
-									decide what generation you want to belong to?</p>
+								<p class="comment-fontsz" th:text = "${eintrag.eintragstext}"></p>
 							</div>
 							<hr class="hr-color"></hr>
 							<p>Kommentar</p>
-							<div class="panel-heading">
+							<div class="panel-heading" th:each="kommentar : ${eintrag.kommentare}">
 								<img class="[ img-circle pull-left img-size1 ]"
 									src="https://lh3.googleusercontent.com/-biH--nNU5xk/AAAAAAAAAAI/AAAAAAAAAAA/2QhOqOsiibA/photo.jpg"
 									alt="Mouse0270" />
-								<h3>BenjoMahenjo</h3>
+								<h3 th:text = "${kommentar.autor.benutzerName}"></h3>
 							</div>
 							<div class="panel-body">
-								<p>Do people born in 2000 get to choose if they are
-									Generation Y or Generation Z? How do you decide what generation
-									you want to belong to?</p>
+								<p>Hallo</p>
 							</div>
 							<div class="panel-footer">
 								<div class="input-placeholder">Kommentiere...</div>

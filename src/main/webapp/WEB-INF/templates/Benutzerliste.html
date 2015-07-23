@@ -58,16 +58,19 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a th:href="@{/home}">Profil <span class="badge">2</span></a></li>
+				<li><a th:href="@{/home}">Profil</a></li>
 					<li><a th:href="@{/freunde}">Freunde</a></li>
 					<li><a th:href="@{/gruppen}">Gruppen</a></li>
 					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
 					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
 					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
 					<li><a th:href="@{/quest}">Quest machen</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="@{/leaderboard}">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
+					<li><a href="Inbox">Inbox</a></li>
 					<li><a th:href="@{/logout}">Abmelden</a></li>
 				</ul>
 			</div>
@@ -78,7 +81,7 @@
 	<div class="table-position1 ">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
+				<div class="col-md-8 col-md-offset-2">
 					<input type="search" id="search" value="" class="form-control"
 						placeholder="Suchen" />
 				</div>

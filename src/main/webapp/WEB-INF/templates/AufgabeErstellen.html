@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gruppenliste</title>
+<title>AufgabeErstellen</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -59,16 +59,19 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Profil <span class="badge">2</span></a></li>
-					<li><a href="Freundesliste">Freunde</a></li>
-					<li><a href="Gruppenliste">Gruppen</a></li>
-					<li><a href="Benutzerliste">Benutzerliste</a></li>
-					<li><a href="Profileinstellungen">Profileinstellungen</a></li>
-					<li><a href="GruppeErstellen">Gruppe erstellen</a></li>
-					<li><a href="Aufgabe">Quest machen</a></li>
+					<li><a th:href="@{/home}">Profil</a></li>
+					<li><a th:href="@{/freunde}">Freunde</a></li>
+					<li><a th:href="@{/gruppen}">Gruppen</a></li>
+					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
+					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
+					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
+					<li><a th:href="@{/quest}">Quest machen</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="@{/leaderboard}">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
+					<li><a href="Inbox">Inbox</a></li>
 					<li><a href="LogOut">Abmelden</a></li>
 				</ul>
 			</div>
@@ -78,7 +81,8 @@
 	</nav>
 
 	<div class="container-quiz">
-		<form>
+		<form role="form" action="#" th:action="@{/teilaufgabeErstellen}"
+			method="post" class="login-form">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="top-content">
@@ -86,57 +90,63 @@
 							<h3 class="title-pos">Hier kannst du deine Teilaufgabe
 								erstellen</h3>
 							<div class="row">
-								<div class="col-md-1">
-									<p>Richtige Antwort:</p>
-								</div>
 								<div class="col-md-10 col-md-offset-1">
 									<div class="form-group">
-										<input type="text" name="form-username" placeholder="Frage"
+										<input th:field="${container.string}" type="text"
+											name="form-username" placeholder="Frage"
 											class="form-username form-control" id="form-username" />
 									</div>
 								</div>
-							</div>
-							<div class="row">
 								<div class="col-md-1">
-									<input type="radio" name="answer" />
-								</div>
-								<div class="col-md-10 col-md-offset-1">
-									<div class="form-group">
-										<input type="text" name="form-username"
-											placeholder="1. Antwort" class="form-username form-control"
-											id="form-username" />
-									</div>
+									<p>Richtige Antwort:</p>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-1">
-									<input type="radio" name="answer" />
-								</div>
 								<div class="col-md-10 col-md-offset-1">
 									<div class="form-group">
-										<input type="text" name="form-username"
-											placeholder="2. Antwort" class="form-username form-control"
-											id="form-username" />
+										<input th:field="${container.string2}" type="text"
+											name="form-username" placeholder="1. Antwort"
+											class="form-username form-control" id="form-username" />
 									</div>
+								</div>
+								<div class="col-md-1">
+									<input th:field="*{container.string5}"
+										th:value="${container.string2}" type="radio" name="answer" />
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-1">
-									<input type="radio" name="answer" />
-								</div>
+
 								<div class="col-md-10 col-md-offset-1">
 									<div class="form-group">
-										<input type="text" name="form-username"
-											placeholder="3. Antwort" class="form-username form-control"
-											id="form-username" />
+										<input th:field="${container.string3}" type="text"
+											name="form-username" placeholder="2. Antwort"
+											class="form-username form-control" id="form-username" />
 									</div>
+								</div>
+								<div class="col-md-1">
+									<input th:field="*{container.string5}"
+										th:value="${container.string3}" type="radio" name="answer" />
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-md-10 col-md-offset-1">
+									<div class="form-group">
+										<input th:field="${container.string4}" type="text"
+											name="form-username" placeholder="3. Antwort"
+											class="form-username form-control" id="form-username" />
+									</div>
+								</div>
+								<div class="col-md-1">
+									<input th:field="*{container.string5}"
+										th:value="${container.string4}" type="radio" name="answer" />
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<label class="btn btn-lg btn-success sub-pos">Erstellen</label>
+			<button name="action" type="submit" value="Registrieren" class="btn">Erstellen</button>
 		</form>
 	</div>
 

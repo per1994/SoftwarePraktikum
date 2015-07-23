@@ -6,15 +6,13 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GruppeErstellen</title>
+<title>GruppenlisteCombat</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500" />
 <link rel="stylesheet"
 	href="resource/assets/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="resource/assets/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet"
 	href="resource/assets/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="resource/assets/css/form-elements.css" />
@@ -40,9 +38,8 @@
 
 
 </head>
-<body class="hor-body">
-
-	<nav class="navbar navbar-default up-bar-color navbar-fixed-top">
+<body>
+	<nav class="navbar navbar-default up-bar-color navbar-static-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -53,7 +50,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="new-navbar-brand" id="plp-color" th:href="@{/home}">PLP</a>
+				<a class="new-navbar-brand" id="plp-color" href="home">PLP</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,7 +70,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="Inbox">Inbox</a></li>
-					<li><a th:href="@{/logout}">Abmelden</a></li>
+					<li><a href="LogOut">Abmelden</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -81,29 +78,52 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<form role="form" action="#" th:action="@{/gruppeErstellen}"
-		th:object="${gruppeErstellen}" method="post" class="login-form">
-		<div class="container-ert">
-			<div class="challenge-bar2">
-				<h2>Gruppe erstellen</h2>
-				<p th:text=" ${message}" />
-				<div class="row">
-					<div class="form-group col-md-12">
-						<input th:field="*{string}" type="text" placeholder="Gruppenname"
-							class="form-control" />
-					</div>
+	<div class="table-position2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<input type="search" id="search" value="" class="form-control"
+						placeholder="Suchen" />
 				</div>
-				<div class="row">
-					<div class="form-group col-md-12">
-						<input th:field="*{string2}" type="text"
-							placeholder="Fachrichtung" class="form-control" />
-					</div>
+			</div>
+			<div class="row table-itself">
+				<div class="col-md-8 col-md-offset-2">
+					<table class="table" id="table">
+						<thead>
+							<tr>
+								<th class="thead-color font-weight1">#</th>
+								<th class="thead-color font-weight1">Name</th>
+								<th class="thead-color font-weight1">Mitgliederanzahl</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Winfos <label class="btn btn-sm btn-success">
+										 <span class="glyphicon glyphicon-plus"></span>
+								</label></td>
+								<td>5</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Gruppe 2 <label class="btn btn-sm btn-success">
+										 <span class="glyphicon glyphicon-plus"></span>
+								</label></td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Gruppe 3 <label class="btn btn-sm btn-success">
+										 <span class="glyphicon glyphicon-plus"></span>
+								</label></td>
+								<td>7</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-		<button name="action" type="submit" value="Einloggen" class="btn">Erstellen</button>
-	</form>
-
+	</div>
 
 
 
@@ -112,6 +132,9 @@
 	<script src="resource/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resource/assets/js/jquery.backstretch.min.js"></script>
 	<script src="resource/assets/js/scripts.js"></script>
+	<script src="resource/dist/gruppenliste.js"></script>
+	<script src="resource/dist/jquery.gruppesearchable.js"></script>
+
 
 	<!--[if lt IE 10]>
             <script src="resource/assets/js/placeholder.js"></script>

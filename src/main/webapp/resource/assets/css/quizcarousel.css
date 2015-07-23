@@ -14,12 +14,12 @@
 }
 
 .carousel-control.right {
-	top: 120px;
+	top: 90px;
 	right: -12px;
 }
 
 .carousel-control.left{
-	top: 120px;
+	top: 90px;
 }
 /* The indicators */
 .carousel-indicators {

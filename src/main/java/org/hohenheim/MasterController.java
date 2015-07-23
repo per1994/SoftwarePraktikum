@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +24,12 @@ import org.plp.dao.AufgabeService;
 import org.plp.dao.BenutzerService;
 import org.plp.dao.EintragService;
 import org.plp.dao.GruppeService;
+import org.plp.dao.NachrichtService;
 import org.plp.dao.PinnwandService;
 import org.plp.dao.StudiengangService;
 import org.plp.gamification.Aufgabe;
+import org.plp.gamification.Teilaufgabe;
+import org.plp.grundfunktionen.Nachricht;
 import org.plp.gruppenfunktionen.Gruppe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,6 +89,9 @@ public class MasterController {
 	
 	@Autowired
 	AufgabeService aufgabenservice;
+	
+	@Autowired
+	NachrichtService nachrichtenservice;
 	
 	
 	
@@ -166,7 +174,7 @@ public class MasterController {
 			}
 		}
 		
-		benutzerservice.registrieren(benutzer.getBenutzerName(),benutzer.getVorname(), benutzer.getNachname(), "Informatik", geburtsdatum.getTag(), geburtsdatum.getMonat(), geburtsdatum.getJahr(), benutzer.getPasswort(), benutzer.getGeschlecht());
+		benutzerservice.registrieren(benutzer.getBenutzerName(),benutzer.getVorname(), benutzer.getNachname(),benutzer.getStudiengang().getName(),geburtsdatum.getTag(), geburtsdatum.getMonat(), geburtsdatum.getJahr(), benutzer.getPasswort(), benutzer.getGeschlecht());
 		
 		model.addAttribute("message1", "Sie wurden erfolgreich registriert, bitte melden Sie sich an");
 		return "LogIn";
@@ -320,7 +328,16 @@ public class MasterController {
 			return "redirect:/";	
 		}
 		
+		List<Benutzer>alleFreunde= new ArrayList<Benutzer>();
 		
+		for (Benutzer f: benutzerservice.getBenutzer(aktiverBenutzerid).getFreundesListe()){
+			alleFreunde.add(f);
+			
+		}
+		
+		
+		
+		model.addAttribute("alleFreunde", alleFreunde);
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
 		return "Freundesliste";
@@ -386,12 +403,45 @@ public class MasterController {
 		}
 		
 		
+		
+		model.addAttribute("container", new StringHilfsklasse());
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		model.addAttribute("benutzer", new Benutzer());
+		model.addAttribute("message", "");
 		
 		return "Profileinstellungen";
 		
 		
 	}
+	
+	
+	@RequestMapping(value="/einstellungen", method=RequestMethod.POST)
+	public String einstellen1(@ModelAttribute Benutzer benutzer, Model model){
+		
+		if(!benutzer.getPasswort().equals(benutzerservice.getBenutzer(aktiverBenutzerid).getPasswort())){
+			
+			model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+			model.addAttribute("benutzer", new Benutzer());
+			model.addAttribute("message", "Falsches Passwort");
+			
+			return "Profileinstellungen";
+			
+			
+		}
+		
+		benutzerservice.getBenutzer(aktiverBenutzerid).setVorname(benutzer.getVorname());
+		benutzerservice.getBenutzer(aktiverBenutzerid).setNachname(benutzer.getNachname());
+		benutzerservice.getBenutzer(aktiverBenutzerid).getStudiengang().setName(benutzer.getStudiengang().getName());
+	
+		
+		System.out.println(benutzer.getVorname());
+		
+		
+		return "redirect:/home";
+		
+	}
+	
+	
 	
 	@RequestMapping(value="/gruppeErstellen", method=RequestMethod.GET)
 	public String gruppeErstellen(@ModelAttribute Benutzer aktiverBenutzer, Model model){
@@ -452,14 +502,27 @@ public class MasterController {
 		
 		
 		
-		Aufgabe questaufgabe=aufgabenservice.aufgabeFürQuestErstellen(aktiverBenutzerid);
+//		Aufgabe questaufgabe=aufgabenservice.aufgabeFürQuestErstellen(aktiverBenutzerid);
+//		ArrayList<Teilaufgabe> teilaufgaben = new ArrayList<Teilaufgabe>();
+//		
+//		for(Teilaufgabe teilaufgabe : questaufgabe.getTeilAufgaben()){
+//			teilaufgaben.add(teilaufgabe);
+//		}
+//		
+//		model.addAttribute("aufgabe", questaufgabe);
+//		model.addAttribute("teilaufgaben", teilaufgaben);
+//		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
-		model.addAttribute("aufgabe", questaufgabe);
-		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
 		
 		return "Aufgabe";
 		
 		
+	}
+	
+	@RequestMapping(value="/quest",method= RequestMethod.POST)
+	public String questAuswerten(@ModelAttribute ArrayList<Teilaufgabe> teilaufgaben, @ModelAttribute Aufgabe questaufgabe, Model model){
+		
+		return"redriect:/home";
 	}
 	
 	@RequestMapping(value = "/file", method = RequestMethod.GET)
@@ -581,7 +644,6 @@ public class MasterController {
 		model.addAttribute("profilBenutzer", benutzerservice.getBenutzer(profilBenutzerid));
 		model.addAttribute("eintragsText", new StringHilfsklasse());
 		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
-		model.addAttribute("eintragsText", new StringHilfsklasse());
 		//ArrayList<Eintrag> sortierteEinträge = pinnwandservice.einträgeSortieren(benutzerservice.getBenutzer(profilBenutzerid).getPinnwand().getPinnwand_id());
 		ArrayList<Eintrag> sortierteEinträge = pinnwandservice.einträgeSortieren(gruppenservice.getGruppe(aktiveGruppeid).getPinnwand().getPinnwand_id());
 		model.addAttribute("sortierteEintraege", sortierteEinträge);
@@ -606,9 +668,123 @@ public class MasterController {
 		
 	}
 	
+	@RequestMapping(value="/teilaufgabeErstellen", method=RequestMethod.POST)
+	public String teilaufgabeErstellen1(@ModelAttribute StringHilfsklasse container,Model model){
+		
+		Set<String> antwortenSet = new HashSet<String>();
+		antwortenSet.add(container.getString2());
+		antwortenSet.add(container.getString3());
+		antwortenSet.add(container.getString4());
+		aufgabenservice.teilaufgabeErstellen(container.getString(), antwortenSet, container.getString5(), "Hiksch", aktiverBenutzerid);
+		
+		
+		
+		
+		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		
+		
+		
+		return "redirect:/home";
+		
+		
+	}
+	
+	@RequestMapping(value="/eintragSchreibenGruppe", method=RequestMethod.POST)
+	public String eintragSchreibenGruppe(@ModelAttribute String eintragsText, @ModelAttribute Benutzer aktiverBenutzer, Model model){
+		
+		if(aktiverBenutzerid==0){
+			return "redirect:/";	
+		}
+		
+		benutzerservice.eintragErstellen(eintragsText, aktiverBenutzerid, aktiveGruppeid, aktiverBenutzer.getBenutzer_id());
+		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		model.addAttribute("eintragsText", new StringHilfsklasse());
+		ArrayList<Eintrag> sortierteEintraege = pinnwandservice.einträgeSortieren(gruppenservice.getGruppe(aktiveGruppeid).getPinnwand().getPinnwand_id());
+		model.addAttribute("sortierteEintraege", sortierteEintraege);
+		model.addAttribute("profilBenutzer", benutzerservice.getBenutzer(profilBenutzerid));
+		model.addAttribute("aktiveGruppe", gruppenservice.getGruppe(aktiveGruppeid));
+		return "Gruppenseite";
+		
+	}
 	
 	
 	
+	
+	
+	@RequestMapping(value="/inbox", method=RequestMethod.GET)
+	public String inbox(Model model){
+		
+		
+		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		
+		List<Nachricht>alleNachrichten=nachrichtenservice.listAllNachricht();
+		List<Nachricht>benutzerNachrichten= new ArrayList<Nachricht>();
+		
+		for (Nachricht n: alleNachrichten){
+			if(n.getEmpfänger()==aktiverBenutzerid){
+				benutzerNachrichten.add(n);
+			}
+		}
+		
+		
+		
+		model.addAttribute("aktiverBenutzer", benutzerservice.getBenutzer(aktiverBenutzerid));
+		model.addAttribute("benutzerNachrichten", benutzerNachrichten);
+		
+		
+		return "Inbox";
+	}
+	
+	
+	
+	@RequestMapping(value="/leaderboard")
+	public String leaderboard(Model model){
+		
+		return"Leaderboard";
+		
+		
+		
+	}
+	
+	
+	@RequestMapping(value="/lernziele")
+	public String lernziele(Model model){
+		
+		return"Lernziele";
+		
+		
+		
+	}
+	
+	
+	@RequestMapping(value="/mitgliederCombat")
+	public String mitgliederCombat(Model model){
+		
+		return"MitgliederlisteCombat";
+		
+		
+		
+	}
+	
+	
+	@RequestMapping(value="/gruppenlisteCombat")
+	public String gruppenlisteCombat(Model model){
+		
+		return"GruppenlisteCombat";
+		
+		
+		
+	}
+	
+	
+	@RequestMapping(value="/teamcombat")
+	public String teamCombat(Model model){
+		
+		return"TeamCombat";
+		
+		
+		
+	}
 	
 	
 	

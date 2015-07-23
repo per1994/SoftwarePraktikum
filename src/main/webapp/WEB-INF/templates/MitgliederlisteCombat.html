@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GruppeErstellen</title>
+<title>Gruppe</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -40,7 +40,7 @@
 
 
 </head>
-<body class="hor-body">
+<body>
 
 	<nav class="navbar navbar-default up-bar-color navbar-fixed-top">
 		<div class="container-fluid">
@@ -53,7 +53,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="new-navbar-brand" id="plp-color" th:href="@{/home}">PLP</a>
+				<a class="new-navbar-brand" id="plp-color" href="home">PLP</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,7 +73,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="Inbox">Inbox</a></li>
-					<li><a th:href="@{/logout}">Abmelden</a></li>
+					<li><a href="LogOut">Abmelden</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -81,29 +81,36 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<form role="form" action="#" th:action="@{/gruppeErstellen}"
-		th:object="${gruppeErstellen}" method="post" class="login-form">
-		<div class="container-ert">
-			<div class="challenge-bar2">
-				<h2>Gruppe erstellen</h2>
-				<p th:text=" ${message}" />
-				<div class="row">
-					<div class="form-group col-md-12">
-						<input th:field="*{string}" type="text" placeholder="Gruppenname"
-							class="form-control" />
+	<div class="container-mitliste">
+		<div class="challenge-bar4">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>MitgliederlisteCombat</h2>
+					<div>
+						<p class="profile-display">Paddy</p>
+						<label class="btn btn-success btn-xs">einladen</label>
 					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-md-12">
-						<input th:field="*{string2}" type="text"
-							placeholder="Fachrichtung" class="form-control" />
+					<div>
+						<p class="profile-display">Paddy</p>
+						<label class="btn btn-success btn-xs">einladen</label>
+					</div>
+					<div>
+						<p class="profile-display">Paddy</p>
+						<label class="btn btn-success btn-xs">einladen</label>
+					</div>
+					<div>
+						<p class="profile-display">Paddy</p>
+						<label class="btn btn-success btn-xs">einladen</label>
+					</div>
+					<div>
+						<p class="profile-display">Paddy</p>
+						<label class="btn btn-success btn-xs">einladen</label>
 					</div>
 				</div>
 			</div>
 		</div>
-		<button name="action" type="submit" value="Einloggen" class="btn">Erstellen</button>
-	</form>
-
+	</div>
+	<label class="btn btn-success btn-lg">Fertig</label>
 
 
 

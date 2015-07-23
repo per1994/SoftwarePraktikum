@@ -69,8 +69,8 @@ public class AufgabeService {
 
 		Teilaufgabe teilaufgabe = new Teilaufgabe();
 		teilaufgabe.setFrage(frage);
-		teilaufgabe.setAntwortmöglichkeiten(antwortmöglichkeiten);
-		teilaufgabe.setLösung(lösung);
+		teilaufgabe.setAntwortmoeglichkeiten(antwortmöglichkeiten);
+		teilaufgabe.setLoesung(lösung);
 		teilaufgabe.setThemengebiet(themengebiet);
 		teilaufgabe.setAufgabenAutor(benutzerservice.getBenutzer(autor));
 		benutzerservice.getBenutzer(autor).getErstellteTeilaufgaben()
@@ -118,6 +118,7 @@ public class AufgabeService {
 
 	}
 
+	@Transactional
 	public Aufgabe aufgabeFürQuestErstellen(int benutzer) {
 
 		List<Fachrichtung> listeDerGruppenFachrichtungen = new ArrayList<Fachrichtung>();
@@ -128,8 +129,14 @@ public class AufgabeService {
 
 		}
 
-		int fachrichtungZufallszahl = (int) ((Math.random() * listeDerGruppenFachrichtungen
-				.size()));
+		int fachrichtungZufallszahl;
+		
+
+		
+			fachrichtungZufallszahl = (int) ((Math.random() * listeDerGruppenFachrichtungen
+					.size()));
+
+			
 		Aufgabe aufgabe = new Aufgabe();
 		aufgabe.setFachrichtung(listeDerGruppenFachrichtungen
 				.get(fachrichtungZufallszahl));

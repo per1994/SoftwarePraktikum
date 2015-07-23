@@ -265,6 +265,8 @@ public class BenutzerService {
 			String nachname, String studiengang, String tag, String monat,
 			String jahr, String passwort, String geschlecht) {
 
+		
+		
 		List<Studiengang> alleStudiengänge = studiengangservice
 				.listAllStudiengang();
 
@@ -274,6 +276,13 @@ public class BenutzerService {
 				studiengangid = s.getStudiengang_id();
 			}
 
+		}
+		
+		if (studiengangid == 0) {
+			Studiengang s = new Studiengang();
+			s.setName(studiengang);
+			studiengangservice.addNewStudiengang(s);
+			studiengangid = s.getStudiengang_id();
 		}
 
 		Pinnwand pinnwand = new Pinnwand();

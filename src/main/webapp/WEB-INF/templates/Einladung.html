@@ -58,17 +58,20 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Profil <span class="badge">2</span></a></li>
-					<li><a href="Freundesliste">Freunde</a></li>
-					<li><a href="Gruppenliste">Gruppen</a></li>
-					<li><a href="Benutzerliste">Benutzerliste</a></li>
-					<li><a href="Profileinstellungen">Profileinstellungen</a></li>
-					<li><a href="GruppeErstellen">Gruppe erstellen</a></li>
-					<li><a href="Aufgabe">Quest machen</a></li>
+				<li><a th:href="@{/home}">Profil</a></li>
+					<li><a th:href="@{/freunde}">Freunde</a></li>
+					<li><a th:href="@{/gruppen}">Gruppen</a></li>
+					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
+					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
+					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
+					<li><a th:href="@{/quest}">Quest machen</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="@{/leaderboard}">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
-					<li><a href="LogOut">Abmelden</a></li>
+					<li><a th:href="@{/inbox}">Inbox</a></li>
+					<li><a th:href="@{/logout}">Abmelden</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -78,13 +81,13 @@
 	<div class="table-position1 ">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-lg-offset-4">
+				<div class="col-md-8 col-md-offset-2">
 					<input type="search" id="search" value="" class="form-control"
 						placeholder="Suchen" />
 				</div>
 			</div>
 			<div class="row table-itself">
-				<div class="col-lg-12">
+				<div class="col-md-8 col-md-offset-2">
 					<table class="table" id="table">
 						<thead>
 							<tr>

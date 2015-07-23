@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gruppe</title>
+<title>Inbox</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -60,16 +60,19 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Profil <span class="badge">2</span></a></li>
-					<li><a href="Freundesliste">Freunde</a></li>
-					<li><a href="Gruppenliste">Gruppen</a></li>
-					<li><a href="Benutzerliste">Benutzerliste</a></li>
-					<li><a href="Profileinstellungen">Profileinstellungen</a></li>
-					<li><a href="GruppeErstellen">Gruppe erstellen</a></li>
-					<li><a href="Aufgabe">Quest machen</a></li>
+					<li><a th:href="@{/home}">Profil</a></li>
+					<li><a th:href="@{/freunde}">Freunde</a></li>
+					<li><a th:href="@{/gruppen}">Gruppen</a></li>
+					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
+					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
+					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
+					<li><a th:href="@{/quest}">Quest machen</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="Leaderboard">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
+					<li><a href="Inbox">Inbox</a></li>
 					<li><a href="LogOut">Abmelden</a></li>
 				</ul>
 			</div>
@@ -79,36 +82,25 @@
 	</nav>
 
 	<div class="container-mitliste">
-		<div class="challenge-bar4">
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Inbox</h2>
 					<table class="table">
 						<tbody>
-							<tr>
-								<td><a href="Freundschaft_Anfrage" class="btn btn-success btn-lg">Freundschaftsanfragen<span
-										class="badge" style="margin-left: 5px;">1</span></a></td>
-							</tr>
-							<tr>
-								<td><a href="Gruppen_Anfrage" class="btn btn-info btn-lg">Gruppeneinladungen<span
-										class="badge" style="margin-left: 5px;">1</span></a></td>
-							</tr>
-							<tr>
-								<td><a href="Combat_Anfrage" class="btn btn-warning btn-lg">Combat Anfrage<span
-										class="badge" style="margin-left: 5px;">1</span>
-								</a></td>
-							</tr>
-							<tr>
-								<td><a href="Team-Combat_Anfrage" class="btn btn-primary btn-lg">Team-Combat
-										Anfrage<span class="badge" style="margin-left: 5px;">1</span>
-								</a></td>
+							<tr th:each="nachricht : ${benutzerNachrichten}">
+								<td th:text="${nachricht.inhalt}"></td>
+								<td><button style="background-color: #5cb85c;" class="btn"><span
+								class="glyphicon glyphicon-ok"></span></button></td>
+								<td><button style="background-color: #d9534f;" class="btn"><span
+								class="glyphicon glyphicon-remove"></span></button></td>
+								<td><button style="background-color: #f0ad4e;" class="btn">OK</button></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-	</div>
+
 
 
 	<!-- Javascript -->

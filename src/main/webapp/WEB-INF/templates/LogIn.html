@@ -109,14 +109,9 @@
 									<input th:field="*{benutzer.benutzerName}" type="text"
 										placeholder="Benutzername" class="form-control" />
 								</div>
-								<div>
-									<select name="selectStudiengang"
-										th:field="*{benutzer.studiengang}" class="form-control"
-										style="height: 50px" th:value="${studiengang}">
-										<option th:each="studiengang: ${studiengaenge}"
-											
-											th:text="${studiengang.name}"></option>
-									</select>
+								<div class="form-group">
+									<input th:field="*{benutzer.studiengang.name}" type="text"
+										placeholder="Studiengang" class="form-control" />
 								</div>
 								<div class="row">
 									<div class="form-group col-xs-4">
