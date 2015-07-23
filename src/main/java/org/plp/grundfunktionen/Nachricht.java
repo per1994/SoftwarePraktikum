@@ -24,6 +24,11 @@ import org.plp.benutzer.Benutzer;
 import org.plp.gamification.Combat;
 import org.plp.gruppenfunktionen.Gruppe;
 
+/**
+ * @author Benni
+ *
+ * Enthält alle Attribute, Konstruktoren sowie Getter und Setter die für das erstellen einer Nachricht relevant sind
+ */
 @Entity
 @Table(name = "NACHRICHT")
 public class Nachricht {

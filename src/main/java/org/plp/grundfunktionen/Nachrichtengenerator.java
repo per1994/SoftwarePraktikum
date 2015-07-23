@@ -41,6 +41,16 @@ public class Nachrichtengenerator {
 	@Autowired
 	QuestService questservice;
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return freundschaftsAnfrage
+	 * 
+	 * Erstellt eine Freundschaftsanfrage mit entsprechendem Inhalt
+	 */
 	public Nachricht freundschaftsanfrageErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -57,6 +67,16 @@ public class Nachrichtengenerator {
 
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return gruppenEinladung
+	 * 
+	 * Erstellt eine Gruppeneinladung
+	 */
 	public Nachricht gruppeneinladungErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 		Nachricht gruppenEinladung = new Nachricht(sender, empfänger, anhang,
@@ -73,6 +93,16 @@ public class Nachrichtengenerator {
 		return gruppenEinladung;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return combatAnfrage
+	 * 
+	 * Erstellt eine Combat-Anfrage
+	 */
 	public Nachricht combatanfrageErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 		Nachricht combatAnfrage = new Nachricht(sender, empfänger, anhang,
@@ -88,6 +118,16 @@ public class Nachrichtengenerator {
 		return combatAnfrage;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return teamcombatAnfrage
+	 * 
+	 * Erstellt eine Teamcombat-Anfrage
+	 */
 	public Nachricht teamcombatanfrageErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 		Nachricht teamcombatAnfrage = new Nachricht(sender, empfänger, anhang,
@@ -101,6 +141,19 @@ public class Nachrichtengenerator {
 		return teamcombatAnfrage;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return freundschaftsAnfrageAngommen
+	 * 
+	 * Nimmt die Freundschaftsanfrage an;
+	 * Fügt die Benutzer den entsprechenen Freundeslisten hinzu;
+	 * Setzt die ursprüngliche Benachrichtigung auf bearbeitet;
+	 * Erstellt eine "Frendschaftsanfrage angenommen" Nachricht;
+	 */
 	public Nachricht freundschaftsanfrageAngenommenErstllen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -115,6 +168,19 @@ public class Nachrichtengenerator {
 
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return gruppenEinladungAngenommen
+	 * 
+	 * Nimmt die Freundschaftsanfrage an;
+	 * Fügt den Benutzer den entsprechenen Mitgliederliste und die Gruppe der entsprechenden Gruppenliste hinzu;
+	 * Setzt die ursprüngliche Benachrichtigung auf bearbeitet;
+	 * Erstellt eine "Gruppeneinladung angenommen" Nachricht;
+	 */
 	public Nachricht gruppenEinladungAngenommenErstellen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 		Nachricht gruppenEinladungAngenommen = new Nachricht(sender, empfänger,
@@ -128,6 +194,16 @@ public class Nachrichtengenerator {
 		return gruppenEinladungAngenommen;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return combatAnfrageAngenommen
+	 * 
+	 * Erstellt eine "Combatanfrage angenommen" Nachricht
+	 */
 	public Nachricht combatanfrageAngenommenErstellen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -141,6 +217,16 @@ public class Nachrichtengenerator {
 
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return teamCombatAnfrageAngenommen
+	 * 
+	 * Erstellt eine "Teamcombatanfrage angenommen" Nachricht
+	 */
 	public Nachricht teamCombatAnfrageAngenommenErstellen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -154,6 +240,16 @@ public class Nachrichtengenerator {
 
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return pinnwandEintragErhalten
+	 * 
+	 * Erstellt eine "Pinnwandeintrag erhalten" Nachricht
+	 */
 	public Nachricht pinnwandEintragErhaltenErstellen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -170,6 +266,16 @@ public class Nachrichtengenerator {
 
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return neueBadgeErhalten
+	 * 
+	 * Erstellt eine "neue Badge erhalten" Nachricht
+	 */
 	public Nachricht neueBadgeErhaltenErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -183,6 +289,16 @@ public class Nachrichtengenerator {
 		return neueBadgeErhalten;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return neuesAchievementErhalten
+	 * 
+	 * Erstellt eine "neues Achievement erhalten" Nachricht
+	 */
 	public Nachricht neuesAchievementErhaltenErstellen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -198,6 +314,17 @@ public class Nachrichtengenerator {
 		return neuesAchievementErhalten;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * @return combatErgebnisBenachrichtigung
+	 * 
+	 * Erstellt eine Benachrichtigung in der der Teilnehmer eines Combats über das Ergebnis informiert wird;
+	 * Der Inhalt wird je nach Ausgang des Combats unterschiedlich gesetzt;
+	 */
 	public Nachricht combatErgebnisBenachrichtungErstellen(int sender,
 			int empfänger, int anhang, boolean bearbeitet, boolean statisch) {
 
@@ -248,6 +375,15 @@ public class Nachrichtengenerator {
 		return combatErgebnisBenachrichtigung;
 	}
 
+	/**
+	 * @param sender
+	 * @param empfänger
+	 * @param anhang
+	 * @param bearbeitet
+	 * @param statisch
+	 * 
+	 * Bei abgeschlossener Quest wird der Benutzer über das Ergebnis benachrichtigt
+	 */
 	public void questErgebnisBenachrichtungErstellen(int sender, int empfänger,
 			int anhang, boolean bearbeitet, boolean statisch) {
 
