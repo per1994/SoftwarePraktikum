@@ -54,24 +54,27 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="new-navbar-brand" id="plp-color" th:href="@{/home}">PLP</a>
+				<a class="new-navbar-brand" id="plp-color" href="home">PLP</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a th:href="@{/home}">Profil <span class="badge">2</span></a></li>
+					<li><a th:href="@{/home}">Profil</a></li>
 					<li><a th:href="@{/freunde}">Freunde</a></li>
 					<li><a th:href="@{/gruppen}">Gruppen</a></li>
 					<li><a th:href="@{/benutzer}">Benutzerliste</a></li>
 					<li><a th:href="@{/einstellungen}">Profileinstellungen</a></li>
 					<li><a th:href="@{/gruppeErstellen}">Gruppe erstellen</a></li>
 					<li><a th:href="@{/quest}">Quest machen</a></li>
+					<li><a th:href="@{/teilaufgabeErstellen}">Teilaufgabe erstellen</a></li>
+					<li><a th:href="@{/leaderboard}">Rangliste</a></li>
+					<li><a th:href="@{/file}">Mediathek</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Inbox">Inbox <span class="badge">42</span></a></li>
-					<li><a th:href="@{/}">Abmelden</a></li>
+					<li><a th:href="@{/inbox}">Inbox</a></li>
+					<li><a th:href="@{/logout}">Abmelden</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -127,11 +130,7 @@
 														class="element-animation3 btn btn-lg btn-primary btn-block"><span
 														class="btn-label"><i
 															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="3" />Hannes</label> <label
-														class="element-animation4 btn btn-lg btn-primary btn-block"><span
-														class="btn-label"><i
-															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="4" />Benjamin</label>
+														type="radio" name="q_answer" value="3" />Hannes</label>
 												</div>
 											</div>
 											<div class="modal-footer text-muted">
@@ -175,11 +174,7 @@
 														class="element-animation3 btn btn-lg btn-primary btn-block"><span
 														class="btn-label"><i
 															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="3" />3 Three</label> <label
-														class="element-animation4 btn btn-lg btn-primary btn-block"><span
-														class="btn-label"><i
-															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="4" />4 Four</label>
+														type="radio" name="q_answer" value="3" />3 Three</label> 
 												</div>
 											</div>
 											<div class="modal-footer text-muted">
@@ -223,11 +218,7 @@
 														class="element-animation3 btn btn-lg btn-primary btn-block"><span
 														class="btn-label"><i
 															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="3" />3 Three</label> <label
-														class="element-animation4 btn btn-lg btn-primary btn-block"><span
-														class="btn-label"><i
-															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="4" />4 Four</label>
+														type="radio" name="q_answer" value="3" />3 Three</label> 
 												</div>
 											</div>
 											<div class="modal-footer text-muted">
@@ -271,11 +262,7 @@
 														class="element-animation3 btn btn-lg btn-primary btn-block"><span
 														class="btn-label"><i
 															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="3" />3 Three</label> <label
-														class="element-animation4 btn btn-lg btn-primary btn-block"><span
-														class="btn-label"><i
-															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="4" />4 Four</label>
+														type="radio" name="q_answer" value="3" />3 Three</label> 
 												</div>
 											</div>
 											<div class="modal-footer text-muted">
@@ -319,11 +306,7 @@
 														class="element-animation3 btn btn-lg btn-primary btn-block"><span
 														class="btn-label"><i
 															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="3" />3 Three</label> <label
-														class="element-animation4 btn btn-lg btn-primary btn-block"><span
-														class="btn-label"><i
-															class="glyphicon glyphicon-chevron-right"></i></span> <input
-														type="radio" name="q_answer" value="4" />4 Four</label>
+														type="radio" name="q_answer" value="3" />3 Three</label> 
 												</div>
 											</div>
 											<div class="modal-footer text-muted">
@@ -338,7 +321,7 @@
 							class="left carousel-control">&#8678;</a> <a data-slide="next"
 							href="#Carousel" class="right carousel-control">&#8680;</a>
 					</div>
-					<label class="btn btn-lg btn-success sub-pos">Abgeben</label>
+					<button class="btn btn-lg btn-success sub-pos">Abgeben</button>
 				</form>
 			</div>
 		</div>
